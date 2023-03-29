@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DYAs8n37Nbw5UT2CoLiw7G6ijdpCfKGExwb4dPa8xQARYC4hoSJdfj3ptZllrP+n0ys6kNEMu8Rj23phgFWkuw==",
+  "success": true,
+  "projectFilePath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\Example\\Example.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Giuseppe\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.28\\microsoft.windows.sdk.net.ref.10.0.22621.28.nupkg.sha512"
+  ],
+  "logs": []
+}
