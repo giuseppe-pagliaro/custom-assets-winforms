@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 
 namespace CustomLists
 {
@@ -18,6 +17,9 @@ namespace CustomLists
 
         private int currentPage;
         private int totPages;
+
+        private int startPageInd = 0;
+        private int endPageInd = 0;
 
         private List<ItemDatas>? items;
         private List<ListItem>? renderedItems;
@@ -114,6 +116,60 @@ namespace CustomLists
             }
         }
 
+        private void addListItems(int count)
+        {
+            if (this.items is null || this.renderedItems is null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                if (this.endPageInd + 1 < this.items.Count)
+                {
+                    this.endPageInd++;
+
+                    this.renderedItems.Add((ListItem)Activator.CreateInstance(this.itemsType));
+                    this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[endPageInd];
+                    this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
+                }
+                else if (this.startPageInd - 1 >= 0)
+                {
+                    this.startPageInd--;
+
+                    this.renderedItems.Insert(0, (ListItem)Activator.CreateInstance(this.itemsType));
+                    this.renderedItems[0].ItemDatas = this.items[startPageInd];
+                    this.renderedItems[0].Dock = DockStyle.Top;
+                }
+            }
+        }
+
+        private void removeListItems(int count)
+        {
+            if (this.renderedItems is null)
+            {
+                return;
+            }
+
+            this.renderedItems.RemoveRange(this.renderedItems.Count - count, count);
+            this.endPageInd -= count;
+        }
+
+        private void refreshItemPanel()
+        {
+            if (this.renderedItems is null)
+            {
+                return;
+            }
+
+            this.itemsPanel.Controls.Clear();
+
+            for (int i = this.renderedItems.Count - 1; i >= 0; i--)
+            {
+                this.itemsPanel.Controls.Add(this.renderedItems[i]);
+            }
+        }
+
         private void UpdateRenderedItems()
         {
             // Integrity Checks
@@ -132,6 +188,8 @@ namespace CustomLists
 
             int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
             int itemsPerPage = this.itemsPanel.Height / originalHeight;
+            int oldTotPages = this.TotPages;
+
             if (itemsPerPage > 0)
             {
                 if (this.items.Count % itemsPerPage == 0)
@@ -148,38 +206,53 @@ namespace CustomLists
                 this.TotPages = 0;
             }
 
+            if (oldTotPages != 0 && oldTotPages != this.totPages && this.currentPage != 1)
+            {
+                this.currentPage = (this.currentPage * this.TotPages) / oldTotPages;
+                this.txtBoxCurrentPage.Text = this.currentPage.ToString();
+            }
+
             if (this.renderedItems.Count > itemsPerPage)
             {
-                int itemsToRemove = this.renderedItems.Count - itemsPerPage;
-                this.renderedItems.RemoveRange(this.renderedItems.Count - itemsToRemove, itemsToRemove);
+                removeListItems(this.renderedItems.Count - itemsPerPage);
             }
             else if (this.renderedItems.Count < itemsPerPage)
             {
-                // TODO fix dataInd
                 int itemsToAdd = itemsPerPage - this.renderedItems.Count;
-                int baseInd = this.items.Count - itemsPerPage * (this.totPages - this.currentPage + 1);
-                baseInd += this.renderedItems.Count;
-                if (itemsPerPage > 0 && this.items.Count % itemsPerPage != 0)
-                {
-                    baseInd += this.items.Count % itemsPerPage + 1;
-                }
 
-                for (int i = 0; i < itemsToAdd; i++)
+                int startingIndUp = (this.currentPage - 1) * itemsPerPage;
+                int startingIndDown = startingIndUp + this.renderedItems.Count;
+                
+                int itemsAddedDown = 0;
+                int itemsAddedUp = 0;
+
+                while (itemsToAdd != itemsAddedDown + itemsAddedUp)
                 {
-                    int dataInd = baseInd + i;
-                    this.renderedItems.Add((ListItem)Activator.CreateInstance(this.itemsType));
-                    this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[dataInd];
-                    this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
+                    int dataInd = startingIndDown + itemsAddedDown;
+
+                    if (dataInd < this.items.Count)
+                    {
+                        this.renderedItems.Add((ListItem)Activator.CreateInstance(this.itemsType));
+                        this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[dataInd];
+                        this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
+                        itemsAddedDown++;
+                    }
+                    else
+                    {
+                        dataInd = startingIndUp - itemsAddedUp - 1;
+
+                        if (dataInd >= 0)
+                        {
+                            this.renderedItems.Insert(0, (ListItem)Activator.CreateInstance(this.itemsType));
+                            this.renderedItems[0].ItemDatas = this.items[dataInd];
+                            this.renderedItems[0].Dock = DockStyle.Top;
+                            itemsAddedUp++;
+                        }
+                    }
                 }
             }
 
-            // Refresh ItemPanel Controls
-
-            this.itemsPanel.Controls.Clear();
-            for (int i = this.renderedItems.Count - 1; i >= 0; i--)
-            {
-                this.itemsPanel.Controls.Add(this.renderedItems[i]);
-            }
+            refreshItemPanel();
 
             // Resize ListItems
 
