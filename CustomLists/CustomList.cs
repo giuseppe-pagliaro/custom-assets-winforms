@@ -16,10 +16,10 @@ namespace CustomLists
         private String totPagesMsg = " Pages";
 
         private int currentPage;
-        private int totPages;
+        private int totPages = 1000;
 
         private int startPageInd = 0;
-        private int endPageInd = 0;
+        private int endPageInd = -1;
 
         private List<ItemDatas>? items;
         private List<ListItem>? renderedItems;
@@ -89,19 +89,50 @@ namespace CustomLists
             get { return currentPage; }
             set
             {
+                if (value < FIRST_PAGE || value > this.TotPages)
+                {
+                    return;
+                }
+
                 if (this.items is null || this.items.Count == 0)
                 {
                     return;
                 }
 
-                currentPage = value;
-                this.txtBoxCurrentPage.Text = value.ToString();
-
                 if (this.renderedItems != null)
                 {
                     this.renderedItems.Clear();
                 }
-                
+
+                if (this.endPageInd >= this.startPageInd)
+                {
+                    int itemsPerPage = this.endPageInd - this.startPageInd + 1;
+
+                    if (value > this.currentPage)
+                    {
+                        this.startPageInd += itemsPerPage * (value - this.currentPage);
+
+                        if (this.startPageInd >= this.items.Count)
+                        {
+                            this.startPageInd = this.items.Count - 1;
+                        }
+                    }
+                    else if (value < this.currentPage)
+                    {
+                        this.startPageInd -= itemsPerPage * (this.currentPage - value);
+
+                        if (this.startPageInd < 0)
+                        {
+                            this.startPageInd = 0;
+                        }
+                    }
+
+                    this.endPageInd = this.startPageInd - 1;
+                }
+
+                this.currentPage = value;
+                this.txtBoxCurrentPage.Text = value.ToString();
+
                 UpdateRenderedItems();
             }
         }
@@ -116,7 +147,9 @@ namespace CustomLists
             }
         }
 
-        private void addListItems(int count)
+        #region Helper Methods
+
+        private void AddListItems(int count)
         {
             if (this.items is null || this.renderedItems is null)
             {
@@ -144,7 +177,7 @@ namespace CustomLists
             }
         }
 
-        private void removeListItems(int count)
+        private void RemoveListItems(int count)
         {
             if (this.renderedItems is null)
             {
@@ -155,7 +188,7 @@ namespace CustomLists
             this.endPageInd -= count;
         }
 
-        private void refreshItemPanel()
+        private void RefreshItemPanel()
         {
             if (this.renderedItems is null)
             {
@@ -170,10 +203,30 @@ namespace CustomLists
             }
         }
 
+        private void ResizeListItems()
+        {
+            if (this.renderedItems is null)
+            {
+                return;
+            }
+
+            int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
+
+            if (this.renderedItems.Count > 0)
+            {
+                int totalEccessHeight = this.itemsPanel.Height - this.renderedItems.Count * originalHeight;
+                int eccessHeight = totalEccessHeight / this.renderedItems.Count;
+                foreach (ListItem listItem in this.renderedItems)
+                {
+                    listItem.Height = originalHeight + eccessHeight;
+                }
+            }
+        }
+
+        #endregion
+
         private void UpdateRenderedItems()
         {
-            // Integrity Checks
-
             if (this.items is null || this.items.Count == 0 || this.itemsType is null)
             {
                 return;
@@ -183,8 +236,6 @@ namespace CustomLists
             {
                 this.renderedItems = new List<ListItem>();
             }
-
-            // Add or Remove ListItems (if needed)
 
             int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
             int itemsPerPage = this.itemsPanel.Height / originalHeight;
@@ -206,71 +257,36 @@ namespace CustomLists
                 this.TotPages = 0;
             }
 
-            if (oldTotPages != 0 && oldTotPages != this.totPages && this.currentPage != 1)
+            // TODO fix condition
+            if (oldTotPages != 0 || (oldTotPages != this.totPages && this.currentPage != FIRST_PAGE))
             {
                 this.currentPage = (this.currentPage * this.TotPages) / oldTotPages;
                 this.txtBoxCurrentPage.Text = this.currentPage.ToString();
             }
 
-            if (this.renderedItems.Count > itemsPerPage)
+            if (this.renderedItems.Count != itemsPerPage)
             {
-                removeListItems(this.renderedItems.Count - itemsPerPage);
-            }
-            else if (this.renderedItems.Count < itemsPerPage)
-            {
-                int itemsToAdd = itemsPerPage - this.renderedItems.Count;
-
-                int startingIndUp = (this.currentPage - 1) * itemsPerPage;
-                int startingIndDown = startingIndUp + this.renderedItems.Count;
-                
-                int itemsAddedDown = 0;
-                int itemsAddedUp = 0;
-
-                while (itemsToAdd != itemsAddedDown + itemsAddedUp)
+                if (this.renderedItems.Count > itemsPerPage)
                 {
-                    int dataInd = startingIndDown + itemsAddedDown;
-
-                    if (dataInd < this.items.Count)
-                    {
-                        this.renderedItems.Add((ListItem)Activator.CreateInstance(this.itemsType));
-                        this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[dataInd];
-                        this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
-                        itemsAddedDown++;
-                    }
-                    else
-                    {
-                        dataInd = startingIndUp - itemsAddedUp - 1;
-
-                        if (dataInd >= 0)
-                        {
-                            this.renderedItems.Insert(0, (ListItem)Activator.CreateInstance(this.itemsType));
-                            this.renderedItems[0].ItemDatas = this.items[dataInd];
-                            this.renderedItems[0].Dock = DockStyle.Top;
-                            itemsAddedUp++;
-                        }
-                    }
+                    RemoveListItems(this.renderedItems.Count - itemsPerPage);
                 }
-            }
-
-            refreshItemPanel();
-
-            // Resize ListItems
-
-            if (itemsPerPage > 0)
-            {
-                int totalEccessHeight = this.itemsPanel.Height - itemsPerPage * originalHeight;
-                int eccessHeight = totalEccessHeight / itemsPerPage;
-                foreach (ListItem listItem in this.renderedItems)
+                else if (this.renderedItems.Count < itemsPerPage)
                 {
-                    listItem.Height = originalHeight + eccessHeight;
+                    AddListItems(itemsPerPage - this.renderedItems.Count);
                 }
+
+                RefreshItemPanel();
             }
+
+            ResizeListItems();
         }
 
         private void CustomList_Load(object sender, EventArgs e)
         {
-            this.txtPlaceHolder.Visible = true;
-            this.txtPlaceHolder.Text = itemsEmptyMsg;
+            this.itemsPanel.Controls.Clear();
+            this.itemsPanel.Controls.Add(this.txtPlaceHolder);
+            this.txtPlaceHolder.Text = this.itemsNullMsg;
+            this.TotPages = 0;
         }
 
         private void txtBoxCurrentPage_KeyPress(object sender, KeyPressEventArgs e)
