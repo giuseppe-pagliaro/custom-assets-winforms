@@ -15,7 +15,7 @@ namespace CustomLists
         private String itemsEmptyMsg = "No Items";
         private String totPagesMsg = " Pages";
 
-        private int currentPage;
+        private int currentPage = 1;
         private int totPages = 1000;
 
         private int startPageInd = 0;
@@ -258,7 +258,7 @@ namespace CustomLists
             }
 
             // TODO fix condition
-            if (oldTotPages != 0 || (oldTotPages != this.totPages && this.currentPage != FIRST_PAGE))
+            if (oldTotPages != 0 && oldTotPages != this.totPages && this.currentPage != FIRST_PAGE)
             {
                 this.currentPage = (this.currentPage * this.TotPages) / oldTotPages;
                 this.txtBoxCurrentPage.Text = this.currentPage.ToString();
