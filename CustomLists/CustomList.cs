@@ -89,12 +89,9 @@ namespace CustomLists
             get { return currentPage; }
             set
             {
-                if (this.totPages != 0)
+                if (value < FIRST_PAGE || value > this.TotPages)
                 {
-                    if (value < FIRST_PAGE || value > this.TotPages)
-                    {
-                        return;
-                    }
+                    return;
                 }
 
                 if (this.items is null || this.items.Count == 0)
@@ -260,7 +257,7 @@ namespace CustomLists
                 this.TotPages = 0;
             }
 
-            // TODO aumenta e basta durante il ricalcolo.
+            // TODO fix condition
             if (oldTotPages != 0 && oldTotPages != this.totPages && this.currentPage != FIRST_PAGE)
             {
                 this.currentPage = (this.currentPage * this.TotPages) / oldTotPages;
