@@ -15,15 +15,16 @@ namespace CustomLists
         private String itemsEmptyMsg = "No Items";
         private String totPagesMsg = " Pages";
 
-        private int currentPage = 1;
-        private int totPages = 1000;
-
-        private int startPageInd = 0;
-        private int endPageInd = -1;
+        private int currentPage;
+        private int totPages;
+        private int startPageInd;
+        private int endPageInd;
 
         private List<ItemDatas>? items;
         private List<ListItem>? renderedItems;
         private Type? itemsType;
+
+        #region Properties
 
         public String ItemsNullMsg
         {
@@ -63,24 +64,19 @@ namespace CustomLists
         {
             if (itemDatas is null)
             {
-                this.itemsPanel.Controls.Clear();
-                this.itemsPanel.Controls.Add(this.txtPlaceHolder);
-                this.txtPlaceHolder.Text = this.itemsNullMsg;
-                this.TotPages = 0;
+                SetRenderedItemsNull();
                 return;
             }
 
             if (itemDatas.Count == 0)
             {
-                this.itemsPanel.Controls.Clear();
-                this.itemsPanel.Controls.Add(this.txtPlaceHolder);
-                this.txtPlaceHolder.Text = this.itemsEmptyMsg;
-                this.TotPages = 0;
+                SetRenderedItemsEmpty();
                 return;
             }
 
             this.items = itemDatas.Cast<ItemDatas>().ToList();
             this.itemsType = typeof(TListItem);
+            this.TotPages = 0;
             this.CurrentPage = FIRST_PAGE;
         }
 
@@ -89,50 +85,59 @@ namespace CustomLists
             get { return currentPage; }
             set
             {
-                if (value < FIRST_PAGE || value > this.TotPages)
+                if (this.totPages == 0)
                 {
-                    return;
+                    this.currentPage = FIRST_PAGE;
+                    this.startPageInd = 0;
+                    this.endPageInd = -1;
                 }
-
-                if (this.items is null || this.items.Count == 0)
+                else
                 {
-                    return;
-                }
-
-                if (this.renderedItems != null)
-                {
-                    this.renderedItems.Clear();
-                }
-
-                if (this.endPageInd >= this.startPageInd)
-                {
-                    int itemsPerPage = this.endPageInd - this.startPageInd + 1;
-
-                    if (value > this.currentPage)
+                    if (value < FIRST_PAGE || value > this.totPages)
                     {
-                        this.startPageInd += itemsPerPage * (value - this.currentPage);
-
-                        if (this.startPageInd >= this.items.Count)
-                        {
-                            this.startPageInd = this.items.Count - 1;
-                        }
-                    }
-                    else if (value < this.currentPage)
-                    {
-                        this.startPageInd -= itemsPerPage * (this.currentPage - value);
-
-                        if (this.startPageInd < 0)
-                        {
-                            this.startPageInd = 0;
-                        }
+                        return;
                     }
 
-                    this.endPageInd = this.startPageInd - 1;
+                    if (this.items is null || this.items.Count == 0)
+                    {
+                        return;
+                    }
+
+                    if (this.renderedItems != null)
+                    {
+                        this.renderedItems.Clear();
+                    }
+
+                    if (this.endPageInd >= this.startPageInd)
+                    {
+                        int itemsPerPage = this.endPageInd - this.startPageInd + 1;
+
+                        if (value > this.currentPage)
+                        {
+                            this.startPageInd += itemsPerPage * (value - this.currentPage);
+
+                            if (this.startPageInd >= this.items.Count)
+                            {
+                                this.startPageInd = this.items.Count - 1;
+                            }
+                        }
+                        else if (value < this.currentPage)
+                        {
+                            this.startPageInd -= itemsPerPage * (this.currentPage - value);
+
+                            if (this.startPageInd < 0)
+                            {
+                                this.startPageInd = 0;
+                            }
+                        }
+
+                        this.endPageInd = this.startPageInd - 1;
+                    }
+
+                    this.currentPage = value;
                 }
 
-                this.currentPage = value;
                 this.txtBoxCurrentPage.Text = value.ToString();
-
                 UpdateRenderedItems();
             }
         }
@@ -147,7 +152,71 @@ namespace CustomLists
             }
         }
 
+        #endregion
+
         #region Helper Methods
+
+        private void RecalculateTotPages()
+        {
+            if (this.items is null || this.items.Count == 0)
+            {
+                this.TotPages = 0;
+                return;
+            }
+
+            int newTotPages = 1;
+
+            int itemsPerPage = this.endPageInd - this.startPageInd + 1;
+            int itemsRemAfter = this.items.Count - this.endPageInd - 1;
+            int itemsRemBefore = this.startPageInd;
+
+            if (itemsRemAfter > 0)
+            {
+                newTotPages += itemsRemAfter / itemsPerPage;
+
+                if (itemsRemAfter % itemsPerPage != 0)
+                {
+                    newTotPages++;
+                }
+            }
+
+            if (itemsRemBefore > 0)
+            {
+                newTotPages += itemsRemBefore / itemsPerPage;
+
+                if (itemsRemBefore % itemsPerPage != 0)
+                {
+                    newTotPages++;
+                }
+            }
+
+            if (newTotPages != this.totPages)
+            {
+                this.TotPages = newTotPages;
+            }
+        }
+
+        private void RecalculateCurrentPage()
+        {
+            int itemsPerPage = this.endPageInd - this.startPageInd + 1;
+
+            if (itemsPerPage < 1)
+            {
+                return;
+            }
+
+            int newCurrentPage = (this.endPageInd + 1) / itemsPerPage;
+            if ((this.endPageInd + 1) % itemsPerPage != 0)
+            {
+                newCurrentPage += 1;
+            }
+
+            if (newCurrentPage != this.currentPage)
+            {
+                this.currentPage = newCurrentPage;
+                this.txtBoxCurrentPage.Text = this.currentPage.ToString();
+            }
+        }
 
         private void AddListItems(int count)
         {
@@ -192,7 +261,7 @@ namespace CustomLists
         {
             if (this.renderedItems is null)
             {
-                return;
+                this.renderedItems = new List<ListItem>();
             }
 
             this.itemsPanel.Controls.Clear();
@@ -225,6 +294,24 @@ namespace CustomLists
 
         #endregion
 
+        private void SetRenderedItemsNull()
+        {
+            this.itemsPanel.Controls.Clear();
+            this.itemsPanel.Controls.Add(this.txtPlaceHolder);
+            this.txtPlaceHolder.Text = this.itemsNullMsg;
+            this.TotPages = 0;
+            this.CurrentPage = FIRST_PAGE;
+        }
+
+        private void SetRenderedItemsEmpty()
+        {
+            this.itemsPanel.Controls.Clear();
+            this.itemsPanel.Controls.Add(this.txtPlaceHolder);
+            this.txtPlaceHolder.Text = this.itemsEmptyMsg;
+            this.TotPages = 0;
+            this.CurrentPage = FIRST_PAGE;
+        }
+
         private void UpdateRenderedItems()
         {
             if (this.items is null || this.items.Count == 0 || this.itemsType is null)
@@ -239,31 +326,7 @@ namespace CustomLists
 
             int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
             int itemsPerPage = this.itemsPanel.Height / originalHeight;
-            int oldTotPages = this.TotPages;
-
-            if (itemsPerPage > 0)
-            {
-                if (this.items.Count % itemsPerPage == 0)
-                {
-                    this.TotPages = this.items.Count / itemsPerPage;
-                }
-                else
-                {
-                    this.TotPages = this.items.Count / itemsPerPage + 1;
-                }
-            }
-            else
-            {
-                this.TotPages = 0;
-            }
-
-            // TODO fix condition
-            if (oldTotPages != 0 && oldTotPages != this.totPages && this.currentPage != FIRST_PAGE)
-            {
-                this.currentPage = (this.currentPage * this.TotPages) / oldTotPages;
-                this.txtBoxCurrentPage.Text = this.currentPage.ToString();
-            }
-
+            
             if (this.renderedItems.Count != itemsPerPage)
             {
                 if (this.renderedItems.Count > itemsPerPage)
@@ -278,17 +341,19 @@ namespace CustomLists
                 RefreshItemPanel();
             }
 
+            RecalculateTotPages();
+            RecalculateCurrentPage();
             ResizeListItems();
         }
 
+        #region Default Events
+
         private void CustomList_Load(object sender, EventArgs e)
         {
-            this.itemsPanel.Controls.Clear();
-            this.itemsPanel.Controls.Add(this.txtPlaceHolder);
-            this.txtPlaceHolder.Text = this.itemsNullMsg;
-            this.TotPages = 0;
+            SetRenderedItemsNull();
         }
 
+        // TODO fix focus & assegnazione valore.
         private void txtBoxCurrentPage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -328,19 +393,13 @@ namespace CustomLists
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            if (this.currentPage != FIRST_PAGE)
-            {
-                this.CurrentPage--;
-            }
+            this.CurrentPage--;
             noFocusObj.Focus();
         }
 
         private void buttonAvanti_Click(object sender, EventArgs e)
         {
-            if (this.currentPage != this.totPages)
-            {
-                this.CurrentPage++;
-            }
+            this.CurrentPage++;
             noFocusObj.Focus();
         }
 
@@ -355,5 +414,7 @@ namespace CustomLists
             this.CurrentPage = this.totPages;
             noFocusObj.Focus();
         }
+
+        #endregion
     }
 }
