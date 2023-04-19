@@ -30,6 +30,7 @@
         {
             txtPlaceHolder = new Label();
             itemsPanel = new Panel();
+            clickProtector = new Panel();
             controlPanel = new Panel();
             noFocusObj = new Label();
             panelButtons = new Panel();
@@ -54,17 +55,30 @@
             txtPlaceHolder.TabIndex = 0;
             txtPlaceHolder.Text = "No Data";
             txtPlaceHolder.TextAlign = ContentAlignment.MiddleCenter;
+            txtPlaceHolder.Click += CustomList_Click;
             // 
             // itemsPanel
             // 
             itemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             itemsPanel.BackColor = SystemColors.ControlDark;
+            itemsPanel.Controls.Add(clickProtector);
             itemsPanel.Controls.Add(txtPlaceHolder);
             itemsPanel.Location = new Point(0, 0);
             itemsPanel.Name = "itemsPanel";
             itemsPanel.Size = new Size(550, 434);
             itemsPanel.TabIndex = 1;
             itemsPanel.SizeChanged += itemsPanel_SizeChanged;
+            itemsPanel.Click += CustomList_Click;
+            // 
+            // clickProtector
+            // 
+            clickProtector.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            clickProtector.BackColor = Color.Transparent;
+            clickProtector.Location = new Point(0, 0);
+            clickProtector.Name = "clickProtector";
+            clickProtector.Size = new Size(550, 0);
+            clickProtector.TabIndex = 1;
+            clickProtector.Click += CustomList_Click;
             // 
             // controlPanel
             // 
@@ -76,6 +90,7 @@
             controlPanel.Name = "controlPanel";
             controlPanel.Size = new Size(550, 50);
             controlPanel.TabIndex = 2;
+            controlPanel.Click += CustomList_Click;
             // 
             // noFocusObj
             // 
@@ -98,6 +113,7 @@
             panelButtons.Name = "panelButtons";
             panelButtons.Size = new Size(302, 50);
             panelButtons.TabIndex = 1;
+            panelButtons.Click += CustomList_Click;
             // 
             // txtBoxCurrentPage
             // 
@@ -109,8 +125,9 @@
             txtBoxCurrentPage.TabIndex = 4;
             txtBoxCurrentPage.Text = "1";
             txtBoxCurrentPage.TextAlign = HorizontalAlignment.Center;
-            txtBoxCurrentPage.TextChanged += txtBoxCurrentPage_TextChanged;
+            txtBoxCurrentPage.Enter += txtBoxCurrentPage_Enter;
             txtBoxCurrentPage.KeyPress += txtBoxCurrentPage_KeyPress;
+            txtBoxCurrentPage.Leave += txtBoxCurrentPage_Leave;
             // 
             // buttonFine
             // 
@@ -174,6 +191,7 @@
             txtPageCount.Size = new Size(67, 23);
             txtPageCount.TabIndex = 0;
             txtPageCount.Text = "x Pages";
+            txtPageCount.Click += CustomList_Click;
             // 
             // CustomList
             // 
@@ -185,6 +203,7 @@
             Name = "CustomList";
             Size = new Size(550, 490);
             Load += CustomList_Load;
+            Click += CustomList_Click;
             itemsPanel.ResumeLayout(false);
             controlPanel.ResumeLayout(false);
             controlPanel.PerformLayout();
@@ -206,5 +225,6 @@
         private Button buttonAvanti;
         private TextBox txtBoxCurrentPage;
         private Label noFocusObj;
+        private Panel clickProtector;
     }
 }

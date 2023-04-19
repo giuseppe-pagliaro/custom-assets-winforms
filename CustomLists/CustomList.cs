@@ -93,7 +93,7 @@ namespace CustomLists
                 }
                 else
                 {
-                    if (value < FIRST_PAGE || value > this.totPages)
+                    if (value < FIRST_PAGE || value > this.totPages || value == this.currentPage)
                     {
                         return;
                     }
@@ -326,7 +326,7 @@ namespace CustomLists
 
             int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
             int itemsPerPage = this.itemsPanel.Height / originalHeight;
-            
+
             if (this.renderedItems.Count != itemsPerPage)
             {
                 if (this.renderedItems.Count > itemsPerPage)
@@ -353,7 +353,16 @@ namespace CustomLists
             SetRenderedItemsNull();
         }
 
-        // TODO fix focus & assegnazione valore.
+        private void itemsPanel_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateRenderedItems();
+        }
+
+        private void CustomList_Click(object sender, EventArgs e)
+        {
+            noFocusObj.Focus();
+        }
+
         private void txtBoxCurrentPage_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -362,33 +371,22 @@ namespace CustomLists
             }
             else if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                if (this.txtBoxCurrentPage.Text != this.currentPage.ToString())
-                {
-                    int newPage = Int32.Parse(txtBoxCurrentPage.Text);
-
-                    if (newPage >= FIRST_PAGE || newPage <= this.totPages)
-                    {
-                        this.CurrentPage = newPage;
-                    }
-                    else
-                    {
-                        this.txtBoxCurrentPage.Text = newPage.ToString();
-                    }
-                }
-
                 noFocusObj.Focus();
                 e.Handled = true;
             }
         }
 
-        private void itemsPanel_SizeChanged(object sender, EventArgs e)
+        private void txtBoxCurrentPage_Enter(object sender, EventArgs e)
         {
-            UpdateRenderedItems();
+            clickProtector.Size = new Size(clickProtector.Size.Width, this.itemsPanel.Height);
         }
 
-        private void txtBoxCurrentPage_TextChanged(object sender, EventArgs e)
+        private void txtBoxCurrentPage_Leave(object sender, EventArgs e)
         {
-            // Serve ???
+            clickProtector.Size = new Size(clickProtector.Size.Width, 0);
+
+            int newPage = Int32.Parse(txtBoxCurrentPage.Text);
+            this.CurrentPage = newPage;
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
