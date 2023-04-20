@@ -35,5 +35,10 @@ namespace Example
                 txtValue.Text = "Value: (Incompatible Class)";
             }
         }
+
+        private void ExampleItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cliccato Item " + this.ItemDatas.Id.ToString());
+        }
     }
 }

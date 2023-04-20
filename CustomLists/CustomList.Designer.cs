@@ -35,8 +35,8 @@
             noFocusObj = new Label();
             panelButtons = new Panel();
             txtBoxCurrentPage = new TextBox();
-            buttonFine = new Button();
-            buttonAvanti = new Button();
+            buttonEnd = new Button();
+            buttonNext = new Button();
             buttonBack = new Button();
             buttonStart = new Button();
             txtPageCount = new Label();
@@ -104,8 +104,8 @@
             // 
             panelButtons.BackColor = Color.Transparent;
             panelButtons.Controls.Add(txtBoxCurrentPage);
-            panelButtons.Controls.Add(buttonFine);
-            panelButtons.Controls.Add(buttonAvanti);
+            panelButtons.Controls.Add(buttonEnd);
+            panelButtons.Controls.Add(buttonNext);
             panelButtons.Controls.Add(buttonBack);
             panelButtons.Controls.Add(buttonStart);
             panelButtons.Dock = DockStyle.Right;
@@ -129,31 +129,31 @@
             txtBoxCurrentPage.KeyPress += txtBoxCurrentPage_KeyPress;
             txtBoxCurrentPage.Leave += txtBoxCurrentPage_Leave;
             // 
-            // buttonFine
+            // buttonEnd
             // 
-            buttonFine.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            buttonFine.BackColor = SystemColors.ControlDark;
-            buttonFine.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonFine.Location = new Point(251, 11);
-            buttonFine.Name = "buttonFine";
-            buttonFine.Size = new Size(48, 29);
-            buttonFine.TabIndex = 3;
-            buttonFine.Text = ">>";
-            buttonFine.UseVisualStyleBackColor = false;
-            buttonFine.Click += buttonFine_Click;
+            buttonEnd.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonEnd.BackColor = SystemColors.ControlDark;
+            buttonEnd.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonEnd.Location = new Point(251, 11);
+            buttonEnd.Name = "buttonEnd";
+            buttonEnd.Size = new Size(48, 29);
+            buttonEnd.TabIndex = 3;
+            buttonEnd.Text = ">>";
+            buttonEnd.UseVisualStyleBackColor = false;
+            buttonEnd.Click += buttonEnd_Click;
             // 
-            // buttonAvanti
+            // buttonNext
             // 
-            buttonAvanti.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            buttonAvanti.BackColor = SystemColors.ControlDark;
-            buttonAvanti.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonAvanti.Location = new Point(197, 11);
-            buttonAvanti.Name = "buttonAvanti";
-            buttonAvanti.Size = new Size(48, 29);
-            buttonAvanti.TabIndex = 2;
-            buttonAvanti.Text = ">";
-            buttonAvanti.UseVisualStyleBackColor = false;
-            buttonAvanti.Click += buttonAvanti_Click;
+            buttonNext.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonNext.BackColor = SystemColors.ControlDark;
+            buttonNext.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonNext.Location = new Point(197, 11);
+            buttonNext.Name = "buttonNext";
+            buttonNext.Size = new Size(48, 29);
+            buttonNext.TabIndex = 2;
+            buttonNext.Text = ">";
+            buttonNext.UseVisualStyleBackColor = false;
+            buttonNext.Click += buttonNext_Click;
             // 
             // buttonBack
             // 
@@ -221,8 +221,8 @@
         private Panel panelButtons;
         private Button buttonStart;
         private Button buttonBack;
-        private Button buttonFine;
-        private Button buttonAvanti;
+        private Button buttonEnd;
+        private Button buttonNext;
         private TextBox txtBoxCurrentPage;
         private Label noFocusObj;
         private Panel clickProtector;

@@ -395,7 +395,7 @@ namespace CustomLists
             noFocusObj.Focus();
         }
 
-        private void buttonAvanti_Click(object sender, EventArgs e)
+        private void buttonNext_Click(object sender, EventArgs e)
         {
             this.CurrentPage++;
             noFocusObj.Focus();
@@ -407,7 +407,7 @@ namespace CustomLists
             noFocusObj.Focus();
         }
 
-        private void buttonFine_Click(object sender, EventArgs e)
+        private void buttonEnd_Click(object sender, EventArgs e)
         {
             this.CurrentPage = this.totPages;
             noFocusObj.Focus();
