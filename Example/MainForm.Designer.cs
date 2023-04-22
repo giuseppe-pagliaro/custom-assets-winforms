@@ -28,26 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             customList = new CustomLists.CustomList();
+            customSearchBar = new CustomSearchBars.CustomSearchBar();
             SuspendLayout();
             // 
             // customList
             // 
+            customList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             customList.BackColor = SystemColors.Control;
-            customList.Dock = DockStyle.Fill;
+            customList.CurrentPage = 1;
             customList.ItemsEmptyMsg = "No Items";
             customList.ItemsNullMsg = "Items is Null";
-            customList.Location = new Point(0, 0);
+            customList.Location = new Point(0, 60);
             customList.Name = "customList";
-            customList.Size = new Size(742, 533);
+            customList.Size = new Size(742, 473);
             customList.TabIndex = 0;
+            customList.TotPagesMsg = " Pages";
+            // 
+            // customSearchBar
+            // 
+            customSearchBar.Dock = DockStyle.Top;
+            customSearchBar.Location = new Point(0, 0);
+            customSearchBar.Name = "customSearchBar";
+            customSearchBar.Size = new Size(742, 54);
+            customSearchBar.TabIndex = 1;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(742, 533);
+            Controls.Add(customSearchBar);
             Controls.Add(customList);
             Name = "MainForm";
             Text = "Main Form";
@@ -58,5 +69,6 @@
         #endregion
 
         private CustomLists.CustomList customList;
+        private CustomSearchBars.CustomSearchBar customSearchBar;
     }
 }
