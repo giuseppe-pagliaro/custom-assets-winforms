@@ -1,4 +1,5 @@
-﻿using CustomLists;
+﻿using Commons;
+using CustomLists;
 
 namespace Example
 {
@@ -28,8 +29,17 @@ namespace Example
             exampleItems = new();
         }
 
+        private void ApplyStyles(Style style)
+        {
+            StyleAppliers.PrimaryBg(this, style);
+            customSearchBar.Style = style;
+            customList.Style = style;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
+            ApplyStyles(Styles.DARK_MODE);
+
             GenPlaceHolderList(10);
             //GenEmptyList();
 

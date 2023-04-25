@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Commons.Style style1 = new Commons.Style();
+            Commons.Style style2 = new Commons.Style();
             customList = new CustomLists.CustomList();
             customSearchBar = new CustomSearchBars.CustomSearchBar();
             SuspendLayout();
@@ -42,6 +44,7 @@
             customList.Location = new Point(0, 60);
             customList.Name = "customList";
             customList.Size = new Size(742, 473);
+            customList.Style = style1;
             customList.TabIndex = 0;
             customList.TotPagesMsg = " Pages";
             // 
@@ -51,6 +54,7 @@
             customSearchBar.Location = new Point(0, 0);
             customSearchBar.Name = "customSearchBar";
             customSearchBar.Size = new Size(742, 54);
+            customSearchBar.Style = style2;
             customSearchBar.TabIndex = 1;
             // 
             // MainForm
@@ -61,7 +65,7 @@
             Controls.Add(customSearchBar);
             Controls.Add(customList);
             Name = "MainForm";
-            Text = "Main Form";
+            Text = "Example";
             Load += MainForm_Load;
             ResumeLayout(false);
         }

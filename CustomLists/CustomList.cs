@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Commons;
+using System.Collections.ObjectModel;
 
 namespace CustomLists
 {
@@ -23,6 +24,8 @@ namespace CustomLists
         private List<ItemDatas>? items;
         private List<ListItem>? renderedItems;
         private Type? itemsType;
+
+        private Style style = new Style();
 
         #region Properties
 
@@ -93,13 +96,22 @@ namespace CustomLists
                 }
                 else
                 {
-                    if (value < FIRST_PAGE || value > this.totPages || value == this.currentPage)
+                    if (value == this.currentPage)
                     {
+                        return;
+                    }
+
+                    if (value < FIRST_PAGE || value > this.totPages)
+                    {
+                        this.txtBoxCurrentPage.Text = this.currentPage.ToString();
                         return;
                     }
 
                     if (this.items is null || this.items.Count == 0)
                     {
+                        this.currentPage = FIRST_PAGE;
+                        this.startPageInd = 0;
+                        this.endPageInd = -1;
                         return;
                     }
 
@@ -152,6 +164,28 @@ namespace CustomLists
             }
         }
 
+        public Style Style
+        {
+            get { return style; }
+            set
+            {
+                style = value;
+
+                StyleAppliers.PrimaryBg(this, style);
+                StyleAppliers.SecondaryBg(this.itemsPanel, style);
+
+                StyleAppliers.Label(this.txtPlaceHolder, style, FontStyle.Bold);
+                StyleAppliers.Label(this.txtPageCount, style, FontStyle.Regular);
+
+                StyleAppliers.TextBox(this.txtBoxCurrentPage, style);
+
+                StyleAppliers.Button(this.buttonStart, style);
+                StyleAppliers.Button(this.buttonBack, style);
+                StyleAppliers.Button(this.buttonNext, style);
+                StyleAppliers.Button(this.buttonEnd, style);
+            }
+        }
+
         #endregion
 
         #region Helper Methods
@@ -169,6 +203,12 @@ namespace CustomLists
             int itemsPerPage = this.endPageInd - this.startPageInd + 1;
             int itemsRemAfter = this.items.Count - this.endPageInd - 1;
             int itemsRemBefore = this.startPageInd;
+
+            if (itemsPerPage < 1)
+            {
+                this.TotPages = 0;
+                return;
+            }
 
             if (itemsRemAfter > 0)
             {
@@ -202,6 +242,8 @@ namespace CustomLists
 
             if (itemsPerPage < 1)
             {
+                this.currentPage = 1;
+                this.txtBoxCurrentPage.Text = this.currentPage.ToString();
                 return;
             }
 
@@ -274,21 +316,18 @@ namespace CustomLists
 
         private void ResizeListItems()
         {
-            if (this.renderedItems is null)
+            if (this.renderedItems is null || this.renderedItems.Count < 1)
             {
                 return;
             }
 
             int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
+            int totalEccessHeight = this.itemsPanel.Height - this.renderedItems.Count * originalHeight;
+            int eccessHeight = totalEccessHeight / this.renderedItems.Count;
 
-            if (this.renderedItems.Count > 0)
+            foreach (ListItem listItem in this.renderedItems)
             {
-                int totalEccessHeight = this.itemsPanel.Height - this.renderedItems.Count * originalHeight;
-                int eccessHeight = totalEccessHeight / this.renderedItems.Count;
-                foreach (ListItem listItem in this.renderedItems)
-                {
-                    listItem.Height = originalHeight + eccessHeight;
-                }
+                listItem.Height = originalHeight + eccessHeight;
             }
         }
 

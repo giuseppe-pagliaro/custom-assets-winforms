@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Commons;
 
 namespace CustomSearchBars
 {
@@ -15,6 +7,39 @@ namespace CustomSearchBars
         public CustomSearchBar()
         {
             InitializeComponent();
+        }
+
+        // public delegate void SearchRequest(String query);
+        private Style style = new Style();
+
+        public Style Style
+        {
+            get { return style; }
+            set
+            {
+                style = value;
+
+                StyleAppliers.PrimaryBg(this, style);
+                StyleAppliers.TextBox(this.textBoxQuery, style);
+                StyleAppliers.Button(this.buttonSearch, style);
+            }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            noFocusObj.Focus();
+
+            // TODO
+        }
+
+        private void textBoxQuery_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                noFocusObj.Focus();
+
+                // TODO
+            }
         }
     }
 }

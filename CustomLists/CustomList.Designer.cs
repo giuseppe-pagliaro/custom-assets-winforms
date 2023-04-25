@@ -83,6 +83,7 @@
             // controlPanel
             // 
             controlPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            controlPanel.BackColor = Color.Transparent;
             controlPanel.Controls.Add(noFocusObj);
             controlPanel.Controls.Add(panelButtons);
             controlPanel.Controls.Add(txtPageCount);
