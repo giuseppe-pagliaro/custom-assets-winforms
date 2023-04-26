@@ -190,6 +190,23 @@ namespace CustomLists
 
         #region Helper Methods
 
+        private int GetOriginalHeight()
+        {
+            if (this.itemsType is null)
+            {
+                return 1;
+            }
+
+            object? helperInstance = Activator.CreateInstance(this.itemsType);
+
+            if (helperInstance is null)
+            {
+                return 1;
+            }
+
+            return ((ListItem)helperInstance).OriginalHeight;
+        }
+
         private void RecalculateTotPages()
         {
             if (this.items is null || this.items.Count == 0)
@@ -260,6 +277,23 @@ namespace CustomLists
             }
         }
 
+        private ListItem CreateInstance()
+        {
+            if (this.itemsType is null)
+            {
+                return new ListItem();
+            }
+
+            object? newInstance = Activator.CreateInstance(this.itemsType);
+
+            if (newInstance is null)
+            {
+                return new ListItem();
+            }
+
+            return (ListItem)newInstance;
+        }
+
         private void AddListItems(int count)
         {
             if (this.items is null || this.renderedItems is null)
@@ -273,7 +307,7 @@ namespace CustomLists
                 {
                     this.endPageInd++;
 
-                    this.renderedItems.Add((ListItem)Activator.CreateInstance(this.itemsType));
+                    this.renderedItems.Add(CreateInstance());
                     this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[endPageInd];
                     this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
                 }
@@ -281,7 +315,7 @@ namespace CustomLists
                 {
                     this.startPageInd--;
 
-                    this.renderedItems.Insert(0, (ListItem)Activator.CreateInstance(this.itemsType));
+                    this.renderedItems.Insert(0, CreateInstance());
                     this.renderedItems[0].ItemDatas = this.items[startPageInd];
                     this.renderedItems[0].Dock = DockStyle.Top;
                 }
@@ -321,7 +355,7 @@ namespace CustomLists
                 return;
             }
 
-            int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
+            int originalHeight = GetOriginalHeight();
             int totalEccessHeight = this.itemsPanel.Height - this.renderedItems.Count * originalHeight;
             int eccessHeight = totalEccessHeight / this.renderedItems.Count;
 
@@ -363,7 +397,7 @@ namespace CustomLists
                 this.renderedItems = new List<ListItem>();
             }
 
-            int originalHeight = ((ListItem)Activator.CreateInstance(this.itemsType)).OriginalHeight;
+            int originalHeight = GetOriginalHeight();
             int itemsPerPage = this.itemsPanel.Height / originalHeight;
 
             if (this.renderedItems.Count != itemsPerPage)

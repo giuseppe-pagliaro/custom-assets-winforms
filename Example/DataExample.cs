@@ -2,8 +2,18 @@
 
 namespace Example
 {
-    internal class DataExample : ItemDatas
+    public class DataExample : ItemDatas
     {
-        public String? Value { get; set; }
+        public DataExample() : base()
+        {
+            this.Value = "";
+        }
+
+        public DataExample(DataExample dataExample) : base(dataExample)
+        {
+            this.Value = dataExample.Value;
+        }
+
+        public String Value { get; set; }
     }
 }

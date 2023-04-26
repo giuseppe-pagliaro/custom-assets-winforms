@@ -20,12 +20,10 @@ namespace CustomLists
             {
                 if (itemDatas is null)
                 {
-                    ItemDatas emptyitemData = new();
-                    emptyitemData.Id = 0;
-                    return emptyitemData;
+                    return new ItemDatas();
                 }
 
-                return ((ListItem)this.MemberwiseClone()).itemDatas;
+                return new ItemDatas(itemDatas);
             }
 
             set
