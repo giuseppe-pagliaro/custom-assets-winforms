@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Commons;
+using System.Text.RegularExpressions;
 
 namespace CustomLists
 {
@@ -9,10 +10,13 @@ namespace CustomLists
             InitializeComponent();
 
             originalHeight = this.Height;
+            style = new();
         }
 
         private ItemDatas? itemDatas;
         private int originalHeight;
+
+        private Style style;
 
         public ItemDatas ItemDatas
         {
@@ -23,22 +27,31 @@ namespace CustomLists
                     return new ItemDatas();
                 }
 
-                return new ItemDatas(itemDatas);
+                return itemDatas.Clone();
             }
-
             set
             {
-                itemDatas = value;
+                this.itemDatas = value;
                 this.Populate();
             }
         }
 
-        public int OriginalHeight
+        internal int OriginalHeight
         {
             get { return originalHeight; }
         }
 
-        private String classNameToString()
+        public Style Style
+        {
+            get { return style; }
+            set
+            {
+                style = value;
+                this.ApplyStyle();
+            }
+        }
+
+        private String ClassNameToString()
         {
             if (itemDatas is null)
             {
@@ -57,8 +70,14 @@ namespace CustomLists
             }
             else
             {
-                txtID.Text = this.classNameToString() + " #" + itemDatas.Id.ToString();
+                txtID.Text = this.ClassNameToString() + " #" + itemDatas.Id.ToString();
             }
+        }
+
+        public virtual void ApplyStyle()
+        {
+            StyleAppliers.SecondaryBg(this, style);
+            StyleAppliers.Label(this.txtID, style, FontStyle.Bold);
         }
     }
 }

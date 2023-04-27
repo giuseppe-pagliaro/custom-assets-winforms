@@ -7,10 +7,12 @@ namespace CustomSearchBars
         public CustomSearchBar()
         {
             InitializeComponent();
+
+            style = new();
         }
 
         // public delegate void SearchRequest(String query);
-        private Style style = new Style();
+        private Style style;
 
         public Style Style
         {

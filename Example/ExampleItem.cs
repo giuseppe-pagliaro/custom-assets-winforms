@@ -1,4 +1,5 @@
-﻿using CustomLists;
+﻿using Commons;
+using CustomLists;
 
 namespace Example
 {
@@ -13,27 +14,35 @@ namespace Example
         {
             base.Populate();
 
-            if (ItemDatas is null)
+            if (this.ItemDatas is null)
             {
                 txtValue.Text = "Value: (Null Object)";
+                return;
             }
-            else if (ItemDatas.GetType().IsSubclassOf(typeof(ItemDatas)))
-            {
-                var dataExample = (DataExample)ItemDatas;
 
-                if (dataExample.Value is null)
-                {
-                    txtValue.Text = "Value: (Null Property)";
-                }
-                else
-                {
-                    txtValue.Text = "Value: " + dataExample.Value;
-                }
+            if (this.ItemDatas is not DataExample)
+            {
+                txtValue.Text = "Value: (Incompatible Class)";
+                return;
+            }
+
+            DataExample dataExample = (DataExample)this.ItemDatas;
+
+            if (dataExample.Value is null)
+            {
+                txtValue.Text = "Value: (Null Field)";
             }
             else
             {
-                txtValue.Text = "Value: (Incompatible Class)";
+                txtValue.Text = "Value: " + dataExample.Value;
             }
+        }
+
+        public override void ApplyStyle()
+        {
+            base.ApplyStyle();
+
+            StyleAppliers.Label(this.txtValue, this.Style, FontStyle.Regular);
         }
 
         private void ExampleItem_Click(object sender, EventArgs e)

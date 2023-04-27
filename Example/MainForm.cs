@@ -45,11 +45,11 @@ namespace Example
 
             if (exampleItems is null)
             {
-                customList.setItems<ItemDatas, ListItem>(new List<ItemDatas>());
+                customList.SetItems<ItemDatas, ListItem>(new List<ItemDatas>());
             }
             else
             {
-                customList.setItems<DataExample, ExampleItem>(exampleItems);
+                customList.SetItems<DataExample, ExampleItem>(exampleItems);
             }
         }
     }

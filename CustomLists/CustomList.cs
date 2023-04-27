@@ -8,13 +8,18 @@ namespace CustomLists
         public CustomList()
         {
             InitializeComponent();
+
+            this.style = new();
+            this.itemsNullMsg = "Null Items";
+            this.itemsEmptyMsg = "No Items";
+            this.totPagesMsg = " Pages";
         }
 
         private static readonly int FIRST_PAGE = 1;
 
-        private String itemsNullMsg = "Null Items";
-        private String itemsEmptyMsg = "No Items";
-        private String totPagesMsg = " Pages";
+        private String itemsNullMsg;
+        private String itemsEmptyMsg;
+        private String totPagesMsg;
 
         private int currentPage;
         private int totPages;
@@ -25,7 +30,7 @@ namespace CustomLists
         private List<ListItem>? renderedItems;
         private Type? itemsType;
 
-        private Style style = new Style();
+        private Style style;
 
         #region Properties
 
@@ -62,7 +67,7 @@ namespace CustomLists
                 return items.AsReadOnly();
             }
         }
-        public void setItems<TItemDatas, TListItem>(List<TItemDatas> itemDatas)
+        public void SetItems<TItemDatas, TListItem>(List<TItemDatas> itemDatas)
         where TItemDatas : ItemDatas where TListItem : ListItem
         {
             if (itemDatas is null)
@@ -309,6 +314,7 @@ namespace CustomLists
 
                     this.renderedItems.Add(CreateInstance());
                     this.renderedItems[this.renderedItems.Count - 1].ItemDatas = this.items[endPageInd];
+                    this.renderedItems[this.renderedItems.Count - 1].Style = this.style;
                     this.renderedItems[this.renderedItems.Count - 1].Dock = DockStyle.Top;
                 }
                 else if (this.startPageInd - 1 >= 0)
@@ -317,6 +323,7 @@ namespace CustomLists
 
                     this.renderedItems.Insert(0, CreateInstance());
                     this.renderedItems[0].ItemDatas = this.items[startPageInd];
+                    this.renderedItems[0].Style = this.style;
                     this.renderedItems[0].Dock = DockStyle.Top;
                 }
             }
