@@ -14,17 +14,17 @@
 
         public static void PrimaryBg(Panel panel, Style style)
         {
-            panel.BackColor = style.SecondaryBackColor;
+            panel.BackColor = style.PrimaryBackColor;
         }
 
         public static void SecondaryBg(Form form, Style style)
         {
-            form.BackColor = style.PrimaryBackColor;
+            form.BackColor = style.SecondaryBackColor;
         }
 
         public static void SecondaryBg(UserControl userControl, Style style)
         {
-            userControl.BackColor = style.PrimaryBackColor;
+            userControl.BackColor = style.SecondaryBackColor;
         }
 
         public static void SecondaryBg(Panel panel, Style style)
