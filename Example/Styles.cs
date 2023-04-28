@@ -4,7 +4,7 @@ namespace Example
 {
     public class Styles
     {
-        public static readonly Style LIGHT_MODE = new Style(
+        public static readonly Style LIGHT_MODE = new(
             SystemColors.Control,
             SystemColors.ControlDark,
             "Segoe UI",
@@ -16,7 +16,7 @@ namespace Example
             FlatStyle.Standard
             );
 
-        public static readonly Style DARK_MODE = new Style(
+        public static readonly Style DARK_MODE = new(
             SystemColors.Desktop,
             SystemColors.WindowFrame,
             "Segoe UI",

@@ -1,4 +1,5 @@
 ﻿using Commons;
+using RestClient;
 using CustomLists;
 
 namespace Example
@@ -29,6 +30,11 @@ namespace Example
             exampleItems = new();
         }
 
+        private void TaskSimulation()
+        {
+            Thread.Sleep(5000);
+        }
+
         private void ApplyStyles(Style style)
         {
             StyleAppliers.PrimaryBg(this, style);
@@ -50,6 +56,12 @@ namespace Example
             else
             {
                 customList.SetItems<DataExample, ExampleItem>(exampleItems);
+            }
+
+            using (WaitForm waitForm = new(TaskSimulation))
+            {
+                waitForm.Style = Styles.DARK_MODE;
+                waitForm.ShowDialog();
             }
         }
     }

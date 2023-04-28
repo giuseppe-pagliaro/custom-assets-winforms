@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CustomLists\CustomLists.csproj" />
     <ProjectReference Include="..\CustomSearchBars\CustomSearchBars.csproj" />
+    <ProjectReference Include="..\RestClient\RestClient.csproj" />
   </ItemGroup>
 
 </Project>

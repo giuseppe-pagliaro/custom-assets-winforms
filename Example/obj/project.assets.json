@@ -46,6 +46,22 @@
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WindowsForms"
         ]
+      },
+      "RestClient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Commons": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/RestClient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/RestClient.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
       }
     }
   },
@@ -64,12 +80,18 @@
       "type": "project",
       "path": "../CustomSearchBars/CustomSearchBars.csproj",
       "msbuildProject": "../CustomSearchBars/CustomSearchBars.csproj"
+    },
+    "RestClient/1.0.0": {
+      "type": "project",
+      "path": "../RestClient/RestClient.csproj",
+      "msbuildProject": "../RestClient/RestClient.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows10.0.22621": [
       "CustomLists >= 1.0.0",
-      "CustomSearchBars >= 1.0.0"
+      "CustomSearchBars >= 1.0.0",
+      "RestClient >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -104,6 +126,9 @@
             },
             "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\CustomSearchBars\\CustomSearchBars.csproj": {
               "projectPath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\CustomSearchBars\\CustomSearchBars.csproj"
+            },
+            "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\RestClient\\RestClient.csproj": {
+              "projectPath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\RestClient\\RestClient.csproj"
             }
           }
         }

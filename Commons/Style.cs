@@ -3,18 +3,18 @@
     public class Style
     {
         public Style(Color primaryBackColor, Color secondaryBackColor, String fontType, Color fontColor,
-            Color primaryButtonColor, Color secondaryButtonColor, String buttonfontType,
-            Color buttonfontColor, FlatStyle buttonFlatStyle)
+            Color primaryInteractableColor, Color secondaryInteractableColor, String interactablefontType,
+            Color interactablefontColor, FlatStyle interactableFlatStyle)
         {
             this.primaryBackColor = primaryBackColor;
             this.secondaryBackColor = secondaryBackColor;
             this.fontType = fontType;
             this.fontColor = fontColor;
-            this.primaryButtonColor = primaryButtonColor;
-            this.secondaryButtonColor = secondaryButtonColor;
-            this.buttonFontType = buttonfontType;
-            this.buttonFontColor = buttonfontColor;
-            this.buttonFlatStyle = buttonFlatStyle;
+            this.primaryInteractableColor = primaryInteractableColor;
+            this.secondaryInteractableColor = secondaryInteractableColor;
+            this.interactableFontType = interactablefontType;
+            this.interactableFontColor = interactablefontColor;
+            this.interactableFlatStyle = interactableFlatStyle;
         }
 
         public Style()
@@ -23,11 +23,11 @@
             this.secondaryBackColor = SystemColors.ControlDark;
             this.fontType = "Segoe UI";
             this.fontColor = SystemColors.ControlText;
-            this.primaryButtonColor = SystemColors.Control;
-            this.secondaryButtonColor = Color.Black;
-            this.buttonFontType = "Segoe UI";
-            this.buttonFontColor = SystemColors.ControlText;
-            this.buttonFlatStyle = FlatStyle.Standard;
+            this.primaryInteractableColor = SystemColors.Control;
+            this.secondaryInteractableColor = Color.Black;
+            this.interactableFontType = "Segoe UI";
+            this.interactableFontColor = SystemColors.ControlText;
+            this.interactableFlatStyle = FlatStyle.Standard;
         }
 
         private Color primaryBackColor;
@@ -36,12 +36,12 @@
         private String fontType;
         private Color fontColor;
 
-        private Color primaryButtonColor;
-        private Color secondaryButtonColor;
+        private Color primaryInteractableColor;
+        private Color secondaryInteractableColor;
 
-        private String buttonFontType;
-        private Color buttonFontColor;
-        private FlatStyle buttonFlatStyle;
+        private String interactableFontType;
+        private Color interactableFontColor;
+        private FlatStyle interactableFlatStyle;
 
         public Color PrimaryBackColor { get { return primaryBackColor; } }
         public Color SecondaryBackColor { get { return secondaryBackColor; } }
@@ -49,11 +49,11 @@
         public String FontType { get { return fontType; } }
         public Color FontColor { get { return fontColor; } }
 
-        public Color PrimaryButtonColor { get { return primaryButtonColor; } }
-        public Color SecondaryButtonColor { get { return secondaryButtonColor; } }
+        public Color PrimaryInteractableColor { get { return primaryInteractableColor; } }
+        public Color SecondaryInteractableColor { get { return secondaryInteractableColor; } }
 
-        public String ButtonFontType { get { return buttonFontType; } }
-        public Color ButtonFontColor { get { return buttonFontColor; } }
-        public FlatStyle ButtonFlatStyle { get { return buttonFlatStyle; } }
+        public String InteractableFontType { get { return interactableFontType; } }
+        public Color InteractableFontColor { get { return interactableFontColor; } }
+        public FlatStyle InteractableFlatStyle { get { return interactableFlatStyle; } }
     }
 }

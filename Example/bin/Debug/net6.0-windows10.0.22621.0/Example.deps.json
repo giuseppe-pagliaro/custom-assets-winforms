@@ -10,6 +10,7 @@
         "dependencies": {
           "CustomLists": "1.0.0",
           "CustomSearchBars": "1.0.0",
+          "RestClient": "1.0.0",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22621.28"
         },
         "runtime": {
@@ -48,6 +49,14 @@
         "runtime": {
           "CustomSearchBars.dll": {}
         }
+      },
+      "RestClient/1.0.0": {
+        "dependencies": {
+          "Commons": "1.0.0"
+        },
+        "runtime": {
+          "RestClient.dll": {}
+        }
       }
     }
   },
@@ -73,6 +82,11 @@
       "sha512": ""
     },
     "CustomSearchBars/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "RestClient/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

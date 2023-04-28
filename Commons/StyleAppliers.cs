@@ -52,10 +52,10 @@
 
         public static void Button(Button button, Style style)
         {
-            button.ForeColor = style.ButtonFontColor;
+            button.ForeColor = style.InteractableFontColor;
             button.Font = new Font(style.FontType, button.Font.SizeInPoints);
-            button.BackColor = style.PrimaryButtonColor;
-            button.FlatStyle = style.ButtonFlatStyle;
+            button.BackColor = style.PrimaryInteractableColor;
+            button.FlatStyle = style.InteractableFlatStyle;
         }
     }
 }
