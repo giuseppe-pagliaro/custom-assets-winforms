@@ -2,7 +2,7 @@
 
 namespace Example
 {
-    public class Styles
+    public static class Styles
     {
         public static readonly Style LIGHT_MODE = new(
             SystemColors.Control,
@@ -17,8 +17,8 @@ namespace Example
             );
 
         public static readonly Style DARK_MODE = new(
-            SystemColors.Desktop,
-            SystemColors.WindowFrame,
+            Color.FromArgb(255, 30, 30, 30),
+            Color.FromArgb(255, 51, 51, 51),
             "Segoe UI",
             SystemColors.HighlightText,
             Color.DarkGreen,

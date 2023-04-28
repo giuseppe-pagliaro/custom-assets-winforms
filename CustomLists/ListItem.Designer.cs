@@ -44,10 +44,10 @@
             // ListItem
             // 
             AutoScaleMode = AutoScaleMode.None;
-            BorderStyle = BorderStyle.Fixed3D;
+            BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(txtID);
             Name = "ListItem";
-            Size = new Size(571, 171);
+            Size = new Size(573, 173);
             ResumeLayout(false);
             PerformLayout();
         }

@@ -1,6 +1,6 @@
 ﻿namespace Commons
 {
-    public class StyleAppliers
+    public static class StyleAppliers
     {
         public static void PrimaryBg(Form form, Style style)
         {
