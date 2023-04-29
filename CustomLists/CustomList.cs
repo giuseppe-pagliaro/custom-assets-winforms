@@ -188,6 +188,14 @@ namespace CustomLists
                 StyleAppliers.Button(this.buttonBack, style);
                 StyleAppliers.Button(this.buttonNext, style);
                 StyleAppliers.Button(this.buttonEnd, style);
+
+                if (this.renderedItems is not null)
+                {
+                    foreach (var renderedItem in this.renderedItems)
+                    {
+                        renderedItem.Style = style;
+                    }
+                }
             }
         }
 

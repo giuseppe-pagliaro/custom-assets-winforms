@@ -38,13 +38,22 @@ namespace Example
         private void ApplyStyles(Style style)
         {
             StyleAppliers.PrimaryBg(this, style);
+            StyleAppliers.PrimaryBg(this.groupBoxStyles, style, FontStyle.Bold);
+            StyleAppliers.Label(this.txtSearchInfo, style, FontStyle.Regular);
             customSearchBar.Style = style;
+            StyleAppliers.TextBox(this.textBoxResult, style);
             customList.Style = style;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ApplyStyles(Styles.DARK_MODE);
+            using (WaitForm waitForm = new(TaskSimulation))
+            {
+                waitForm.Style = Styles.LIGHT_MODE;
+                waitForm.ShowDialog();
+            }
+
+            ApplyStyles(Styles.LIGHT_MODE);
 
             GenPlaceHolderList(10);
             //GenEmptyList();
@@ -57,12 +66,16 @@ namespace Example
             {
                 customList.SetItems<DataExample, ExampleItem>(exampleItems);
             }
+        }
 
-            using (WaitForm waitForm = new(TaskSimulation))
-            {
-                waitForm.Style = Styles.DARK_MODE;
-                waitForm.ShowDialog();
-            }
+        private void radioLightMode_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyStyles(Styles.LIGHT_MODE);
+        }
+
+        private void radioDarkMode_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyStyles(Styles.DARK_MODE);
         }
     }
 }
