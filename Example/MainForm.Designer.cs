@@ -122,9 +122,9 @@
             txtSearchInfo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             txtSearchInfo.Location = new Point(297, 16);
             txtSearchInfo.Name = "txtSearchInfo";
-            txtSearchInfo.Size = new Size(281, 23);
+            txtSearchInfo.Size = new Size(335, 23);
             txtSearchInfo.TabIndex = 4;
-            txtSearchInfo.Text = "Looking for first result from Google.";
+            txtSearchInfo.Text = "Looking for first search result from Google.";
             // 
             // MainForm
             // 

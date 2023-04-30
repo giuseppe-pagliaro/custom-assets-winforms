@@ -35,7 +35,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Commons": "1.0.0"
+          "Commons": "1.0.0",
+          "RestClient": "1.0.0"
         },
         "compile": {
           "bin/placeholder/CustomSearchBars.dll": {}

@@ -1,4 +1,5 @@
 ﻿using Commons;
+using RestClient;
 
 namespace CustomSearchBars
 {
@@ -9,22 +10,29 @@ namespace CustomSearchBars
             InitializeComponent();
 
             style = new();
+            request = new();
         }
 
-        // public delegate void SearchRequest(String query);
         private Style style;
+        private Request request;
 
         public Style Style
         {
-            get { return style; }
+            get { return this.style; }
             set
             {
-                style = value;
+                this.style = value;
 
                 StyleAppliers.PrimaryBg(this, style);
                 StyleAppliers.TextBox(this.textBoxQuery, style);
                 StyleAppliers.Button(this.buttonSearch, style);
             }
+        }
+
+        public Request Request
+        {
+            get { return this.request; }
+            set { this.request = value; }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)

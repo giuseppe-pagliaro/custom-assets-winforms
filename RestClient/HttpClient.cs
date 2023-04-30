@@ -12,7 +12,7 @@
             set { mode = value; }
         }
 
-        public static async Task<String> MakeRequest(Request request)
+        public static async Task<String> MakeRequest(Request request, String[] argValues)
         {
             if (mode == ClientMode.Test)
             {
@@ -21,7 +21,7 @@
 
             try
             {
-                httpResponseMessage = await httpClient.GetAsync(request.FullUrl);
+                httpResponseMessage = await httpClient.GetAsync(request.GetFullUrl(argValues));
                 httpResponseMessage.EnsureSuccessStatusCode();
                 return await httpResponseMessage.Content.ReadAsStringAsync();
             }

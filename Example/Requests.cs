@@ -1,5 +1,4 @@
 ﻿using RestClient;
-using System;
 
 namespace Example
 {
@@ -20,9 +19,9 @@ namespace Example
         #endregion
 
         public static readonly Request SEARCH_FIRST_RESULT = new Request(GOOGLE_BASE_URL, "/search",
-            new string[] {"q=ciao", "num=1"}, "{\"mode\": \"Test\"}");
+            new Arg[] { new("q"), new("num", "1") }, "{\"mode\": \"Test\"}");
 
         public static readonly Request GET_LISTITEMS = new(LOCALHOST_BASE_URL, "/",
-            Array.Empty<String>(), JSON_TEST_GET_LISTITEMS);
+            JSON_TEST_GET_LISTITEMS);
     }
 }

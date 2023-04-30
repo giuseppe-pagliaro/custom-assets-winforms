@@ -168,6 +168,9 @@
             "projectReferences": {
               "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\Commons\\Commons.csproj": {
                 "projectPath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\Commons\\Commons.csproj"
+              },
+              "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\RestClient\\RestClient.csproj": {
+                "projectPath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\RestClient\\RestClient.csproj"
               }
             }
           }
