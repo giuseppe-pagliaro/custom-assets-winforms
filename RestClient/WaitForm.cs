@@ -118,8 +118,10 @@ namespace RestClient
         {
             if (this.worker is not null)
             {
-                Thread threadPointsAnimation = new(new ThreadStart(ExecutePointsAnimation));
-                threadPointsAnimation.IsBackground = true;
+                Thread threadPointsAnimation = new(new ThreadStart(ExecutePointsAnimation))
+                {
+                    IsBackground = true
+                };
                 threadPointsAnimation.Start();
 
                 Task.Factory.StartNew(this.worker).ContinueWith(t => { this.Close(); },

@@ -1,6 +1,4 @@
 ﻿using Commons;
-using RestClient;
-using CustomLists;
 using CustomSearchBars;
 
 namespace Example
@@ -15,11 +13,10 @@ namespace Example
             customSearchBar.SearchMade += customSearchBar_SearchMade;
         }
 
-        private List<DataExample>? exampleItems;
-
-        private void GenPlaceHolderList(int lenght)
+        private List<DataExample> GenPlaceHolderList(int lenght)
         {
-            exampleItems = new();
+            List<DataExample> exampleItems = new();
+
             for (int i = 0; i < lenght; i++)
             {
                 exampleItems.Add(new DataExample());
@@ -27,16 +24,8 @@ namespace Example
                 exampleItems[i].Id = i + 1;
                 exampleItems[i].Value = "Ciao";
             }
-        }
 
-        private void GenEmptyList()
-        {
-            exampleItems = new();
-        }
-
-        private void TaskSimulation()
-        {
-            Thread.Sleep(5000);
+            return exampleItems;
         }
 
         private void ApplyStyles(Style style)
@@ -51,25 +40,8 @@ namespace Example
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            using (WaitForm waitForm = new(TaskSimulation))
-            {
-                waitForm.Style = Styles.LIGHT_MODE;
-                waitForm.ShowDialog();
-            }
-
             ApplyStyles(Styles.LIGHT_MODE);
-
-            GenPlaceHolderList(10);
-            //GenEmptyList();
-
-            if (exampleItems is null)
-            {
-                customList.SetItems<ItemDatas, ListItem>(new List<ItemDatas>());
-            }
-            else
-            {
-                customList.SetItems<DataExample, ExampleItem>(exampleItems);
-            }
+            customList.SetItems<DataExample, ExampleItem>(GenPlaceHolderList(10));
         }
 
         private void radioLightMode_CheckedChanged(object sender, EventArgs e)

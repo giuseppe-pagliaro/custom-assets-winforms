@@ -14,7 +14,9 @@ C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-window
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.dll
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.pdb
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\Commons.dll
+C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\RestClient.dll
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\Commons.pdb
+C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\RestClient.pdb
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.csproj.AssemblyReference.cache
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.CustomSearchBar.resources
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.csproj.GenerateResource.cache
@@ -27,5 +29,3 @@ C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-window
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\refint\CustomSearchBars.dll
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\CustomSearchBars.pdb
 C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\obj\Debug\net6.0-windows10.0.22621.0\ref\CustomSearchBars.dll
-C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\RestClient.dll
-C:\Dati\Code\WindowsAppNet\CustomAssets\CustomSearchBars\bin\Debug\net6.0-windows10.0.22621.0\RestClient.pdb
