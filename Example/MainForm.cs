@@ -1,6 +1,7 @@
 ﻿using Commons;
 using RestClient;
 using CustomLists;
+using CustomSearchBars;
 
 namespace Example
 {
@@ -9,6 +10,9 @@ namespace Example
         public MainForm()
         {
             InitializeComponent();
+
+            customSearchBar.Request = Requests.SEARCH_FIRST_RESULT;
+            customSearchBar.SearchMade += customSearchBar_SearchMade;
         }
 
         private List<DataExample>? exampleItems;
@@ -76,6 +80,11 @@ namespace Example
         private void radioDarkMode_CheckedChanged(object sender, EventArgs e)
         {
             ApplyStyles(Styles.DARK_MODE);
+        }
+
+        private void customSearchBar_SearchMade(object sender, EventArgs e)
+        {
+            this.textBoxResult.Text = ((SearchMadeEventArgs)e).JsonResult;
         }
     }
 }

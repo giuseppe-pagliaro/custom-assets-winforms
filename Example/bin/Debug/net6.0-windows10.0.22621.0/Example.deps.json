@@ -44,7 +44,8 @@
       },
       "CustomSearchBars/1.0.0": {
         "dependencies": {
-          "Commons": "1.0.0"
+          "Commons": "1.0.0",
+          "RestClient": "1.0.0"
         },
         "runtime": {
           "CustomSearchBars.dll": {}

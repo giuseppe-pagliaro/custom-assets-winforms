@@ -81,7 +81,7 @@
                 formattedArgs = "?" + args[0].GetFormatted();
             }
 
-            for (int i = 1; i < this.args.Length; i++)
+            for (int i = 1; i < this.numVariableArgs; i++)
             {
                 if (this.args[0].isVariable)
                 {

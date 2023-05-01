@@ -13,6 +13,7 @@ namespace RestClient
             this.worker = null;
             this.style = new();
 
+            // TODO fix (Parent is always null?)
             if (Parent is not null)
             {
                 int x = this.Parent.Location.X + this.Parent.Width / 2 - this.Width / 2;
