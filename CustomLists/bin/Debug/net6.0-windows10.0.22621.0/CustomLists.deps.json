@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "CustomLists/1.0.0": {
         "dependencies": {
+          "Commons": "1.0.0",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.22621.28"
         },
         "runtime": {
@@ -25,6 +26,11 @@
             "fileVersion": "2.0.1.40881"
           }
         }
+      },
+      "Commons/1.0.0": {
+        "runtime": {
+          "Commons.dll": {}
+        }
       }
     }
   },
@@ -36,6 +42,11 @@
     },
     "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.22621.28": {
       "type": "runtimepack",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Commons/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

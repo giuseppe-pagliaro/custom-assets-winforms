@@ -51,7 +51,7 @@
             txtPlaceHolder.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             txtPlaceHolder.Location = new Point(0, 0);
             txtPlaceHolder.Name = "txtPlaceHolder";
-            txtPlaceHolder.Size = new Size(550, 125);
+            txtPlaceHolder.Size = new Size(548, 125);
             txtPlaceHolder.TabIndex = 0;
             txtPlaceHolder.Text = "No Data";
             txtPlaceHolder.TextAlign = ContentAlignment.MiddleCenter;
@@ -65,7 +65,7 @@
             itemsPanel.Controls.Add(txtPlaceHolder);
             itemsPanel.Location = new Point(0, 0);
             itemsPanel.Name = "itemsPanel";
-            itemsPanel.Size = new Size(550, 434);
+            itemsPanel.Size = new Size(548, 432);
             itemsPanel.TabIndex = 1;
             itemsPanel.SizeChanged += itemsPanel_SizeChanged;
             itemsPanel.Click += CustomList_Click;
@@ -76,19 +76,20 @@
             clickProtector.BackColor = Color.Transparent;
             clickProtector.Location = new Point(0, 0);
             clickProtector.Name = "clickProtector";
-            clickProtector.Size = new Size(550, 0);
+            clickProtector.Size = new Size(548, 0);
             clickProtector.TabIndex = 1;
             clickProtector.Click += CustomList_Click;
             // 
             // controlPanel
             // 
             controlPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            controlPanel.BackColor = Color.Transparent;
             controlPanel.Controls.Add(noFocusObj);
             controlPanel.Controls.Add(panelButtons);
             controlPanel.Controls.Add(txtPageCount);
-            controlPanel.Location = new Point(0, 440);
+            controlPanel.Location = new Point(0, 438);
             controlPanel.Name = "controlPanel";
-            controlPanel.Size = new Size(550, 50);
+            controlPanel.Size = new Size(548, 50);
             controlPanel.TabIndex = 2;
             controlPanel.Click += CustomList_Click;
             // 
@@ -109,17 +110,18 @@
             panelButtons.Controls.Add(buttonBack);
             panelButtons.Controls.Add(buttonStart);
             panelButtons.Dock = DockStyle.Right;
-            panelButtons.Location = new Point(248, 0);
+            panelButtons.Location = new Point(234, 0);
             panelButtons.Name = "panelButtons";
-            panelButtons.Size = new Size(302, 50);
+            panelButtons.Size = new Size(314, 50);
             panelButtons.TabIndex = 1;
             panelButtons.Click += CustomList_Click;
             // 
             // txtBoxCurrentPage
             // 
+            txtBoxCurrentPage.Anchor = AnchorStyles.Right;
             txtBoxCurrentPage.BackColor = SystemColors.ControlDark;
             txtBoxCurrentPage.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBoxCurrentPage.Location = new Point(111, 10);
+            txtBoxCurrentPage.Location = new Point(117, 10);
             txtBoxCurrentPage.Name = "txtBoxCurrentPage";
             txtBoxCurrentPage.Size = new Size(80, 30);
             txtBoxCurrentPage.TabIndex = 4;
@@ -131,10 +133,10 @@
             // 
             // buttonEnd
             // 
-            buttonEnd.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonEnd.Anchor = AnchorStyles.Right;
             buttonEnd.BackColor = SystemColors.ControlDark;
             buttonEnd.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonEnd.Location = new Point(251, 11);
+            buttonEnd.Location = new Point(257, 11);
             buttonEnd.Name = "buttonEnd";
             buttonEnd.Size = new Size(48, 29);
             buttonEnd.TabIndex = 3;
@@ -144,10 +146,10 @@
             // 
             // buttonNext
             // 
-            buttonNext.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonNext.Anchor = AnchorStyles.Right;
             buttonNext.BackColor = SystemColors.ControlDark;
             buttonNext.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonNext.Location = new Point(197, 11);
+            buttonNext.Location = new Point(203, 11);
             buttonNext.Name = "buttonNext";
             buttonNext.Size = new Size(48, 29);
             buttonNext.TabIndex = 2;
@@ -157,10 +159,10 @@
             // 
             // buttonBack
             // 
-            buttonBack.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonBack.Anchor = AnchorStyles.Right;
             buttonBack.BackColor = SystemColors.ControlDark;
             buttonBack.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonBack.Location = new Point(57, 11);
+            buttonBack.Location = new Point(63, 11);
             buttonBack.Name = "buttonBack";
             buttonBack.Size = new Size(48, 29);
             buttonBack.TabIndex = 1;
@@ -170,10 +172,10 @@
             // 
             // buttonStart
             // 
-            buttonStart.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            buttonStart.Anchor = AnchorStyles.Right;
             buttonStart.BackColor = SystemColors.ControlDark;
             buttonStart.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonStart.Location = new Point(3, 11);
+            buttonStart.Location = new Point(9, 11);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(48, 29);
             buttonStart.TabIndex = 0;
@@ -198,10 +200,11 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(controlPanel);
             Controls.Add(itemsPanel);
             Name = "CustomList";
-            Size = new Size(550, 490);
+            Size = new Size(548, 488);
             Load += CustomList_Load;
             Click += CustomList_Click;
             itemsPanel.ResumeLayout(false);

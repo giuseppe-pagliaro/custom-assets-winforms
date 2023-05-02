@@ -1,11 +1,33 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows10.0.22621": {}
+    "net6.0-windows10.0.22621": {
+      "Commons/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Commons.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Commons.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WindowsForms"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Commons/1.0.0": {
+      "type": "project",
+      "path": "../Commons/Commons.csproj",
+      "msbuildProject": "../Commons/Commons.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows10.0.22621": []
+    "net6.0-windows10.0.22621": [
+      "Commons >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Giuseppe\\.nuget\\packages\\": {}
@@ -33,7 +55,11 @@
       "frameworks": {
         "net6.0-windows10.0.22621": {
           "targetAlias": "net6.0-windows10.0.22621.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\Commons\\Commons.csproj": {
+              "projectPath": "C:\\Dati\\Code\\WindowsAppNet\\CustomAssets\\Commons\\Commons.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
