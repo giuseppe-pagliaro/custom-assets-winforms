@@ -1,6 +1,6 @@
-﻿namespace CustomItemManagers
+﻿namespace Example
 {
-    partial class ItemViewer
+    partial class ExampleViewer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,34 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtID = new Label();
+            CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
+            txtValue = new Label();
             SuspendLayout();
             // 
-            // txtID
+            // txtValue
             // 
-            txtID.AutoSize = true;
-            txtID.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            txtID.Location = new Point(40, 40);
-            txtID.Name = "txtID";
-            txtID.Size = new Size(0, 38);
-            txtID.TabIndex = 0;
+            txtValue.AutoSize = true;
+            txtValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtValue.Location = new Point(40, 40);
+            txtValue.Name = "txtValue";
+            txtValue.Size = new Size(107, 28);
+            txtValue.TabIndex = 1;
+            txtValue.Text = "Value: Ciao";
             // 
-            // ItemViewer
+            // ExampleViewer
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(428, 166);
-            Controls.Add(txtID);
-            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "ItemViewer";
-            Text = "Object #99999";
+            ClientSize = new Size(385, 127);
+            Controls.Add(txtValue);
+            itemDatas1.Id = 0;
+            ItemDatas = itemDatas1;
+            Name = "ExampleViewer";
+            Controls.SetChildIndex(txtID, 0);
+            Controls.SetChildIndex(txtValue, 0);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        protected Label txtID;
+        private Label txtValue;
     }
 }

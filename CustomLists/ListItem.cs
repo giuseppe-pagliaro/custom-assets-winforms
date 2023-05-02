@@ -1,5 +1,4 @@
 ﻿using Commons;
-using System.Text.RegularExpressions;
 
 namespace CustomLists
 {
@@ -51,26 +50,15 @@ namespace CustomLists
             }
         }
 
-        private String ClassNameToString()
-        {
-            if (itemDatas is null)
-            {
-                return "Null Class";
-            }
-
-            String rawName = itemDatas.GetType().Name;
-            return Regex.Replace(rawName, @"(\p{Lu})", " $1").TrimStart();
-        }
-
         public virtual void Populate()
         {
             if (itemDatas is null)
             {
-                txtID.Text = "(Item ID is Null)";
+                this.txtID.Text = "(Item ID is Null)";
             }
             else
             {
-                txtID.Text = this.ClassNameToString() + " #" + itemDatas.Id.ToString();
+                this.txtID.Text = this.itemDatas.ClassNameToString() + " #" + this.itemDatas.Id.ToString();
             }
         }
 
