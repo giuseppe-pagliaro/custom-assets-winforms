@@ -54,6 +54,6 @@
 
         #endregion
 
-        public Label txtID;
+        protected Label txtID;
     }
 }
