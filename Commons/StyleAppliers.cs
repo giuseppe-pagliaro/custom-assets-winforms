@@ -74,7 +74,6 @@
             textBox.ForeColor = style.FontColor;
             textBox.Font = new Font(style.FontType, textBox.Font.SizeInPoints);
             textBox.BackColor = style.SecondaryBackColor;
-            // TODO change Selection Color
         }
 
         public static void Button(Button button, Style style)
@@ -83,13 +82,6 @@
             button.Font = new Font(style.FontType, button.Font.SizeInPoints);
             button.BackColor = style.PrimaryInteractableColor;
             button.FlatStyle = style.InteractableFlatStyle;
-        }
-
-        public static void RadioButton(RadioButton radioButton, Style style)
-        {
-            radioButton.ForeColor = style.InteractableFontColor;
-            radioButton.Font = new Font(style.FontType, radioButton.Font.SizeInPoints);
-            // TODO change Selection Color
         }
     }
 }

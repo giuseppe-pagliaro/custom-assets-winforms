@@ -10,7 +10,7 @@ namespace Example
             "Segoe UI",
             SystemColors.ControlText,
             Color.Teal,
-            SystemColors.ControlText,
+            SystemColors.ControlDark,
             "Segoe UI",
             SystemColors.ControlText,
             FlatStyle.Standard
@@ -22,7 +22,7 @@ namespace Example
             "Segoe UI",
             SystemColors.HighlightText,
             Color.Teal,
-            SystemColors.HighlightText,
+            Color.FromArgb(255, 51, 51, 51),
             "Segoe UI",
             SystemColors.HighlightText,
             FlatStyle.Standard

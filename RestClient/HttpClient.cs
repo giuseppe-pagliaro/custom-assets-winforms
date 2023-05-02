@@ -16,7 +16,7 @@
         {
             if (mode == ClientMode.Test)
             {
-                return request.JsonTestResult;
+                return request.TestResult;
             }
 
             try

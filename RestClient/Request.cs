@@ -8,37 +8,37 @@
             this.path = "/";
             this.args = Array.Empty<Arg>();
             this.numVariableArgs = 0;
-            this.jsonTestResult = "{}";
+            this.testResult = "{}";
         }
 
-        public Request(String baseUrl, String path, String jsonTestResult)
+        public Request(String baseUrl, String path, String testResult)
         {
             this.baseUrl = baseUrl;
             this.path = path;
             this.args = Array.Empty<Arg>();
             this.numVariableArgs = 0;
-            this.jsonTestResult = jsonTestResult;
+            this.testResult = testResult;
         }
 
-        public Request(String baseUrl, String path, Arg[] args, String jsonTestResult)
+        public Request(String baseUrl, String path, Arg[] args, String testResult)
         {
             this.baseUrl = baseUrl;
             this.path = path;
             this.args = args;
             this.numVariableArgs = CountVariableArgs(this.args);
-            this.jsonTestResult = jsonTestResult;
+            this.testResult = testResult;
         }
 
         private String baseUrl;
         private String path;
         private Arg[] args;
-        private String jsonTestResult;
+        private String testResult;
 
         private int numVariableArgs;
 
-        public String JsonTestResult
+        public String TestResult
         {
-            get { return jsonTestResult; }
+            get { return testResult; }
         }
 
         private static int CountVariableArgs(Arg[] args)

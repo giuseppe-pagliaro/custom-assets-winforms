@@ -9,14 +9,14 @@ namespace CustomSearchBars
         {
             InitializeComponent();
 
-            style = new();
-            request = new();
-            jsonResult = "";
+            this.style = new();
+            this.request = new();
+            this.result = "";
         }
 
         private Style style;
         private Request request;
-        private String jsonResult;
+        private String result;
 
         public Style Style
         {
@@ -39,8 +39,8 @@ namespace CustomSearchBars
 
         private void MakeSearch()
         {
-            this.jsonResult = RestClient.HttpClient.MakeRequest(this.request,
-                new String[] { this.textBoxQuery.Text }).Result;
+            this.result = RestClient.HttpClient.MakeRequest(this.request,
+                new String[] { this.textBoxQuery.Text.Replace(" ", "+") }).Result;
         }
 
         private void ThrowSearchMadeEvent()
@@ -53,7 +53,7 @@ namespace CustomSearchBars
 
             SearchMadeEventArgs args = new()
             {
-                JsonResult = this.jsonResult
+                Result = this.result
             };
 
             OnSearchMade(args);
@@ -86,9 +86,9 @@ namespace CustomSearchBars
     {
         public SearchMadeEventArgs() : base()
         {
-            JsonResult = "";
+            this.Result = "";
         }
 
-        public String JsonResult { get; set; }
+        public String Result { get; set; }
     }
 }

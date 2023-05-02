@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Commons.Style style1 = new Commons.Style();
-            Commons.Style style2 = new Commons.Style();
+            Commons.Style style5 = new Commons.Style();
+            RestClient.Request request3 = new RestClient.Request();
+            Commons.Style style6 = new Commons.Style();
             customList = new CustomLists.CustomList();
             customSearchBar = new CustomSearchBars.CustomSearchBar();
             groupBoxStyles = new GroupBox();
-            radioLightMode = new RadioButton();
-            radioDarkMode = new RadioButton();
+            noFocusObj = new Label();
+            buttonDarkMode = new Button();
+            buttonLightMode = new Button();
             textBoxResult = new TextBox();
             txtSearchInfo = new Label();
             groupBoxStyles.SuspendLayout();
@@ -51,7 +53,7 @@
             customList.Location = new Point(12, 126);
             customList.Name = "customList";
             customList.Size = new Size(764, 519);
-            customList.Style = style1;
+            customList.Style = style5;
             customList.TabIndex = 0;
             customList.TotPagesMsg = " Pages";
             // 
@@ -61,15 +63,17 @@
             customSearchBar.BackColor = SystemColors.Control;
             customSearchBar.Location = new Point(288, 42);
             customSearchBar.Name = "customSearchBar";
+            customSearchBar.Request = request3;
             customSearchBar.Size = new Size(500, 43);
-            customSearchBar.Style = style2;
+            customSearchBar.Style = style6;
             customSearchBar.TabIndex = 1;
             // 
             // groupBoxStyles
             // 
             groupBoxStyles.BackColor = SystemColors.Control;
-            groupBoxStyles.Controls.Add(radioLightMode);
-            groupBoxStyles.Controls.Add(radioDarkMode);
+            groupBoxStyles.Controls.Add(noFocusObj);
+            groupBoxStyles.Controls.Add(buttonDarkMode);
+            groupBoxStyles.Controls.Add(buttonLightMode);
             groupBoxStyles.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             groupBoxStyles.Location = new Point(12, 0);
             groupBoxStyles.Name = "groupBoxStyles";
@@ -78,31 +82,39 @@
             groupBoxStyles.TabStop = false;
             groupBoxStyles.Text = "Styles";
             // 
-            // radioLightMode
+            // noFocusObj
             // 
-            radioLightMode.AutoSize = true;
-            radioLightMode.Checked = true;
-            radioLightMode.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            radioLightMode.Location = new Point(12, 42);
-            radioLightMode.Name = "radioLightMode";
-            radioLightMode.Size = new Size(118, 27);
-            radioLightMode.TabIndex = 1;
-            radioLightMode.TabStop = true;
-            radioLightMode.Text = "Light Mode";
-            radioLightMode.UseVisualStyleBackColor = true;
-            radioLightMode.CheckedChanged += radioLightMode_CheckedChanged;
+            noFocusObj.AutoSize = true;
+            noFocusObj.BackColor = Color.Transparent;
+            noFocusObj.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            noFocusObj.Location = new Point(260, 46);
+            noFocusObj.Name = "noFocusObj";
+            noFocusObj.Size = new Size(0, 17);
+            noFocusObj.TabIndex = 2;
             // 
-            // radioDarkMode
+            // buttonDarkMode
             // 
-            radioDarkMode.AutoSize = true;
-            radioDarkMode.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            radioDarkMode.Location = new Point(145, 42);
-            radioDarkMode.Name = "radioDarkMode";
-            radioDarkMode.Size = new Size(115, 27);
-            radioDarkMode.TabIndex = 0;
-            radioDarkMode.Text = "Dark Mode";
-            radioDarkMode.UseVisualStyleBackColor = true;
-            radioDarkMode.CheckedChanged += radioDarkMode_CheckedChanged;
+            buttonDarkMode.BackColor = SystemColors.ControlDark;
+            buttonDarkMode.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonDarkMode.Location = new Point(143, 38);
+            buttonDarkMode.Name = "buttonDarkMode";
+            buttonDarkMode.Size = new Size(111, 36);
+            buttonDarkMode.TabIndex = 1;
+            buttonDarkMode.Text = "Dark Mode";
+            buttonDarkMode.UseVisualStyleBackColor = false;
+            buttonDarkMode.Click += buttonDarkMode_Click;
+            // 
+            // buttonLightMode
+            // 
+            buttonLightMode.BackColor = SystemColors.ControlDark;
+            buttonLightMode.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonLightMode.Location = new Point(15, 38);
+            buttonLightMode.Name = "buttonLightMode";
+            buttonLightMode.Size = new Size(115, 36);
+            buttonLightMode.TabIndex = 0;
+            buttonLightMode.Text = "Light Mode";
+            buttonLightMode.UseVisualStyleBackColor = false;
+            buttonLightMode.Click += buttonLightMode_Click;
             // 
             // textBoxResult
             // 
@@ -122,9 +134,9 @@
             txtSearchInfo.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             txtSearchInfo.Location = new Point(297, 16);
             txtSearchInfo.Name = "txtSearchInfo";
-            txtSearchInfo.Size = new Size(335, 23);
+            txtSearchInfo.Size = new Size(473, 23);
             txtSearchInfo.TabIndex = 4;
-            txtSearchInfo.Text = "Looking for first search result from Google.";
+            txtSearchInfo.Text = "Get a list of universities in a specified country. (hipolabs.com)";
             // 
             // MainForm
             // 
@@ -150,9 +162,10 @@
         private CustomLists.CustomList customList;
         private CustomSearchBars.CustomSearchBar customSearchBar;
         private GroupBox groupBoxStyles;
-        private RadioButton radioLightMode;
-        private RadioButton radioDarkMode;
         private TextBox textBoxResult;
         private Label txtSearchInfo;
+        private Button buttonDarkMode;
+        private Button buttonLightMode;
+        private Label noFocusObj;
     }
 }
