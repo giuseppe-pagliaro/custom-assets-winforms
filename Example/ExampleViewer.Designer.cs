@@ -28,37 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Commons.Style style1 = new Commons.Style();
             CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
-            txtValue = new Label();
+            fieldValue = new CustomItemManagers.CopiableTextField();
             SuspendLayout();
             // 
-            // txtValue
+            // fieldValue
             // 
-            txtValue.AutoSize = true;
-            txtValue.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtValue.Location = new Point(40, 40);
-            txtValue.Name = "txtValue";
-            txtValue.Size = new Size(107, 28);
-            txtValue.TabIndex = 1;
-            txtValue.Text = "Value: Ciao";
+            fieldValue.BackColor = SystemColors.ControlDark;
+            fieldValue.Dock = DockStyle.Fill;
+            fieldValue.FieldName = "Value";
+            fieldValue.Location = new Point(0, 0);
+            fieldValue.Name = "fieldValue";
+            fieldValue.Separator = ":";
+            fieldValue.Size = new Size(359, 52);
+            fieldValue.Style = style1;
+            fieldValue.TabIndex = 2;
+            fieldValue.Value = "(empty)";
             // 
             // ExampleViewer
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(385, 127);
-            Controls.Add(txtValue);
+            ClientSize = new Size(359, 52);
+            Controls.Add(fieldValue);
             itemDatas1.Id = 0;
             ItemDatas = itemDatas1;
             Name = "ExampleViewer";
+            Text = "Item Datas #0";
             Controls.SetChildIndex(txtID, 0);
-            Controls.SetChildIndex(txtValue, 0);
+            Controls.SetChildIndex(fieldValue, 0);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label txtValue;
+        private CustomItemManagers.CopiableTextField fieldValue;
     }
 }

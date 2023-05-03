@@ -10,7 +10,7 @@ namespace Example
             InitializeComponent();
         }
 
-        public override void Populate()
+        protected override void Populate()
         {
             base.Populate();
 
@@ -38,7 +38,7 @@ namespace Example
             }
         }
 
-        public override void ApplyStyle()
+        protected override void ApplyStyle()
         {
             base.ApplyStyle();
 

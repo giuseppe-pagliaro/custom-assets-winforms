@@ -69,6 +69,12 @@
             }
         }
 
+        public static void CopyableLabel(Label label, Style style)
+        {
+            label.ForeColor = style.PrimaryInteractableColor;
+            label.Font = new Font(style.FontType, label.Font.SizeInPoints, FontStyle.Underline);
+        }
+
         public static void TextBox(TextBox textBox, Style style)
         {
             textBox.ForeColor = style.FontColor;

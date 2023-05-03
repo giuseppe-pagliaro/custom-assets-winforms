@@ -50,7 +50,7 @@ namespace CustomLists
             }
         }
 
-        public virtual void Populate()
+        protected virtual void Populate()
         {
             if (itemDatas is null)
             {
@@ -62,7 +62,7 @@ namespace CustomLists
             }
         }
 
-        public virtual void ApplyStyle()
+        protected virtual void ApplyStyle()
         {
             StyleAppliers.SecondaryBg(this, style);
             StyleAppliers.Label(this.txtID, style, FontStyle.Bold);

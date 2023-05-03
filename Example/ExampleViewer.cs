@@ -1,5 +1,4 @@
-﻿using Commons;
-using CustomItemManagers;
+﻿using CustomItemManagers;
 
 namespace Example
 {
@@ -16,13 +15,13 @@ namespace Example
 
             if (this.ItemDatas is null)
             {
-                txtValue.Text = "Value: (Null Object)";
+                this.fieldValue.Value = "(Null Object)";
                 return;
             }
 
             if (this.ItemDatas is not DataExample)
             {
-                txtValue.Text = "Value: (Incompatible Class)";
+                this.fieldValue.Value = "(Incompatible Class)";
                 return;
             }
 
@@ -30,11 +29,11 @@ namespace Example
 
             if (dataExample.Value is null)
             {
-                txtValue.Text = "Value: (Null Field)";
+                this.fieldValue.Value = "(Null Field)";
             }
             else
             {
-                txtValue.Text = "Value: " + dataExample.Value;
+                this.fieldValue.Value = dataExample.Value;
             }
         }
 
@@ -42,7 +41,7 @@ namespace Example
         {
             base.ApplyStyle();
 
-            StyleAppliers.Label(this.txtValue, this.Style, FontStyle.Regular);
+            this.fieldValue.Style = this.Style;
         }
     }
 }
