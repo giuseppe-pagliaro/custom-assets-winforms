@@ -2,23 +2,23 @@
 
 namespace CustomItemManagers
 {
-    public partial class TextField : Field
+    public partial class CopyableTextField : Field
     {
-        public TextField() : base()
+        public CopyableTextField() : base()
         {
             InitializeComponent();
 
             this.Value = "(empty)";
         }
 
-        public TextField(String name, String value) : base(name)
+        public CopyableTextField(String name, String value) : base(name)
         {
             InitializeComponent();
 
             this.Value = value;
         }
 
-        public TextField(String name, String value, Style style) : base(name, style)
+        public CopyableTextField(String name, String value, Style style) : base(name, style)
         {
             InitializeComponent();
 
@@ -34,7 +34,13 @@ namespace CustomItemManagers
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
-            StyleAppliers.Label(this.txtValue, this.style, FontStyle.Regular);
+            StyleAppliers.LinkLabel(this.txtValue, this.style);
+        }
+
+        private void txtValue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Clipboard.SetText(txtValue.Text);
+            // TODO add prompt.
         }
     }
 }

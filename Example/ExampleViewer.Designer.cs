@@ -30,32 +30,31 @@
         {
             Commons.Style style1 = new Commons.Style();
             CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
-            fieldValue = new CustomItemManagers.CopiableTextField();
+            fieldValue = new CustomItemManagers.CopyableTextField();
             SuspendLayout();
             // 
             // fieldValue
             // 
             fieldValue.BackColor = SystemColors.ControlDark;
-            fieldValue.Dock = DockStyle.Fill;
-            fieldValue.FieldName = "Value";
-            fieldValue.Location = new Point(0, 0);
+            fieldValue.FieldName = "Name";
+            fieldValue.Location = new Point(12, 12);
             fieldValue.Name = "fieldValue";
             fieldValue.Separator = ":";
-            fieldValue.Size = new Size(359, 52);
+            fieldValue.Size = new Size(365, 52);
             fieldValue.Style = style1;
-            fieldValue.TabIndex = 2;
+            fieldValue.TabIndex = 1;
             fieldValue.Value = "(empty)";
             // 
             // ExampleViewer
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(359, 52);
+            ClientSize = new Size(389, 76);
             Controls.Add(fieldValue);
             itemDatas1.Id = 0;
             ItemDatas = itemDatas1;
             Name = "ExampleViewer";
-            Text = "Item Datas #0";
+            Text = "Data Example #9999";
             Controls.SetChildIndex(txtID, 0);
             Controls.SetChildIndex(fieldValue, 0);
             ResumeLayout(false);
@@ -63,6 +62,7 @@
         }
 
         #endregion
-        private CustomItemManagers.CopiableTextField fieldValue;
+
+        private CustomItemManagers.CopyableTextField fieldValue;
     }
 }

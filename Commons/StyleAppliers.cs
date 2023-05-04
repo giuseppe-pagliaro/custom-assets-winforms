@@ -69,10 +69,20 @@
             }
         }
 
-        public static void CopyableLabel(Label label, Style style)
+        public static void LinkLabel(LinkLabel linkLabel, Style style)
         {
-            label.ForeColor = style.PrimaryInteractableColor;
-            label.Font = new Font(style.FontType, label.Font.SizeInPoints, FontStyle.Underline);
+            linkLabel.LinkColor = style.PrimaryInteractableColor;
+            linkLabel.ActiveLinkColor = style.InteractableFontColor;
+            linkLabel.VisitedLinkColor = style.PrimaryInteractableColor;
+            linkLabel.Font = new Font(style.FontType, linkLabel.Font.SizeInPoints, FontStyle.Underline);
+        }
+
+        public static void LinkLabelWithVisited(LinkLabel linkLabel, Style style)
+        {
+            linkLabel.LinkColor = style.PrimaryInteractableColor;
+            linkLabel.ActiveLinkColor = style.InteractableFontColor;
+            linkLabel.VisitedLinkColor = style.SecondaryInteractableColor; ;
+            linkLabel.Font = new Font(style.FontType, linkLabel.Font.SizeInPoints, FontStyle.Underline);
         }
 
         public static void TextBox(TextBox textBox, Style style)

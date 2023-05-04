@@ -1,6 +1,6 @@
 ﻿namespace CustomItemManagers
 {
-    partial class CopiableTextField
+    partial class CopyableTextField
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -28,21 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            txtValue = new LinkLabel();
             SuspendLayout();
             // 
             // txtValue
             // 
-            txtValue.Click += txtValue_Click;
+            txtValue.AutoSize = true;
+            txtValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            txtValue.Location = new Point(109, 15);
+            txtValue.Name = "txtValue";
+            txtValue.Size = new Size(54, 25);
+            txtValue.TabIndex = 4;
+            txtValue.TabStop = true;
+            txtValue.Text = "Value";
             // 
-            // CopiableTextField
+            // CopyableTextField
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "CopiableTextField";
+            Controls.Add(txtValue);
+            Name = "CopyableTextField";
+            Size = new Size(175, 52);
+            Controls.SetChildIndex(txtName, 0);
+            Controls.SetChildIndex(txtSeparator, 0);
+            Controls.SetChildIndex(txtValue, 0);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
+
+        private LinkLabel txtValue;
     }
 }
