@@ -2,46 +2,46 @@
 
 namespace Example
 {
-    public partial class ExampleViewer : ItemViewer
+    public partial class ExampleViewer : FieldsForm
     {
         public ExampleViewer()
         {
             InitializeComponent();
         }
 
-        public override void Populate()
+        protected override void Populate()
         {
             base.Populate();
 
-            if (this.ItemDatas is null)
+            if (ItemDatas is null)
             {
-                this.fieldValue.Value = "(Null Object)";
+                fieldValue.Value = "(Null Object)";
                 return;
             }
 
-            if (this.ItemDatas is not DataExample)
+            if (ItemDatas is not DataExample)
             {
-                this.fieldValue.Value = "(Incompatible Class)";
+                fieldValue.Value = "(Incompatible Class)";
                 return;
             }
 
-            DataExample dataExample = (DataExample)this.ItemDatas;
+            DataExample dataExample = (DataExample)ItemDatas;
 
             if (dataExample.Value is null)
             {
-                this.fieldValue.Value = "(Null Field)";
+                fieldValue.Value = "(Null Field)";
             }
             else
             {
-                this.fieldValue.Value = dataExample.Value;
+                fieldValue.Value = dataExample.Value;
             }
         }
 
-        public override void ApplyStyle()
+        protected override void ApplyStyle()
         {
             base.ApplyStyle();
 
-            this.fieldValue.Style = this.Style;
+            fieldValue.Style = Style;
         }
     }
 }

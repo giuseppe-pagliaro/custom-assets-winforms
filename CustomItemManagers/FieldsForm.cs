@@ -3,9 +3,9 @@ using CustomLists;
 
 namespace CustomItemManagers
 {
-    public partial class ItemViewer : Form
+    public partial class FieldsForm : Form
     {
-        public ItemViewer()
+        public FieldsForm()
         {
             InitializeComponent();
 
@@ -13,7 +13,7 @@ namespace CustomItemManagers
         }
 
         private ItemDatas? itemDatas;
-        private Style style;
+        protected Style style;
 
         public ItemDatas ItemDatas
         {
@@ -43,7 +43,7 @@ namespace CustomItemManagers
             }
         }
 
-        public virtual void Populate()
+        protected virtual void Populate()
         {
             if (itemDatas is null)
             {
@@ -55,7 +55,7 @@ namespace CustomItemManagers
             }
         }
 
-        public virtual void ApplyStyle()
+        protected virtual void ApplyStyle()
         {
             StyleAppliers.PrimaryBg(this, style);
         }

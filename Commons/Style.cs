@@ -2,9 +2,22 @@
 {
     public class Style
     {
+        public Style()
+        {
+            primaryBackColor = SystemColors.Control;
+            secondaryBackColor = SystemColors.ControlDark;
+            fontType = "Segoe UI";
+            fontColor = SystemColors.ControlText;
+            primaryInteractableColor = SystemColors.Control;
+            secondaryInteractableColor = Color.Black;
+            interactableFontType = "Segoe UI";
+            interactableFontColor = SystemColors.ControlText;
+            interactableFlatStyle = FlatStyle.Standard;
+        }
+
         public Style(Color primaryBackColor, Color secondaryBackColor, String fontType, Color fontColor,
-            Color primaryInteractableColor, Color secondaryInteractableColor, String interactablefontType,
-            Color interactablefontColor, FlatStyle interactableFlatStyle)
+            Color primaryInteractableColor, Color secondaryInteractableColor, String interactableFontType,
+            Color interactableFontColor, FlatStyle interactableFlatStyle)
         {
             this.primaryBackColor = primaryBackColor;
             this.secondaryBackColor = secondaryBackColor;
@@ -12,22 +25,9 @@
             this.fontColor = fontColor;
             this.primaryInteractableColor = primaryInteractableColor;
             this.secondaryInteractableColor = secondaryInteractableColor;
-            this.interactableFontType = interactablefontType;
-            this.interactableFontColor = interactablefontColor;
+            this.interactableFontType = interactableFontType;
+            this.interactableFontColor = interactableFontColor;
             this.interactableFlatStyle = interactableFlatStyle;
-        }
-
-        public Style()
-        {
-            this.primaryBackColor = SystemColors.Control;
-            this.secondaryBackColor = SystemColors.ControlDark;
-            this.fontType = "Segoe UI";
-            this.fontColor = SystemColors.ControlText;
-            this.primaryInteractableColor = SystemColors.Control;
-            this.secondaryInteractableColor = Color.Black;
-            this.interactableFontType = "Segoe UI";
-            this.interactableFontColor = SystemColors.ControlText;
-            this.interactableFlatStyle = FlatStyle.Standard;
         }
 
         private Color primaryBackColor;

@@ -9,55 +9,61 @@ namespace CustomSearchBars
         {
             InitializeComponent();
 
-            this.style = new();
-            this.request = new();
-            this.result = "";
+            style = new();
+            request = new();
+            result = "";
         }
 
         private Style style;
         private Request request;
         private String result;
 
+        #region Properties
+
         public Style Style
         {
-            get { return this.style; }
+            get { return style; }
             set
             {
-                this.style = value;
+                style = value;
 
                 StyleAppliers.PrimaryBg(this, style);
-                StyleAppliers.TextBox(this.textBoxQuery, style);
-                StyleAppliers.Button(this.buttonSearch, style);
+                StyleAppliers.TextBox(textBoxQuery, style);
+                StyleAppliers.Button(buttonSearch, style);
             }
         }
 
         public Request Request
         {
-            get { return this.request; }
-            set { this.request = value; }
+            get { return request; }
+            set { request = value; }
         }
+
+        #endregion
 
         private void MakeSearch()
         {
-            this.result = RestClient.HttpClient.MakeRequest(this.request,
-                new String[] { this.textBoxQuery.Text.Replace(" ", "+") }).Result;
+            result = RestClient.HttpClient.MakeRequest(request,
+                new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
         }
 
         private void ThrowSearchMadeEvent()
         {
             using (WaitForm waitForm = new(MakeSearch))
             {
-                waitForm.Style = this.style;
+                waitForm.Style = style;
                 waitForm.ShowDialog();
             }
 
             SearchMadeEventArgs args = new()
             {
-                Result = this.result
+                Result = result
             };
 
             OnSearchMade(args);
         }
+
+        #region Default Events
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -74,6 +80,8 @@ namespace CustomSearchBars
             }
         }
 
+        #endregion
+
         protected virtual void OnSearchMade(SearchMadeEventArgs e)
         {
             SearchMade?.Invoke(this, e);
@@ -86,7 +94,7 @@ namespace CustomSearchBars
     {
         public SearchMadeEventArgs() : base()
         {
-            this.Result = "";
+            Result = "";
         }
 
         public String Result { get; set; }

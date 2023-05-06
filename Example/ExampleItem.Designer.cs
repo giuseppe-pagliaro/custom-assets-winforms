@@ -36,7 +36,6 @@
             // 
             txtID.Size = new Size(162, 31);
             txtID.Text = "Item Datas #0";
-            txtID.Click += ExampleItem_Click;
             // 
             // txtValue
             // 
@@ -47,7 +46,6 @@
             txtValue.Size = new Size(97, 23);
             txtValue.TabIndex = 1;
             txtValue.Text = "Value: 1000";
-            txtValue.Click += ExampleItem_Click;
             // 
             // ExampleItem
             // 
@@ -58,7 +56,6 @@
             ItemDatas = itemDatas1;
             Name = "ExampleItem";
             Size = new Size(571, 173);
-            Click += ExampleItem_Click;
             Controls.SetChildIndex(txtID, 0);
             Controls.SetChildIndex(txtValue, 0);
             ResumeLayout(false);

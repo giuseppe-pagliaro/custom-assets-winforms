@@ -8,25 +8,27 @@ namespace Example
         public ExampleItem()
         {
             InitializeComponent();
+
+            txtValue.Click += ListItem_Click;
         }
 
         protected override void Populate()
         {
             base.Populate();
 
-            if (this.ItemDatas is null)
+            if (ItemDatas is null)
             {
                 txtValue.Text = "Value: (Null Object)";
                 return;
             }
 
-            if (this.ItemDatas is not DataExample)
+            if (ItemDatas is not DataExample)
             {
                 txtValue.Text = "Value: (Incompatible Class)";
                 return;
             }
 
-            DataExample dataExample = (DataExample)this.ItemDatas;
+            DataExample dataExample = (DataExample)ItemDatas;
 
             if (dataExample.Value is null)
             {
@@ -42,15 +44,7 @@ namespace Example
         {
             base.ApplyStyle();
 
-            StyleAppliers.Label(this.txtValue, this.Style, FontStyle.Regular);
-        }
-
-        private void ExampleItem_Click(object sender, EventArgs e)
-        {
-            ExampleViewer exampleViewer = new();
-            exampleViewer.Style = this.Style;
-            exampleViewer.ItemDatas = this.ItemDatas;
-            exampleViewer.Show();
+            StyleAppliers.Label(txtValue, Style, FontStyle.Regular);
         }
     }
 }

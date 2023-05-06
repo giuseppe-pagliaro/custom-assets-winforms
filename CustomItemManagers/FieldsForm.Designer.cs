@@ -1,6 +1,6 @@
 ﻿namespace CustomItemManagers
 {
-    partial class ItemViewer
+    partial class FieldsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +44,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(428, 166);
+            ClientSize = new Size(282, 37);
             Controls.Add(txtID);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;

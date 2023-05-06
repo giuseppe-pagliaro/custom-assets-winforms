@@ -8,21 +8,21 @@ namespace CustomItemManagers
         {
             InitializeComponent();
 
-            this.Value = "(empty)";
+            Value = "(empty)";
         }
 
         public CopyableTextField(String name, String value) : base(name)
         {
             InitializeComponent();
 
-            this.Value = value;
+            Value = value;
         }
 
         public CopyableTextField(String name, String value, Style style) : base(name, style)
         {
             InitializeComponent();
 
-            this.Value = value;
+            Value = value;
         }
 
         public String Value

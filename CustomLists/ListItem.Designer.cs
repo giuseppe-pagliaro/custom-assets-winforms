@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             txtID = new Label();
+            buttonEdit = new Button();
+            noFocusObj = new Label();
             SuspendLayout();
             // 
             // txtID
@@ -40,14 +42,38 @@
             txtID.Size = new Size(169, 31);
             txtID.TabIndex = 0;
             txtID.Text = "Object #99999";
+            txtID.Click += ListItem_Click;
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonEdit.Location = new Point(474, 32);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Size = new Size(67, 29);
+            buttonEdit.TabIndex = 1;
+            buttonEdit.Text = "Edit";
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
+            // 
+            // noFocusObj
+            // 
+            noFocusObj.AutoSize = true;
+            noFocusObj.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
+            noFocusObj.Location = new Point(343, 36);
+            noFocusObj.Name = "noFocusObj";
+            noFocusObj.Size = new Size(0, 17);
+            noFocusObj.TabIndex = 2;
             // 
             // ListItem
             // 
             AutoScaleMode = AutoScaleMode.None;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(noFocusObj);
+            Controls.Add(buttonEdit);
             Controls.Add(txtID);
             Name = "ListItem";
             Size = new Size(573, 173);
+            Click += ListItem_Click;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -55,5 +81,7 @@
         #endregion
 
         protected Label txtID;
+        private Button buttonEdit;
+        private Label noFocusObj;
     }
 }

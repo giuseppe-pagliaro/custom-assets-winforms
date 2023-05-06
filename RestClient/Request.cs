@@ -4,19 +4,19 @@
     {
         public Request()
         {
-            this.baseUrl = "localhost:8080";
-            this.path = "/";
-            this.args = Array.Empty<Arg>();
-            this.numVariableArgs = 0;
-            this.testResult = "{}";
+            baseUrl = "localhost:8080";
+            path = "/";
+            args = Array.Empty<Arg>();
+            numVariableArgs = 0;
+            testResult = "{}";
         }
 
         public Request(String baseUrl, String path, String testResult)
         {
             this.baseUrl = baseUrl;
             this.path = path;
-            this.args = Array.Empty<Arg>();
-            this.numVariableArgs = 0;
+            args = Array.Empty<Arg>();
+            numVariableArgs = 0;
             this.testResult = testResult;
         }
 
@@ -25,7 +25,7 @@
             this.baseUrl = baseUrl;
             this.path = path;
             this.args = args;
-            this.numVariableArgs = CountVariableArgs(this.args);
+            numVariableArgs = CountVariableArgs(this.args);
             this.testResult = testResult;
         }
 
@@ -58,20 +58,20 @@
 
         public String GetFullUrl(String[] argValues)
         {
-            if (argValues.Length != this.numVariableArgs)
+            if (argValues.Length != numVariableArgs)
             {
                 throw new ArgValuesNumberMismatchException();
             }
 
-            if (this.args.Length == 0)
+            if (args.Length == 0)
             {
-                return this.baseUrl + this.path;
+                return baseUrl + path;
             }
 
             int indArgValues = 0;
             String formattedArgs = "";
 
-            if (this.args[0].isVariable)
+            if (args[0].isVariable)
             {
                 formattedArgs = "?" + args[0].GetFormatted(argValues[0]);
                 indArgValues++;
@@ -81,9 +81,9 @@
                 formattedArgs = "?" + args[0].GetFormatted();
             }
 
-            for (int i = 1; i < this.numVariableArgs; i++)
+            for (int i = 1; i < numVariableArgs; i++)
             {
-                if (this.args[0].isVariable)
+                if (args[0].isVariable)
                 {
                     formattedArgs = "&" + args[0].GetFormatted(argValues[indArgValues]);
                     indArgValues++;
@@ -94,7 +94,7 @@
                 }
             }
 
-            return this.baseUrl + this.path + formattedArgs;
+            return baseUrl + path + formattedArgs;
         }
     }
 

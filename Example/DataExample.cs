@@ -6,7 +6,7 @@ namespace Example
     {
         public DataExample() : base()
         {
-            this.Value = "";
+            Value = "";
         }
 
         public String Value { get; set; }

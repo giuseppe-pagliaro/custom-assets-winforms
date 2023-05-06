@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Commons\Commons.csproj" />
+    <ProjectReference Include="..\CustomItemManagers\CustomItemManagers.csproj" />
   </ItemGroup>
 
 </Project>

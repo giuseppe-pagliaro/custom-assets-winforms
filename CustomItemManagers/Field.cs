@@ -8,16 +8,16 @@ namespace CustomItemManagers
         {
             InitializeComponent();
 
-            this.style = new();
-            this.Name = "Field";
+            style = new();
+            Name = "Field";
         }
 
         public Field(string name)
         {
             InitializeComponent();
 
-            this.style = new();
-            this.Name = name;
+            style = new();
+            Name = name;
         }
 
         public Field(string name, Style style)
@@ -25,7 +25,7 @@ namespace CustomItemManagers
             InitializeComponent();
 
             this.style = style;
-            this.Name = name;
+            Name = name;
         }
 
         protected Style style;
@@ -35,7 +35,7 @@ namespace CustomItemManagers
             get { return this.style; }
             set
             {
-                this.style = value;
+                style = value;
                 this.ApplyStyle();
             }
         }

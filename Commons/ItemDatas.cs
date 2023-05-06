@@ -6,7 +6,7 @@ namespace CustomLists
     {
         public ItemDatas()
         {
-            this.Id = 0;
+            Id = 0;
         }
 
         public int Id { get; set; }
