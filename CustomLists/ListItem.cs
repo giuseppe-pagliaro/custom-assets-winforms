@@ -49,7 +49,7 @@ namespace CustomLists
             get { return originalHeight; }
         }
 
-        public Type Viewer
+        internal Type Viewer
         {
             get
             {
@@ -63,7 +63,7 @@ namespace CustomLists
             set { viewerType = value; }
         }
 
-        public Type Editor
+        internal Type Editor
         {
             get
             {

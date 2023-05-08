@@ -184,7 +184,18 @@ namespace CustomLists
 
                 return viewerType;
             }
-            set { viewerType = value; }
+            set
+            {
+                if (!value.IsSubclassOf(typeof(FieldsForm)))
+                {
+                    if (!(value == typeof(FieldsForm)))
+                    {
+                        throw new IncompatibleClassException();
+                    }
+                }
+
+                viewerType = value;
+            }
         }
 
         public Type Editor
@@ -198,7 +209,18 @@ namespace CustomLists
 
                 return editorType;
             }
-            set { editorType = value; }
+            set
+            {
+                if (!value.IsSubclassOf(typeof(FieldsForm)))
+                {
+                    if (!(value == typeof(FieldsForm)))
+                    {
+                        throw new IncompatibleClassException();
+                    }
+                }
+
+                editorType = value;
+            }
         }
 
         public Style Style
@@ -554,5 +576,11 @@ namespace CustomLists
         }
 
         #endregion
+    }
+
+    public class IncompatibleClassException : Exception
+    {
+        public IncompatibleClassException()
+            : base("The class you provided isn't or doesn't extend \"CustomItemManagers.FieldsForm\".") { }
     }
 }

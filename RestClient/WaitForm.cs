@@ -13,13 +13,7 @@ namespace RestClient
             worker = null;
             style = new();
 
-            // TODO fix (Parent is always null?)
-            if (Parent is not null)
-            {
-                int x = Parent.Location.X + Parent.Width / 2 - Width / 2;
-                int y = Parent.Location.Y + Parent.Height / 2 - Height / 2;
-                Location = new(x, y);
-            }
+            CenterToParent();
         }
 
         public WaitForm(Action worker) : this()
@@ -32,6 +26,8 @@ namespace RestClient
         private Action? worker;
 
         private Style style;
+
+        #region Properties
 
         public String LoadingMessage
         {
@@ -50,6 +46,8 @@ namespace RestClient
                 Style.Apply(txtLoading, style, FontStyle.Bold);
             }
         }
+
+        #endregion
 
         private void UpdateLoadingMessageSafely(String text)
         {
@@ -114,6 +112,8 @@ namespace RestClient
             }
         }
 
+        #region Default Events
+
         private void WaitForm_Load(object sender, EventArgs e)
         {
             if (worker is not null)
@@ -138,5 +138,7 @@ namespace RestClient
         {
             animationRunning = false;
         }
+
+        #endregion
     }
 }

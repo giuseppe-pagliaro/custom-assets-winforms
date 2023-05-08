@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtValue = new LinkLabel();
+            toolTipValue = new ToolTip(components);
             SuspendLayout();
             // 
             // txtValue
@@ -41,6 +43,8 @@
             txtValue.TabIndex = 4;
             txtValue.TabStop = true;
             txtValue.Text = "Value";
+            txtValue.LinkClicked += txtValue_LinkClicked;
+            txtValue.MouseLeave += txtValue_MouseLeave;
             // 
             // CopyableTextField
             // 
@@ -59,5 +63,6 @@
         #endregion
 
         private LinkLabel txtValue;
+        protected ToolTip toolTipValue;
     }
 }

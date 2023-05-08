@@ -141,7 +141,7 @@
             }
             else
             {
-                linkLabel.VisitedLinkColor = style.SecondaryInteractableColor;
+                linkLabel.VisitedLinkColor = style.InteractableFontColor;
             }
 
             linkLabel.Font = new Font(style.FontType, linkLabel.Font.SizeInPoints, FontStyle.Underline);

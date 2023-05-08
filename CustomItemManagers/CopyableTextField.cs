@@ -8,28 +8,54 @@ namespace CustomItemManagers
         {
             InitializeComponent();
 
-            Value = "(empty)";
+            value = "(empty)";
+            CopyMessage = "Click to copy.";
+            CopiedMessage = "Copied.";
+            toolTipValue.SetToolTip(txtValue, CopyMessage);
         }
 
         public CopyableTextField(String name, String value) : base(name)
         {
             InitializeComponent();
 
-            Value = value;
+            clicked = false;
+            this.value = value;
+            CopyMessage = "Click to copy.";
+            CopiedMessage = "Copied.";
+            toolTipValue.SetToolTip(txtValue, CopyMessage);
         }
 
         public CopyableTextField(String name, String value, Style style) : base(name, style)
         {
             InitializeComponent();
 
-            Value = value;
+            clicked = false;
+            this.value = value;
+            CopyMessage = "Click to copy.";
+            CopiedMessage = "Copied.";
+            toolTipValue.SetToolTip(txtValue, CopyMessage);
         }
+
+        private bool clicked;
+        private String value;
+
+        #region Properties
+
+        public String CopyMessage { get; set; }
+
+        public String CopiedMessage { get; set; }
 
         public String Value
         {
-            get { return txtValue.Text; }
-            set { txtValue.Text = value; }
+            get { return value; }
+            set
+            {
+                this.value = value;
+                txtValue.Text = value;
+            }
         }
+
+        #endregion
 
         protected override void ResizeControls(int WidthDiff)
         {
@@ -42,10 +68,29 @@ namespace CustomItemManagers
             Style.Apply(txtValue, style, LinkType.Normal);
         }
 
+        #region Default Events
+
         private void txtValue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(txtValue.Text);
-            // TODO add prompt.
+            txtValue.Text = value + " ✓";
+            txtValue.LinkColor = style.InteractableFontColor;
+            toolTipValue.SetToolTip(txtValue, CopiedMessage);
+            clicked = true;
+
+            Clipboard.SetText(value);
         }
+
+        private void txtValue_MouseLeave(object sender, EventArgs e)
+        {
+            if (clicked)
+            {
+                clicked = false;
+                txtValue.Text = value;
+                txtValue.LinkColor = style.PrimaryInteractableColor;
+                toolTipValue.SetToolTip(txtValue, CopyMessage);
+            }
+        }
+
+        #endregion
     }
 }
