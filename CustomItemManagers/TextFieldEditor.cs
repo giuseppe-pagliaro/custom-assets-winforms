@@ -17,6 +17,8 @@ namespace CustomItemManagers
         private bool active;
         private bool togglable;
 
+        #region Properties
+
         public bool Togglable
         {
             get { return togglable; }
@@ -57,12 +59,21 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        #endregion
+
+        protected override void ResizeControls(int WidthDiff)
+        {
+            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
+            buttonActive.Location = new Point(buttonActive.Location.X + WidthDiff, buttonActive.Location.Y);
+        }
+
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
 
-            StyleAppliers.TextBox(txtBoxValue, style);
-            StyleAppliers.Button(buttonActive, style);
+            Style.Apply(txtBoxValue, style);
+            Style.Apply(buttonActive, style);
 
             if (!active)
             {

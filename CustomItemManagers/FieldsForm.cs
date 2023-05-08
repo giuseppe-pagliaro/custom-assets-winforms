@@ -15,6 +15,8 @@ namespace CustomItemManagers
         private ItemDatas? itemDatas;
         protected Style style;
 
+        #region Properties
+
         public ItemDatas ItemDatas
         {
             get
@@ -43,6 +45,8 @@ namespace CustomItemManagers
             }
         }
 
+        #endregion
+
         protected virtual void Populate()
         {
             if (itemDatas is null)
@@ -57,7 +61,7 @@ namespace CustomItemManagers
 
         protected virtual void ApplyStyle()
         {
-            StyleAppliers.PrimaryBg(this, style);
+            Style.Apply(this, style, BgType.Primary);
         }
     }
 }

@@ -24,6 +24,8 @@ namespace CustomLists
 
         private Style style;
 
+        #region Properties
+
         public ItemDatas ItemDatas
         {
             get
@@ -108,6 +110,8 @@ namespace CustomLists
             }
         }
 
+        #endregion
+
         protected virtual void Populate()
         {
             if (itemDatas is null)
@@ -122,9 +126,9 @@ namespace CustomLists
 
         protected virtual void ApplyStyle()
         {
-            StyleAppliers.SecondaryBg(this, style);
-            StyleAppliers.Label(txtID, style, FontStyle.Bold);
-            StyleAppliers.Button(buttonEdit, style);
+            Style.Apply(this, style, BgType.Secondary);
+            Style.Apply(txtID, style, FontStyle.Bold);
+            Style.Apply(buttonEdit, style);
         }
 
         protected static FieldsForm CreateInstance(Type type)
@@ -138,6 +142,9 @@ namespace CustomLists
 
             return (FieldsForm)obj;
         }
+
+        #region Default Events
+
         protected void ListItem_Click(object sender, EventArgs e)
         {
             if (viewerType is null)
@@ -191,5 +198,7 @@ namespace CustomLists
         {
             editor = null;
         }
+
+        #endregion
     }
 }

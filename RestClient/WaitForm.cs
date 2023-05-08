@@ -46,8 +46,8 @@ namespace RestClient
             {
                 style = value;
 
-                StyleAppliers.PrimaryBg(this, style);
-                StyleAppliers.Label(txtLoading, style, FontStyle.Bold);
+                Style.Apply(this, style, BgType.Primary);
+                Style.Apply(txtLoading, style, FontStyle.Bold);
             }
         }
 

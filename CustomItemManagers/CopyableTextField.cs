@@ -27,14 +27,19 @@ namespace CustomItemManagers
 
         public String Value
         {
-            get { return this.txtValue.Text; }
-            set { this.txtValue.Text = value; }
+            get { return txtValue.Text; }
+            set { txtValue.Text = value; }
+        }
+
+        protected override void ResizeControls(int WidthDiff)
+        {
+            txtValue.Location = new Point(txtValue.Location.X + WidthDiff, txtValue.Location.Y);
         }
 
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
-            StyleAppliers.LinkLabel(this.txtValue, this.style);
+            Style.Apply(txtValue, style, LinkType.Normal);
         }
 
         private void txtValue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

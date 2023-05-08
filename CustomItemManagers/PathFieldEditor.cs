@@ -22,6 +22,8 @@ namespace CustomItemManagers
         private bool active;
         private bool togglable;
 
+        #region Properties
+
         public String FileDialogMessage { get; set; }
 
         public OpenDialogType OpenDialogType { get; set; }
@@ -72,6 +74,8 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        #endregion
+
         private String FormatDialogFilters()
         {
             String formattedDialogFilters = ALL_FILES_FILTER.ToString();
@@ -84,13 +88,21 @@ namespace CustomItemManagers
             return formattedDialogFilters;
         }
 
+        protected override void ResizeControls(int WidthDiff)
+        {
+            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
+            buttonBrowse.Location = new Point(buttonBrowse.Location.X + WidthDiff, buttonBrowse.Location.Y);
+            buttonActive.Location = new Point(buttonActive.Location.X + WidthDiff, buttonActive.Location.Y);
+        }
+
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
 
-            StyleAppliers.TextBox(txtBoxValue, style);
-            StyleAppliers.Button(buttonActive, style);
-            StyleAppliers.Button(buttonBrowse, style);
+            Style.Apply(txtBoxValue, style);
+            Style.Apply(buttonActive, style);
+            Style.Apply(buttonBrowse, style);
 
             if (!active)
             {
@@ -98,6 +110,8 @@ namespace CustomItemManagers
                 buttonBrowse.BackColor = style.SecondaryInteractableColor;
             }
         }
+
+        #region Default Events
 
         private void buttonActive_Click(object sender, EventArgs e)
         {
@@ -152,6 +166,8 @@ namespace CustomItemManagers
                 txtBoxValue.Text = openFileDialog.FileName;
             }
         }
+
+        #endregion
     }
 
     public enum OpenDialogType

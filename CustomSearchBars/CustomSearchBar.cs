@@ -27,9 +27,9 @@ namespace CustomSearchBars
             {
                 style = value;
 
-                StyleAppliers.PrimaryBg(this, style);
-                StyleAppliers.TextBox(textBoxQuery, style);
-                StyleAppliers.Button(buttonSearch, style);
+                Style.Apply(this, style, BgType.Primary);
+                Style.Apply(textBoxQuery, style);
+                Style.Apply(buttonSearch, style);
             }
         }
 

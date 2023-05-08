@@ -30,33 +30,54 @@ namespace CustomItemManagers
 
         protected Style style;
 
+        #region Properties
+
         public Style Style
         {
-            get { return this.style; }
+            get { return style; }
             set
             {
                 style = value;
-                this.ApplyStyle();
+                ApplyStyle();
             }
         }
 
         public String FieldName
         {
-            get { return this.txtName.Text; }
-            set { this.txtName.Text = value; }
+            get { return txtName.Text; }
+            set
+            {
+                int oldTxtNameWidth = txtName.Width;
+                txtName.Text = value;
+
+                int newX = txtSeparator.Location.X + (txtName.Width - oldTxtNameWidth);
+                txtSeparator.Location = new Point(newX, txtSeparator.Location.Y);
+
+                ResizeControls(txtName.Width - oldTxtNameWidth);
+            }
         }
 
         public String Separator
         {
-            get { return this.txtSeparator.Text; }
-            set { this.txtSeparator.Text = value; }
+            get { return txtSeparator.Text; }
+            set
+            {
+                int newTxtSeparatorWidth = txtSeparator.Width;
+                txtSeparator.Text = value;
+
+                ResizeControls(txtSeparator.Width - newTxtSeparatorWidth);
+            }
         }
+
+        #endregion
+
+        protected virtual void ResizeControls(int WidthDiff) { }
 
         protected virtual void ApplyStyle()
         {
-            StyleAppliers.SecondaryBg(this, this.style);
-            StyleAppliers.Label(this.txtName, this.style, FontStyle.Bold);
-            StyleAppliers.Label(this.txtSeparator, this.style, FontStyle.Regular);
+            Style.Apply(this, style, BgType.Secondary);
+            Style.Apply(txtName, style, FontStyle.Bold);
+            Style.Apply(txtSeparator, style, FontStyle.Regular);
         }
     }
 }

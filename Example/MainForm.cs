@@ -31,13 +31,13 @@ namespace Example
 
         private void ApplyStyles(Style style)
         {
-            StyleAppliers.PrimaryBg(this, style);
-            StyleAppliers.PrimaryBg(groupBoxStyles, style, FontStyle.Bold);
-            StyleAppliers.Label(txtSearchInfo, style, FontStyle.Regular);
-            StyleAppliers.Button(buttonLightMode, style);
-            StyleAppliers.Button(buttonDarkMode, style);
+            Style.Apply(this, style, BgType.Primary);
+            Style.Apply(groupBoxStyles, style, FontStyle.Bold, BgType.Primary);
+            Style.Apply(txtSearchInfo, style, FontStyle.Regular);
+            Style.Apply(buttonLightMode, style);
+            Style.Apply(buttonDarkMode, style);
             customSearchBar.Style = style;
-            StyleAppliers.TextBox(textBoxResult, style);
+            Style.Apply(textBoxResult, style);
             customList.Style = style;
         }
 

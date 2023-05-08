@@ -8,33 +8,38 @@ namespace CustomItemManagers
         {
             InitializeComponent();
 
-            this.Value = "(empty)";
+            Value = "(empty)";
         }
 
         public TextField(String name, String value) : base(name)
         {
             InitializeComponent();
 
-            this.Value = value;
+            Value = value;
         }
 
         public TextField(String name, String value, Style style) : base(name, style)
         {
             InitializeComponent();
 
-            this.Value = value;
+            Value = value;
         }
 
         public String Value
         {
-            get { return this.txtValue.Text; }
-            set { this.txtValue.Text = value; }
+            get { return txtValue.Text; }
+            set { txtValue.Text = value; }
+        }
+
+        protected override void ResizeControls(int WidthDiff)
+        {
+            txtValue.Location = new Point(txtValue.Location.X + WidthDiff, txtValue.Location.Y);
         }
 
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
-            StyleAppliers.Label(this.txtValue, this.style, FontStyle.Regular);
+            Style.Apply(txtValue, style, FontStyle.Regular);
         }
     }
 }

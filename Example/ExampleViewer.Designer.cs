@@ -36,7 +36,7 @@
             // fieldValue
             // 
             fieldValue.BackColor = SystemColors.ControlDark;
-            fieldValue.FieldName = "Name";
+            fieldValue.FieldName = "Value";
             fieldValue.Location = new Point(12, 12);
             fieldValue.Name = "fieldValue";
             fieldValue.Separator = ":";

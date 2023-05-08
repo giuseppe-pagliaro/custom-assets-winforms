@@ -208,18 +208,18 @@ namespace CustomLists
             {
                 style = value;
 
-                StyleAppliers.PrimaryBg(this, style);
-                StyleAppliers.SecondaryBg(itemsPanel, style);
+                Style.Apply(this, style, BgType.Primary);
+                Style.Apply(itemsPanel, style, BgType.Secondary);
 
-                StyleAppliers.Label(txtPlaceHolder, style, FontStyle.Bold);
-                StyleAppliers.Label(txtPageCount, style, FontStyle.Regular);
+                Style.Apply(txtPlaceHolder, style, FontStyle.Bold);
+                Style.Apply(txtPageCount, style, FontStyle.Regular);
 
-                StyleAppliers.TextBox(txtBoxCurrentPage, style);
+                Style.Apply(txtBoxCurrentPage, style);
 
-                StyleAppliers.Button(buttonStart, style);
-                StyleAppliers.Button(buttonBack, style);
-                StyleAppliers.Button(buttonNext, style);
-                StyleAppliers.Button(buttonEnd, style);
+                Style.Apply(buttonStart, style);
+                Style.Apply(buttonBack, style);
+                Style.Apply(buttonNext, style);
+                Style.Apply(buttonEnd, style);
 
                 if (renderedItems is not null)
                 {

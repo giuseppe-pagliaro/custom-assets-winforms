@@ -44,7 +44,7 @@ namespace Example
         {
             base.ApplyStyle();
 
-            StyleAppliers.Label(txtValue, Style, FontStyle.Regular);
+            Style.Apply(txtValue, Style, FontStyle.Regular);
         }
     }
 }
