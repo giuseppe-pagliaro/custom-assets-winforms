@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomSearchBars", "CustomS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{6B4045B1-757A-45DD-B903-3902BA59EABD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestClient", "RestClient\RestClient.csproj", "{1339CFCB-903E-4907-A6AF-B6F80B1023E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestClient", "RestClient\RestClient.csproj", "{1339CFCB-903E-4907-A6AF-B6F80B1023E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomItemManagers", "CustomItemManagers\CustomItemManagers.csproj", "{5FC86D08-704A-4882-A25E-8105BF57EA4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1339CFCB-903E-4907-A6AF-B6F80B1023E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1339CFCB-903E-4907-A6AF-B6F80B1023E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1339CFCB-903E-4907-A6AF-B6F80B1023E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC86D08-704A-4882-A25E-8105BF57EA4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC86D08-704A-4882-A25E-8105BF57EA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC86D08-704A-4882-A25E-8105BF57EA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC86D08-704A-4882-A25E-8105BF57EA4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

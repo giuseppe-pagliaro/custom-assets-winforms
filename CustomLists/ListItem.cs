@@ -1,5 +1,5 @@
 ﻿using Commons;
-using System.Text.RegularExpressions;
+using CustomItemManagers;
 
 namespace CustomLists
 {
@@ -9,14 +9,22 @@ namespace CustomLists
         {
             InitializeComponent();
 
-            originalHeight = this.Height;
+            originalHeight = Height;
             style = new();
+            buttonEdit.Visible = false;
         }
 
         private ItemDatas? itemDatas;
         private int originalHeight;
 
+        private Type? viewerType;
+        private Type? editorType;
+        private FieldsForm? viewer;
+        private FieldsForm? editor;
+
         private Style style;
+
+        #region Properties
 
         public ItemDatas ItemDatas
         {
@@ -31,8 +39,8 @@ namespace CustomLists
             }
             set
             {
-                this.itemDatas = value;
-                this.Populate();
+                itemDatas = value;
+                Populate();
             }
         }
 
@@ -41,28 +49,70 @@ namespace CustomLists
             get { return originalHeight; }
         }
 
+        internal Type Viewer
+        {
+            get
+            {
+                if (viewerType is null)
+                {
+                    return typeof(FieldsForm);
+                }
+
+                return viewerType;
+            }
+            set { viewerType = value; }
+        }
+
+        internal Type Editor
+        {
+            get
+            {
+                if (editorType is null)
+                {
+                    return typeof(FieldsForm);
+                }
+
+                return editorType;
+            }
+            set
+            {
+                editorType = value;
+                
+                if (!buttonEdit.Visible && editorType is not null)
+                {
+                    buttonEdit.Visible = true;
+                }
+
+                if (buttonEdit.Visible && editorType is null)
+                {
+                    buttonEdit.Visible = false;
+                }
+            }
+        }
+
         public Style Style
         {
             get { return style; }
             set
             {
                 style = value;
-                this.ApplyStyle();
+                ApplyStyle();
+
+                if (viewer is not null)
+                {
+                    viewer.Style = style;
+                }
+
+                if (editor is not null)
+                {
+                    editor.Style = style;
+                }
             }
         }
 
-        private String ClassNameToString()
-        {
-            if (itemDatas is null)
-            {
-                return "Null Class";
-            }
+        #endregion
 
-            String rawName = itemDatas.GetType().Name;
-            return Regex.Replace(rawName, @"(\p{Lu})", " $1").TrimStart();
-        }
-
-        public virtual void Populate()
+        protected virtual void Populate()
         {
             if (itemDatas is null)
             {
@@ -70,14 +120,85 @@ namespace CustomLists
             }
             else
             {
-                txtID.Text = this.ClassNameToString() + " #" + itemDatas.Id.ToString();
+                txtID.Text = itemDatas.ClassNameToString() + " #" + itemDatas.Id.ToString();
             }
         }
 
-        public virtual void ApplyStyle()
+        protected virtual void ApplyStyle()
         {
-            StyleAppliers.SecondaryBg(this, style);
-            StyleAppliers.Label(this.txtID, style, FontStyle.Bold);
+            Style.Apply(this, style, BgType.Secondary);
+            Style.Apply(txtID, style, FontStyle.Bold);
+            Style.Apply(buttonEdit, style);
         }
+
+        protected static FieldsForm CreateInstance(Type type)
+        {
+            object? obj = Activator.CreateInstance(type);
+
+            if (obj is null)
+            {
+                return new FieldsForm();
+            }
+
+            return (FieldsForm)obj;
+        }
+
+        #region Event Consumers
+
+        protected void ListItem_Click(object? sender, EventArgs e)
+        {
+            if (viewerType is null)
+            {
+                return;
+            }
+
+            if (viewer is null)
+            {
+                viewer = CreateInstance(viewerType);
+                viewer.FormClosed += viewer_FormClosed;
+                viewer.Style = style;
+                viewer.ItemDatas = ItemDatas;
+                viewer.Show();
+            }
+            else
+            {
+                viewer.BringToFront();
+            }
+        }
+
+        protected void buttonEdit_Click(object sender, EventArgs e)
+        {
+            noFocusObj.Focus();
+
+            if (editorType is null)
+            {
+                return;
+            }
+
+            if (editor is null)
+            {
+                editor = CreateInstance(editorType);
+                editor.FormClosed += editor_FormClosed;
+                editor.Style = style;
+                editor.ItemDatas = ItemDatas;
+                editor.Show();
+            }
+            else
+            {
+                editor.BringToFront();
+            }
+        }
+
+        protected void viewer_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            viewer = null;
+        }
+
+        protected void editor_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            editor = null;
+        }
+
+        #endregion
     }
 }

@@ -4,15 +4,15 @@
     {
         public Arg()
         {
-            this.name = "";
-            this.value = "";
+            name = "";
+            value = "";
             isVariable = false;
         }
 
         public Arg(String name)
         {
             this.name = name;
-            this.value = "";
+            value = "";
             isVariable = true;
         }
 
@@ -29,17 +29,17 @@
 
         internal String GetFormatted()
         {
-            if (this.name == "")
+            if (name == "")
             {
                 return "";
             }
 
-            return this.name + "=" + this.value;
+            return name + "=" + value;
         }
 
         internal String GetFormatted(String value)
         {
-            return this.name + "=" + value;
+            return name + "=" + value;
         }
     }
 }
