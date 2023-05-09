@@ -1,11 +1,11 @@
 # Custom Assets For Winforms
 Adds a series of useful controls to Winforms.
-Before starting, make sure you download the **dlls** that correspond to the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
+Before starting, please download the **dlls** that contain the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
 
 ![Dependency Diagram](https://github.com/giuseppe-pagliaro/custom-assets-for-winforms/blob/main/.github/DependancyDiagram.jpg)
 
 ## Item Datas
-If a control **handles data** in any way, it's going to do that through the `Commons::ItemDatas` class. To make your own data type that's compatible with this framework, simply extend said class and add your own fields.
+If a control **handles data**, in any way, it's going to do that through the `Commons::ItemDatas` class. To make your own data type that's compatible with this framework, simply extend said class and add your own fields.
 
 ```csharp
 public class DataExample : ItemDatas
@@ -22,9 +22,9 @@ public class DataExample : ItemDatas
 ## Styles
 Every component that can be visualized has a style property that accepts an instance of the `Commons::Style` class. And their appearance can be controlled by simply updating said property.
 
-Furthermore, some **static methods** are provided to control the look of some **default Winforms controls**. Simply provide your control and your style and it'll wrap it up nicely for you.
+Furthermore, some **static methods** are provided to modify the look of some **default Winforms controls**. Simply provide your control and your style and it'll wrap it up nicely for you.
 
-For example, you could have all your style instances as **static readonly fields** and store them in a class named something like "Styles".
+You can create all your style instances as **static readonly fields** and store them in a class named something like "Styles".
 
 ```csharp
 public static class Styles
@@ -57,12 +57,12 @@ public static class Styles
     }
 ```
 
-So that changing the appearance of a control is as easy as typing somethis like `control.Style = Styles.DARK_MODE`.
+This way, changing the appearance of a control is as easy as typing somethis like `control.Style = Styles.DARK_MODE`.
 
 (Or `control.Style = Styles.LIGHT_MODE` if you're a maniac!)
 
 ## Rest Client
-This framework also provides a nicer way to make **http** or **https** requests. First of all, you'll need to create your an instance of the `RestClient::Request` class and specify the parameters.
+This framework also provides a nicer way to make **http** or **https** requests. First of all, you'll need to create an instance of the `RestClient::Request` class.
 
 ```csharp
 public static class Requests
@@ -71,8 +71,7 @@ public static class Requests
         {
             String UNIS_BY_COUNTRY_BASE_URL = "http://universities.hipolabs.com";
 
-            SEARCH_UNIS_BY_COUNTRY = new (UNIS_BY_COUNTRY_BASE_URL, "/search", new Arg[] { new("country") },
-                "{\"mode\": \"Test\"}");
+            SEARCH_UNIS_BY_COUNTRY = new (UNIS_BY_COUNTRY_BASE_URL, "/search", new Arg[] { new("country") }, "{\"mode\": \"Test\"}");
         }
 
         public static readonly Request SEARCH_UNIS_BY_COUNTRY;
@@ -84,9 +83,10 @@ public static class Requests
 Now, whenever you need it, simply call the MakeRequest method and access it's result by reading the Result property of the task that is returned.
 
 ```csharp
-String res = RestClient.HttpClient.MakeRequest(request,
-                new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
+String res = RestClient.HttpClient.MakeRequest(request, new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
 ```
+
+You can also change the `RestClient::HttpClient.ClientMode` static property to toggle between **Live** and **Test** mode. When the second one is selected, instead of actually making the request, every call to the method will return the `RestClient::Request.TestResult` you've provided for that request (the last parameter in the constructor).
 
 ## SearchBar
 This control uses the **Http Requests Framework** discussed earlier to implement an extremely easy to use **search bar**. All you need to do is drag and drop it in any form, customize any of it's properties and supply it with a compatible `RestClient::Request` instance. That is, a request with **one arg** containing the search query.
@@ -105,7 +105,7 @@ Simply create a new form which extends `CustomItemManagers::FieldsForm` and then
 3. `CustomItemManagers::TextFieldEditor`
 4. `CustomItemManagers::PathFieldEditor`
 
-Also, don't forget to **override** `CustomItemManagers::FieldsForm.Populate()`, to control how the data info get displayed in the form, and `CustomItemManagers::FieldsForm.ApplyStyle()`, so you can control how the form transforms when it's style is changed.
+Also, don't forget to **override** `CustomItemManagers::FieldsForm.Populate()`, to control how the data gets displayed in the form, and `CustomItemManagers::FieldsForm.ApplyStyle()`, so you can control how the form transforms when it's style is changed.
 
 ```csharp
 public partial class ExampleViewer : FieldsForm
@@ -153,9 +153,9 @@ public partial class ExampleViewer : FieldsForm
 ```
 
 # Items List
-Implements an extremely easy to use **list control** that displays a set of data of a class created, as always, by extending `Commons::ItemDatas`.
+Implements a **list control** that displays a set of datas of a class created, as always, by extending `Commons::ItemDatas`.
 
-Before we talk about the list itself, we need to create the item that will be actually displayed by it. To do that, simply create a new control and **extend** `CustomLists::ListItem`. Next, design your control as you please and **override** `CustomLists::ListItem.Populate()` and `CustomLists::ListItem.ApplyStyle()`. Also, unless you want to have a specific behavour, remember to add the **ListItem_Click** consumer to the click event of all the controls in the class.
+Before we talk about the list itself, we need to create the item that will be actually displayed by it. To do that, simply create a new control and **extend** `CustomLists::ListItem`. Next, design your control as you please and **override** `CustomLists::ListItem.Populate()` and `CustomLists::ListItem.ApplyStyle()`. Also, unless you want to have a specialized behavour, remember to add the **ListItem_Click** consumer to the **Click Event** of all the controls in the class.
 
 ```csharp
 public partial class ExampleItem : ListItem
@@ -204,15 +204,15 @@ public partial class ExampleItem : ListItem
     }
 ```
 
-Now, drag and drop the `CustomLists::CustomList` control onto any form and set it up as you please.
+Now, drag and drop the `CustomLists::CustomList` control into any form and set it up as you please.
 
-If you want it, you can actually specify the form that you want to use to visualize the data and the one you want to use it to modify it. In order to do that, create two forms that **extend** `CustomItemManagers::FieldsForm` and provide them to the list by updating the right properties.
+If you want it, you can actually specify the form that you want to use to visualize the data and the one you want to use to modify it. In order to do that, create two forms that **extend** `CustomItemManagers::FieldsForm` and provide them to the list by updating the right properties.
 
 ```csharp
 customList.Viewer = typeof(ExampleViewer);
 ```
 
-If an editor is provided, an **edit button** will be shown in the top-right corner of every ListItem. By clicking it, the edit screen will be displayed.
+If an editor is provided, an **edit button** will be shown in the top-right corner of every ListItem. By clicking it, the edit screen for that specific item will be displayed.
 
 Finally, to set the data that is to be shown by the list, you can use `CustomLists::CustomList.SetItems<TItemDatas, TListItem>(List<TItemDatas> itemDatas) where TItemDatas : ItemDatas where TListItem : ListItem`.
 
