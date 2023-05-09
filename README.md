@@ -2,7 +2,7 @@
 Adds a series of useful controls to Winforms.
 Before starting, make sure you download the **dlls** that correspond to the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
 
-![Dependency Diagram]()
+![Dependency Diagram](./.main/DependencyDiagram.jpg)
 
 ## Item Datas
 If a control **handles data** in any way, it's going to do that through the `Commons::ItemDatas` class. To make your own data type that's compatible with this framework, simply extend said class and add your own fields.
