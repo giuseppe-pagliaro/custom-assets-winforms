@@ -12,12 +12,13 @@
             secondaryInteractableColor = Color.Black;
             interactableFontType = "Segoe UI";
             interactableFontColor = SystemColors.ControlText;
-            interactableFlatStyle = FlatStyle.Standard;
+            linkColor = SystemColors.HotTrack;
+            buttonFlatStyle = FlatStyle.Standard;
         }
 
         public Style(Color primaryBackColor, Color secondaryBackColor, String fontType, Color fontColor,
             Color primaryInteractableColor, Color secondaryInteractableColor, String interactableFontType,
-            Color interactableFontColor, FlatStyle interactableFlatStyle)
+            Color interactableFontColor, Color linkColor, FlatStyle buttonFlatStyle)
         {
             this.primaryBackColor = primaryBackColor;
             this.secondaryBackColor = secondaryBackColor;
@@ -27,7 +28,8 @@
             this.secondaryInteractableColor = secondaryInteractableColor;
             this.interactableFontType = interactableFontType;
             this.interactableFontColor = interactableFontColor;
-            this.interactableFlatStyle = interactableFlatStyle;
+            this.linkColor = linkColor;
+            this.buttonFlatStyle = buttonFlatStyle;
         }
 
         private Color primaryBackColor;
@@ -41,7 +43,8 @@
 
         private String interactableFontType;
         private Color interactableFontColor;
-        private FlatStyle interactableFlatStyle;
+        private Color linkColor;
+        private FlatStyle buttonFlatStyle;
 
         #region Properties
 
@@ -56,7 +59,8 @@
 
         public String InteractableFontType { get { return interactableFontType; } }
         public Color InteractableFontColor { get { return interactableFontColor; } }
-        public FlatStyle InteractableFlatStyle { get { return interactableFlatStyle; } }
+        public Color LinkColor { get { return linkColor; } }
+        public FlatStyle ButtonFlatStyle { get { return buttonFlatStyle; } }
 
         #endregion
 
@@ -84,7 +88,7 @@
             {
                 userControl.BackColor = style.SecondaryBackColor;
             }
-            
+
         }
 
         public static void Apply(Panel panel, Style style, BgType bgType)
@@ -132,16 +136,16 @@
 
         public static void Apply(LinkLabel linkLabel, Style style, LinkType linkType)
         {
-            linkLabel.LinkColor = style.PrimaryInteractableColor;
+            linkLabel.LinkColor = style.LinkColor;
             linkLabel.ActiveLinkColor = style.InteractableFontColor;
 
             if (linkType == LinkType.Normal)
             {
-                linkLabel.VisitedLinkColor = style.PrimaryInteractableColor;
+                linkLabel.VisitedLinkColor = style.LinkColor;
             }
             else
             {
-                linkLabel.VisitedLinkColor = style.InteractableFontColor;
+                linkLabel.VisitedLinkColor = style.SecondaryInteractableColor;
             }
 
             linkLabel.Font = new Font(style.FontType, linkLabel.Font.SizeInPoints, FontStyle.Underline);
@@ -159,7 +163,7 @@
             button.ForeColor = style.InteractableFontColor;
             button.Font = new Font(style.FontType, button.Font.SizeInPoints);
             button.BackColor = style.PrimaryInteractableColor;
-            button.FlatStyle = style.InteractableFlatStyle;
+            button.FlatStyle = style.ButtonFlatStyle;
         }
 
         #endregion

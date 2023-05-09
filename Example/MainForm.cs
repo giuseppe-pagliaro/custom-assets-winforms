@@ -41,6 +41,8 @@ namespace Example
             customList.Style = style;
         }
 
+        #region Event Consumers
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             ApplyStyles(Styles.LIGHT_MODE);
@@ -74,5 +76,7 @@ namespace Example
         {
             textBoxResult.Text = e.Result;
         }
+
+        #endregion
     }
 }

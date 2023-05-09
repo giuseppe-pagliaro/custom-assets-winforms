@@ -112,7 +112,7 @@ namespace RestClient
             }
         }
 
-        #region Default Events
+        #region Event Consumers
 
         private void WaitForm_Load(object sender, EventArgs e)
         {

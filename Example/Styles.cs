@@ -13,6 +13,7 @@ namespace Example
             SystemColors.ControlDark,
             "Segoe UI",
             SystemColors.ControlText,
+            Color.Teal,
             FlatStyle.Standard
             );
 
@@ -25,6 +26,7 @@ namespace Example
             Color.FromArgb(255, 51, 51, 51),
             "Segoe UI",
             SystemColors.HighlightText,
+            Color.Teal,
             FlatStyle.Standard
             );
     }

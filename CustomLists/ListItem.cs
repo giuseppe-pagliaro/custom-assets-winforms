@@ -143,9 +143,9 @@ namespace CustomLists
             return (FieldsForm)obj;
         }
 
-        #region Default Events
+        #region Event Consumers
 
-        protected void ListItem_Click(object sender, EventArgs e)
+        protected void ListItem_Click(object? sender, EventArgs e)
         {
             if (viewerType is null)
             {
@@ -189,12 +189,12 @@ namespace CustomLists
             }
         }
 
-        protected void viewer_FormClosed(object sender, FormClosedEventArgs e)
+        protected void viewer_FormClosed(object? sender, FormClosedEventArgs e)
         {
             viewer = null;
         }
 
-        protected void editor_FormClosed(object sender, FormClosedEventArgs e)
+        protected void editor_FormClosed(object? sender, FormClosedEventArgs e)
         {
             editor = null;
         }

@@ -508,7 +508,7 @@ namespace CustomLists
             ResizeListItems();
         }
 
-        #region Default Events
+        #region Event Consumers
 
         private void CustomList_Load(object sender, EventArgs e)
         {

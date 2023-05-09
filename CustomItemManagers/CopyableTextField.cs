@@ -68,7 +68,7 @@ namespace CustomItemManagers
             Style.Apply(txtValue, style, LinkType.Normal);
         }
 
-        #region Default Events
+        #region Event Consumers
 
         private void txtValue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -86,7 +86,7 @@ namespace CustomItemManagers
             {
                 clicked = false;
                 txtValue.Text = value;
-                txtValue.LinkColor = style.PrimaryInteractableColor;
+                txtValue.LinkColor = style.LinkColor;
                 toolTipValue.SetToolTip(txtValue, CopyMessage);
             }
         }

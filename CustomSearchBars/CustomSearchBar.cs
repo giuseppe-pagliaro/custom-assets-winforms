@@ -63,7 +63,7 @@ namespace CustomSearchBars
             OnSearchMade(args);
         }
 
-        #region Default Events
+        #region Event Consumers
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {

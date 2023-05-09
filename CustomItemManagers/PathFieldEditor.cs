@@ -111,7 +111,7 @@ namespace CustomItemManagers
             }
         }
 
-        #region Default Events
+        #region Event Consumers
 
         private void buttonActive_Click(object sender, EventArgs e)
         {
