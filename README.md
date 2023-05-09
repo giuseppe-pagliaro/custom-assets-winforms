@@ -206,7 +206,7 @@ public partial class ExampleItem : ListItem
 
 Now, drag and drop the `CustomLists::CustomList` control onto any form and set it up as you please.
 
-If you want it, you can actually specify the form that you want to use to visualize the data, and the one you want to use it to modify it. In order to do that, create two forms that **extend** `CustomItemManagers::FieldsForm` and provide them to the list by updating the right properties.
+If you want it, you can actually specify the form that you want to use to visualize the data and the one you want to use it to modify it. In order to do that, create two forms that **extend** `CustomItemManagers::FieldsForm` and provide them to the list by updating the right properties.
 
 ```csharp
 customList.Viewer = typeof(ExampleViewer);
