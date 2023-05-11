@@ -81,7 +81,7 @@
         #endregion
 
         protected Label txtID;
-        private Button buttonEdit;
         private Label noFocusObj;
+        protected Button buttonEdit;
     }
 }

@@ -40,7 +40,7 @@
             buttonSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSearch.Location = new Point(469, 12);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(94, 32);
+            buttonSearch.Size = new Size(94, 31);
             buttonSearch.TabIndex = 0;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;
@@ -53,6 +53,7 @@
             textBoxQuery.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxQuery.Location = new Point(12, 12);
             textBoxQuery.Name = "textBoxQuery";
+            textBoxQuery.PlaceholderText = "Type Query Here";
             textBoxQuery.Size = new Size(451, 30);
             textBoxQuery.TabIndex = 1;
             textBoxQuery.KeyPress += textBoxQuery_KeyPress;

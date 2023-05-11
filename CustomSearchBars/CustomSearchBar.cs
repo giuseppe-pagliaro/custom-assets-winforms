@@ -20,6 +20,18 @@ namespace CustomSearchBars
 
         #region Properties
 
+        public String QueryPlaceholderText
+        {
+            get { return textBoxQuery.PlaceholderText; }
+            set { textBoxQuery.PlaceholderText = value; }
+        }
+
+        public String ButtonText
+        {
+            get { return buttonSearch.Text; }
+            set { buttonSearch.Text = value; }
+        }
+
         public Style Style
         {
             get { return style; }
