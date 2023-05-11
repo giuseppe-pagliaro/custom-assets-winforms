@@ -135,7 +135,7 @@
             // 
             buttonEnd.Anchor = AnchorStyles.Right;
             buttonEnd.BackColor = SystemColors.ControlDark;
-            buttonEnd.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonEnd.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             buttonEnd.Location = new Point(257, 11);
             buttonEnd.Name = "buttonEnd";
             buttonEnd.Size = new Size(48, 29);
@@ -148,7 +148,7 @@
             // 
             buttonNext.Anchor = AnchorStyles.Right;
             buttonNext.BackColor = SystemColors.ControlDark;
-            buttonNext.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonNext.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             buttonNext.Location = new Point(203, 11);
             buttonNext.Name = "buttonNext";
             buttonNext.Size = new Size(48, 29);
@@ -161,7 +161,7 @@
             // 
             buttonBack.Anchor = AnchorStyles.Right;
             buttonBack.BackColor = SystemColors.ControlDark;
-            buttonBack.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonBack.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             buttonBack.Location = new Point(63, 11);
             buttonBack.Name = "buttonBack";
             buttonBack.Size = new Size(48, 29);
@@ -174,7 +174,7 @@
             // 
             buttonStart.Anchor = AnchorStyles.Right;
             buttonStart.BackColor = SystemColors.ControlDark;
-            buttonStart.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonStart.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             buttonStart.Location = new Point(9, 11);
             buttonStart.Name = "buttonStart";
             buttonStart.Size = new Size(48, 29);
