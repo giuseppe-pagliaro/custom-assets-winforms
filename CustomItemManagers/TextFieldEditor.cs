@@ -19,6 +19,12 @@ namespace CustomItemManagers
 
         #region Properties
 
+        public String EditButtonText
+        {
+            get { return buttonActive.Text; }
+            set { buttonActive.Text = value; }
+        }
+
         public bool Togglable
         {
             get { return togglable; }

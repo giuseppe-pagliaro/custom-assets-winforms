@@ -77,7 +77,7 @@ namespace CustomLists
             set
             {
                 editorType = value;
-                
+
                 if (!buttonEdit.Visible && editorType is not null)
                 {
                     buttonEdit.Visible = true;

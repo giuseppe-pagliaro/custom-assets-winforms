@@ -11,6 +11,7 @@ namespace Example
 
             customSearchBar.Request = Requests.SEARCH_UNIS_BY_COUNTRY;
             customSearchBar.SearchMade += customSearchBar_SearchMade;
+            customSearchBar.QueryPlaceholderText = "Type Your Country Here";
             customList.Viewer = typeof(ExampleViewer);
         }
 

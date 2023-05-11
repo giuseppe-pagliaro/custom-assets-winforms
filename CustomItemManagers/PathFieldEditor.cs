@@ -24,6 +24,18 @@ namespace CustomItemManagers
 
         #region Properties
 
+        public String BrowseButtonText
+        {
+            get { return buttonBrowse.Text; }
+            set { buttonBrowse.Text = value; }
+        }
+
+        public String ActiveButtonText
+        {
+            get { return buttonActive.Text; }
+            set { buttonActive.Text = value; }
+        }
+
         public String FileDialogMessage { get; set; }
 
         public OpenDialogType OpenDialogType { get; set; }
