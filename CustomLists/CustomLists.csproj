@@ -7,6 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>custom-assets-lists</PackageId>
+    <Title>Custom Assets Lists</Title>
+    <Version>1.0.1</Version>
+    <Authors>Giuseppe Pagliaro</Authors>
+    <Description>Adds a list control that displays items created with the Custom Assets framework.</Description>
+    <Copyright>GPL-3.0</Copyright>
+    <RepositoryUrl>https://github.com/giuseppe-pagliaro/custom-assets-for-winforms</RepositoryUrl>
+    <PackageTags>custom assets; client; tools; controls; database; lists; custom; toolbar; rest client; searchbar</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -7,6 +7,11 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>custom-assets-item-managers</PackageId>
+    <Title>Custom Assets Item Managers</Title>
+    <Version>1.0.1</Version>
+    <Authors>Giuseppe Pagliaro</Authors>
   </PropertyGroup>
 
   <ItemGroup>

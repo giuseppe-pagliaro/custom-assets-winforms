@@ -7,6 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>custom-assets-commons</PackageId>
+    <Title>Custom Assets Commons</Title>
+    <Authors>Giuseppe Pagliaro</Authors>
+    <Description>Common Objects For Custom Assets</Description>
+    <Version>1.0.1</Version>
+    <RepositoryUrl>https://github.com/giuseppe-pagliaro/custom-assets-for-winforms</RepositoryUrl>
+    <Copyright>GPL-3.0</Copyright>
+    <PackageTags>client; tools; controls</PackageTags>
   </PropertyGroup>
 
 </Project>
