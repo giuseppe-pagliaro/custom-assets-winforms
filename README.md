@@ -1,6 +1,6 @@
 # Custom Assets For Winforms
 Adds a series of useful controls to Winforms.
-Before starting, please download the **dlls** that contain the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
+Before starting, please download the **NuGet Packages** that contain the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
 
 ![Dependency Diagram](https://github.com/giuseppe-pagliaro/custom-assets-for-winforms/blob/main/.github/DependancyDiagram.jpg)
 
