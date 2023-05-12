@@ -10,7 +10,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>custom-assets-item-managers</PackageId>
     <Title>Custom Assets Item Managers</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Giuseppe Pagliaro</Authors>
     <Description>Adds a series of controls and forms that help you manage objects that are created with the Custom Assets framework.</Description>
     <Copyright>GPL-3.0</Copyright>
