@@ -41,7 +41,7 @@ namespace CustomItemManagers
                         txtBoxValue.Width -= buttonActive.Width;
 
                         active = false;
-                        buttonActive.BackColor = style.SecondaryInteractableColor;
+                        buttonActive.BackColor = Style.SecondaryInteractableColor;
                         txtBoxValue.Enabled = false;
                     }
                     else
@@ -78,12 +78,12 @@ namespace CustomItemManagers
         {
             base.ApplyStyle();
 
-            Style.Apply(txtBoxValue, style);
-            Style.Apply(buttonActive, style);
+            Style.Apply(txtBoxValue, Style);
+            Style.Apply(buttonActive, Style);
 
             if (!active)
             {
-                buttonActive.BackColor = style.SecondaryInteractableColor;
+                buttonActive.BackColor = Style.SecondaryInteractableColor;
             }
         }
 
@@ -92,13 +92,13 @@ namespace CustomItemManagers
             if (active)
             {
                 active = false;
-                buttonActive.BackColor = style.SecondaryInteractableColor;
+                buttonActive.BackColor = Style.SecondaryInteractableColor;
                 txtBoxValue.Enabled = false;
             }
             else
             {
                 active = true;
-                buttonActive.BackColor = style.PrimaryInteractableColor;
+                buttonActive.BackColor = Style.PrimaryInteractableColor;
                 txtBoxValue.Enabled = true;
             }
         }

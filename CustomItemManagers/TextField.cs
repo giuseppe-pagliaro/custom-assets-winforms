@@ -39,7 +39,7 @@ namespace CustomItemManagers
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
-            Style.Apply(txtValue, style, FontStyle.Regular);
+            Style.Apply(txtValue, Style, FontStyle.Regular);
         }
     }
 }

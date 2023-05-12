@@ -65,7 +65,7 @@ namespace CustomItemManagers
         protected override void ApplyStyle()
         {
             base.ApplyStyle();
-            Style.Apply(txtValue, style, LinkType.Normal);
+            Style.Apply(txtValue, Style, LinkType.Normal);
         }
 
         #region Event Consumers
@@ -73,7 +73,7 @@ namespace CustomItemManagers
         private void txtValue_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             txtValue.Text = value + " ✓";
-            txtValue.LinkColor = style.InteractableFontColor;
+            txtValue.LinkColor = Style.InteractableFontColor;
             toolTipValue.SetToolTip(txtValue, CopiedMessage);
             clicked = true;
 
@@ -86,7 +86,7 @@ namespace CustomItemManagers
             {
                 clicked = false;
                 txtValue.Text = value;
-                txtValue.LinkColor = style.LinkColor;
+                txtValue.LinkColor = Style.LinkColor;
                 toolTipValue.SetToolTip(txtValue, CopyMessage);
             }
         }

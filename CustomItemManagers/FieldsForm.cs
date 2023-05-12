@@ -13,7 +13,7 @@ namespace CustomItemManagers
         }
 
         private ItemDatas? itemDatas;
-        protected Style style;
+        private Style style;
 
         #region Properties
 

@@ -28,7 +28,7 @@ namespace CustomItemManagers
             Name = name;
         }
 
-        protected Style style;
+        private Style style;
 
         #region Properties
 
