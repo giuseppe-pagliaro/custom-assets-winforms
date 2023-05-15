@@ -7,57 +7,37 @@ namespace CustomItemManagers
         public TextFieldEditor()
         {
             InitializeComponent();
-
-            togglable = true;
-            active = false;
-
-            Togglable = false;
         }
-
-        private bool active;
-        private bool togglable;
 
         #region Properties
 
-        public String EditButtonText
-        {
-            get { return buttonActive.Text; }
-            set { buttonActive.Text = value; }
-        }
-
         public bool Togglable
         {
-            get { return togglable; }
+            get { return checkBoxActive.Enabled; }
             set
             {
-                if (togglable != value)
+                if (checkBoxActive.Enabled == value)
                 {
-                    togglable = value;
+                    return;
+                }
 
-                    if (togglable)
-                    {
-                        buttonActive.Enabled = true;
-                        buttonActive.Visible = true;
-                        txtBoxValue.Width -= buttonActive.Width;
-
-                        active = false;
-                        buttonActive.BackColor = Style.SecondaryInteractableColor;
-                        txtBoxValue.Enabled = false;
-                    }
-                    else
-                    {
-                        buttonActive.Enabled = false;
-                        buttonActive.Visible = false;
-                        txtBoxValue.Width += buttonActive.Width;
-                    }
+                if (value)
+                {
+                    checkBoxActive.Enabled = true;
+                    checkBoxActive.Visible = true;
+                }
+                else
+                {
+                    checkBoxActive.Enabled = false;
+                    checkBoxActive.Visible = false;
                 }
             }
         }
 
         public bool Active
         {
-            get { return active; }
-            set { active = value; }
+            get { return checkBoxActive.Checked; }
+            set { checkBoxActive.Checked = value; }
         }
 
         public String Value
@@ -71,7 +51,6 @@ namespace CustomItemManagers
         {
             txtBoxValue.Width -= WidthDiff;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
-            buttonActive.Location = new Point(buttonActive.Location.X + WidthDiff, buttonActive.Location.Y);
         }
 
         protected override void ApplyStyle()
@@ -79,9 +58,8 @@ namespace CustomItemManagers
             base.ApplyStyle();
 
             Style.Apply(txtBoxValue, Style);
-            Style.Apply(buttonActive, Style);
 
-            if (!active)
+            if (!checkBoxActive.Checked)
             {
                 buttonActive.BackColor = Style.SecondaryInteractableColor;
             }
@@ -89,16 +67,12 @@ namespace CustomItemManagers
 
         private void buttonActive_Click(object sender, EventArgs e)
         {
-            if (active)
+            if (checkBoxActive.Checked)
             {
-                active = false;
-                buttonActive.BackColor = Style.SecondaryInteractableColor;
                 txtBoxValue.Enabled = false;
             }
             else
             {
-                active = true;
-                buttonActive.BackColor = Style.PrimaryInteractableColor;
                 txtBoxValue.Enabled = true;
             }
         }
