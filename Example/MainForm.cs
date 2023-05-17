@@ -13,7 +13,6 @@ namespace Example
             customSearchBar.SearchMade += customSearchBar_SearchMade;
             customSearchBar.QueryPlaceholderText = "Type Your Country Here";
             customList.Viewer = typeof(ExampleViewer);
-
             customList.Editor = typeof(ExampleEditor);
         }
 
