@@ -45,12 +45,16 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        public bool Mandatory { get; set; }
+
         #endregion
 
         protected override void ResizeControls(int WidthDiff)
         {
-            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
+            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         }
 
         protected override void ApplyStyle()
@@ -58,22 +62,18 @@ namespace CustomItemManagers
             base.ApplyStyle();
 
             Style.Apply(txtBoxValue, Style);
-
-            if (!checkBoxActive.Checked)
-            {
-                buttonActive.BackColor = Style.SecondaryInteractableColor;
-            }
+            Style.Apply(checkBoxActive, Style, BgType.Transparent);
         }
 
-        private void buttonActive_Click(object sender, EventArgs e)
+        private void checkBoxActive_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxActive.Checked)
             {
-                txtBoxValue.Enabled = false;
+                txtBoxValue.Enabled = true;
             }
             else
             {
-                txtBoxValue.Enabled = true;
+                txtBoxValue.Enabled = false;
             }
         }
     }

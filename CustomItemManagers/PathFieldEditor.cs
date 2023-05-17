@@ -58,12 +58,12 @@ namespace CustomItemManagers
             set { checkBoxActive.Checked = value; }
         }
 
-        public bool Mandatory { get; set; }
-
         public String Value
         {
             get { return txtBoxValue.Text; }
         }
+
+        public bool Mandatory { get; set; }
 
         #endregion
 
@@ -81,9 +81,10 @@ namespace CustomItemManagers
 
         protected override void ResizeControls(int WidthDiff)
         {
-            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
-            buttonBrowse.Location = new Point(buttonBrowse.Location.X + WidthDiff, buttonBrowse.Location.Y);
+            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         }
 
         protected override void ApplyStyle()

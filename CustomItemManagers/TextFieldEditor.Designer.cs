@@ -35,6 +35,7 @@
             // txtBoxValue
             // 
             txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
             txtBoxValue.Name = "txtBoxValue";
@@ -51,6 +52,7 @@
             checkBoxActive.Size = new Size(18, 17);
             checkBoxActive.TabIndex = 6;
             checkBoxActive.UseVisualStyleBackColor = false;
+            checkBoxActive.CheckedChanged += checkBoxActive_CheckedChanged;
             // 
             // TextFieldEditor
             // 

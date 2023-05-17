@@ -37,6 +37,7 @@
             // txtBoxValue
             // 
             txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
             txtBoxValue.Name = "txtBoxValue";
@@ -47,6 +48,7 @@
             // buttonBrowse
             // 
             buttonBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonBrowse.Enabled = false;
             buttonBrowse.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonBrowse.Location = new Point(407, 12);
             buttonBrowse.Name = "buttonBrowse";
