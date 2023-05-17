@@ -6,8 +6,12 @@ namespace CustomItemManagers
     {
         public TextFieldEditor()
         {
+            charLimit = 50;
+
             InitializeComponent();
         }
+
+        private int charLimit;
 
         #region Properties
 
@@ -45,6 +49,14 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        public int CharLimit
+        {
+            get { return charLimit; }
+            set { charLimit = value; }
+        }
+
+        public FilterType FilterType { get; set; }
+
         public bool Mandatory { get; set; }
 
         #endregion
@@ -65,6 +77,8 @@ namespace CustomItemManagers
             Style.Apply(checkBoxActive, Style, BgType.Transparent);
         }
 
+        #region Event Consumers
+
         private void checkBoxActive_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxActive.Checked)
@@ -76,5 +90,118 @@ namespace CustomItemManagers
                 txtBoxValue.Enabled = false;
             }
         }
+
+        private void txtBoxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            switch (FilterType)
+            {
+                case FilterType.DecimalNumbersOnly:
+                    if (txtBoxValue.Text.Length >= charLimit)
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    {
+                        if (e.KeyChar != ',' && e.KeyChar != '.')
+                        {
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+
+                    if (e.KeyChar == '.' || e.KeyChar == ',')
+                    {
+                        if (txtBoxValue.Text.Contains('.') || txtBoxValue.Text.Contains(","))
+                        {
+                            e.Handled = true;
+                        }
+                        else if (txtBoxValue.Text.Length == 0)
+                        {
+                            txtBoxValue.Text = "0";
+                            txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                        }
+                    }
+
+                    break;
+
+                case FilterType.NumbersOnly:
+                    if (txtBoxValue.Text.Length >= charLimit)
+                    {
+                        e.Handled = true;
+                    }
+                    else if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    {
+                        e.Handled = true;
+                    }
+
+                    break;
+
+                case FilterType.Date:
+                    if (txtBoxValue.Text.Length >= 10)
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    switch (txtBoxValue.Text.Length)
+                    {
+                        case 1:
+                            if (e.KeyChar == '/')
+                            {
+                                txtBoxValue.Text = "0" + txtBoxValue.Text;
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+                            else
+                            {
+                                txtBoxValue.Text += e.KeyChar;
+                                e.KeyChar = '/';
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+
+                            break;
+
+                        case 4:
+                            if (e.KeyChar == '/')
+                            {
+                                String subStr = txtBoxValue.Text.Substring(0, 3);
+                                txtBoxValue.Text = subStr + "0" + txtBoxValue.Text[3];
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+                            else
+                            {
+                                txtBoxValue.Text += e.KeyChar;
+                                e.KeyChar = '/';
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+
+                            break;
+                    }
+
+                    break;
+            }
+        }
+
+        #endregion
+    }
+
+    public enum FilterType
+    {
+        None,
+        NumbersOnly,
+        DecimalNumbersOnly,
+        Date
     }
 }

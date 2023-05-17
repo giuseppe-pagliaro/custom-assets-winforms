@@ -17,8 +17,11 @@ namespace Example
             base.ApplyStyle();
 
             Style.Apply(txtTitle, Style, FontStyle.Bold);
-            fieldExample1.Style = Style;
-            fieldExample2.Style = Style;
+            fieldPath.Style = Style;
+            fieldNormal.Style = Style;
+            fieldDecimalNumber.Style = Style;
+            fieldNumber.Style = Style;
+            fieldDate.Style = Style;
             Style.Apply(buttonUpdate, Style);
         }
 

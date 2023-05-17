@@ -34,13 +34,14 @@
             // 
             // txtBoxValue
             // 
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
             txtBoxValue.Name = "txtBoxValue";
             txtBoxValue.Size = new Size(219, 31);
             txtBoxValue.TabIndex = 4;
+            txtBoxValue.KeyPress += txtBoxValue_KeyPress;
             // 
             // checkBoxActive
             // 

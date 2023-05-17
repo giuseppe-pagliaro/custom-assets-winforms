@@ -124,10 +124,7 @@ namespace CustomLists
                         return;
                     }
 
-                    if (renderedItems != null)
-                    {
-                        renderedItems.Clear();
-                    }
+                    renderedItems?.Clear();
 
                     if (endPageInd >= startPageInd)
                     {
