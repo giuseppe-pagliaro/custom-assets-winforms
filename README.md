@@ -105,6 +105,8 @@ Simply create a new form which extends `CustomItemManagers::FieldsForm` and then
 3. `CustomItemManagers::TextFieldEditor`
 4. `CustomItemManagers::PathFieldEditor`
 
+The **TextFieldEditor** has a property called `CustomItemManagers::TextFieldEditor.FilterType { get; set; }`. By changing it, you can control whether to accept any character (`CustomItemManagers::FilterType.None`), to only accept numbers (`CustomItemManagers::FilterType.NumbersOnly` or `CustomItemManagers::FilterType.DecimalNumbersOnly`) or a date (`CustomItemManagers::FilterType.Date`). There is also a property for the **character limit** (which has no effect if the date filter is set).
+
 Also, don't forget to **override** `CustomItemManagers::FieldsForm.Populate()`, to control how the data gets displayed in the form, and `CustomItemManagers::FieldsForm.ApplyStyle()`, so you can control how the form transforms when it's style is changed.
 
 ```csharp
@@ -152,7 +154,7 @@ public partial class ExampleViewer : FieldsForm
     }
 ```
 
-# Items List
+## Items List
 Implements a **list control** that displays a set of datas of a class created, as always, by extending `Commons::ItemDatas`.
 
 Before we talk about the list itself, we need to create the item that will be actually displayed by it. To do that, simply create a new control and **extend** `CustomLists::ListItem`. Next, design your control as you please and **override** `CustomLists::ListItem.Populate()` and `CustomLists::ListItem.ApplyStyle()`. Also, unless you want to have a specialized behavour, remember to add the **ListItem_Click** consumer to the **Click Event** of all the controls in the class.
