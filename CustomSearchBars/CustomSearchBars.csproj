@@ -10,7 +10,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>custom-assets-searchbars</PackageId>
     <Title>Custom Assets Searchbars</Title>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Authors>Giuseppe Pagliaro</Authors>
     <Description>Adds a searchbar that uses the http client implemented in the Custom Assets framework.</Description>
     <Copyright>GPL-3.0</Copyright>
