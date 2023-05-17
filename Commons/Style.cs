@@ -72,9 +72,13 @@
             {
                 form.BackColor = style.PrimaryBackColor;
             }
-            else
+            else if (bgType == BgType.Secondary)
             {
                 form.BackColor = style.SecondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                form.BackColor = Color.Transparent;
             }
         }
 
@@ -84,11 +88,14 @@
             {
                 userControl.BackColor = style.PrimaryBackColor;
             }
-            else
+            else if (bgType == BgType.Secondary)
             {
                 userControl.BackColor = style.SecondaryBackColor;
             }
-
+            else if (bgType == BgType.Transparent)
+            {
+                userControl.BackColor = Color.Transparent;
+            }
         }
 
         public static void Apply(Panel panel, Style style, BgType bgType)
@@ -97,9 +104,13 @@
             {
                 panel.BackColor = style.PrimaryBackColor;
             }
-            else
+            else if (bgType == BgType.Secondary)
             {
                 panel.BackColor = style.SecondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                panel.BackColor = Color.Transparent;
             }
         }
 
@@ -109,9 +120,13 @@
             {
                 groupBox.BackColor = style.PrimaryBackColor;
             }
-            else
+            else if (bgType == BgType.Secondary)
             {
                 groupBox.BackColor = style.SecondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                groupBox.BackColor = Color.Transparent;
             }
 
             groupBox.ForeColor = style.FontColor;
@@ -166,13 +181,34 @@
             button.FlatStyle = style.ButtonFlatStyle;
         }
 
+        public static void Apply(CheckBox checkBox, Style style, BgType bgType)
+        {
+            if (bgType == BgType.Primary)
+            {
+                checkBox.BackColor = style.primaryBackColor;
+            }
+            else if (bgType == BgType.Secondary)
+            {
+                checkBox.BackColor = style.secondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                checkBox.BackColor = Color.Transparent;
+            }
+
+            checkBox.Font = new Font(style.FontType, checkBox.Font.SizeInPoints);
+            checkBox.ForeColor = style.fontColor;
+        }
+
         #endregion
     }
 
     public enum BgType
     {
         Primary,
-        Secondary
+        Secondary,
+        Transparent,
+        Inherit
     }
 
     public enum LinkType

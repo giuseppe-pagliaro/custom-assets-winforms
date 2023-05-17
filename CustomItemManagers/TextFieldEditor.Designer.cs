@@ -29,42 +29,44 @@
         private void InitializeComponent()
         {
             txtBoxValue = new TextBox();
-            buttonActive = new Button();
+            checkBoxActive = new CheckBox();
             SuspendLayout();
             // 
             // txtBoxValue
             // 
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
             txtBoxValue.Name = "txtBoxValue";
-            txtBoxValue.Size = new Size(155, 31);
+            txtBoxValue.Size = new Size(219, 31);
             txtBoxValue.TabIndex = 4;
+            txtBoxValue.KeyPress += txtBoxValue_KeyPress;
             // 
-            // buttonActive
+            // checkBoxActive
             // 
-            buttonActive.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonActive.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonActive.Location = new Point(270, 12);
-            buttonActive.Name = "buttonActive";
-            buttonActive.Size = new Size(59, 31);
-            buttonActive.TabIndex = 5;
-            buttonActive.Text = "Edit";
-            buttonActive.UseVisualStyleBackColor = true;
-            buttonActive.Click += buttonActive_Click;
+            checkBoxActive.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            checkBoxActive.AutoSize = true;
+            checkBoxActive.BackColor = Color.Transparent;
+            checkBoxActive.Location = new Point(312, 12);
+            checkBoxActive.Name = "checkBoxActive";
+            checkBoxActive.Size = new Size(18, 17);
+            checkBoxActive.TabIndex = 6;
+            checkBoxActive.UseVisualStyleBackColor = false;
+            checkBoxActive.CheckedChanged += checkBoxActive_CheckedChanged;
             // 
             // TextFieldEditor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(buttonActive);
+            Controls.Add(checkBoxActive);
             Controls.Add(txtBoxValue);
             Name = "TextFieldEditor";
             Size = new Size(341, 52);
             Controls.SetChildIndex(txtName, 0);
             Controls.SetChildIndex(txtSeparator, 0);
             Controls.SetChildIndex(txtBoxValue, 0);
-            Controls.SetChildIndex(buttonActive, 0);
+            Controls.SetChildIndex(checkBoxActive, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -72,6 +74,6 @@
         #endregion
 
         private TextBox txtBoxValue;
-        private Button buttonActive;
+        private CheckBox checkBoxActive;
     }
 }

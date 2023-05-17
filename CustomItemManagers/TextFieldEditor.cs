@@ -6,58 +6,42 @@ namespace CustomItemManagers
     {
         public TextFieldEditor()
         {
+            charLimit = 50;
+
             InitializeComponent();
-
-            togglable = true;
-            active = false;
-
-            Togglable = false;
         }
 
-        private bool active;
-        private bool togglable;
+        private int charLimit;
 
         #region Properties
 
-        public String EditButtonText
-        {
-            get { return buttonActive.Text; }
-            set { buttonActive.Text = value; }
-        }
-
         public bool Togglable
         {
-            get { return togglable; }
+            get { return checkBoxActive.Enabled; }
             set
             {
-                if (togglable != value)
+                if (checkBoxActive.Enabled == value)
                 {
-                    togglable = value;
+                    return;
+                }
 
-                    if (togglable)
-                    {
-                        buttonActive.Enabled = true;
-                        buttonActive.Visible = true;
-                        txtBoxValue.Width -= buttonActive.Width;
-
-                        active = false;
-                        buttonActive.BackColor = Style.SecondaryInteractableColor;
-                        txtBoxValue.Enabled = false;
-                    }
-                    else
-                    {
-                        buttonActive.Enabled = false;
-                        buttonActive.Visible = false;
-                        txtBoxValue.Width += buttonActive.Width;
-                    }
+                if (value)
+                {
+                    checkBoxActive.Enabled = true;
+                    checkBoxActive.Visible = true;
+                }
+                else
+                {
+                    checkBoxActive.Enabled = false;
+                    checkBoxActive.Visible = false;
                 }
             }
         }
 
         public bool Active
         {
-            get { return active; }
-            set { active = value; }
+            get { return checkBoxActive.Checked; }
+            set { checkBoxActive.Checked = value; }
         }
 
         public String Value
@@ -65,13 +49,24 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        public int CharLimit
+        {
+            get { return charLimit; }
+            set { charLimit = value; }
+        }
+
+        public FilterType FilterType { get; set; }
+
+        public bool Mandatory { get; set; }
+
         #endregion
 
         protected override void ResizeControls(int WidthDiff)
         {
-            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
-            buttonActive.Location = new Point(buttonActive.Location.X + WidthDiff, buttonActive.Location.Y);
+            txtBoxValue.Width -= WidthDiff;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         }
 
         protected override void ApplyStyle()
@@ -79,28 +74,134 @@ namespace CustomItemManagers
             base.ApplyStyle();
 
             Style.Apply(txtBoxValue, Style);
-            Style.Apply(buttonActive, Style);
-
-            if (!active)
-            {
-                buttonActive.BackColor = Style.SecondaryInteractableColor;
-            }
+            Style.Apply(checkBoxActive, Style, BgType.Transparent);
         }
 
-        private void buttonActive_Click(object sender, EventArgs e)
+        #region Event Consumers
+
+        private void checkBoxActive_CheckedChanged(object sender, EventArgs e)
         {
-            if (active)
+            if (checkBoxActive.Checked)
             {
-                active = false;
-                buttonActive.BackColor = Style.SecondaryInteractableColor;
-                txtBoxValue.Enabled = false;
+                txtBoxValue.Enabled = true;
             }
             else
             {
-                active = true;
-                buttonActive.BackColor = Style.PrimaryInteractableColor;
-                txtBoxValue.Enabled = true;
+                txtBoxValue.Enabled = false;
             }
         }
+
+        private void txtBoxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            switch (FilterType)
+            {
+                case FilterType.DecimalNumbersOnly:
+                    if (txtBoxValue.Text.Length >= charLimit)
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    {
+                        if (e.KeyChar != ',' && e.KeyChar != '.')
+                        {
+                            e.Handled = true;
+                            break;
+                        }
+                    }
+
+                    if (e.KeyChar == '.' || e.KeyChar == ',')
+                    {
+                        if (txtBoxValue.Text.Contains('.') || txtBoxValue.Text.Contains(","))
+                        {
+                            e.Handled = true;
+                        }
+                        else if (txtBoxValue.Text.Length == 0)
+                        {
+                            txtBoxValue.Text = "0";
+                            txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                        }
+                    }
+
+                    break;
+
+                case FilterType.NumbersOnly:
+                    if (txtBoxValue.Text.Length >= charLimit)
+                    {
+                        e.Handled = true;
+                    }
+                    else if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                    {
+                        e.Handled = true;
+                    }
+
+                    break;
+
+                case FilterType.Date:
+                    if (txtBoxValue.Text.Length >= 10)
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
+                    {
+                        e.Handled = true;
+                        break;
+                    }
+
+                    switch (txtBoxValue.Text.Length)
+                    {
+                        case 1:
+                            if (e.KeyChar == '/')
+                            {
+                                txtBoxValue.Text = "0" + txtBoxValue.Text;
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+                            else
+                            {
+                                txtBoxValue.Text += e.KeyChar;
+                                e.KeyChar = '/';
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+
+                            break;
+
+                        case 4:
+                            if (e.KeyChar == '/')
+                            {
+                                String subStr = txtBoxValue.Text.Substring(0, 3);
+                                txtBoxValue.Text = subStr + "0" + txtBoxValue.Text[3];
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+                            else
+                            {
+                                txtBoxValue.Text += e.KeyChar;
+                                e.KeyChar = '/';
+                                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+                            }
+
+                            break;
+                    }
+
+                    break;
+            }
+        }
+
+        #endregion
+    }
+
+    public enum FilterType
+    {
+        None,
+        NumbersOnly,
+        DecimalNumbersOnly,
+        Date
     }
 }

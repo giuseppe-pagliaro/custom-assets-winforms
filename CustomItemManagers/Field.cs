@@ -62,10 +62,10 @@ namespace CustomItemManagers
             get { return txtSeparator.Text; }
             set
             {
-                int newTxtSeparatorWidth = txtSeparator.Width;
+                int oldTxtSeparatorWidth = txtSeparator.Width;
                 txtSeparator.Text = value;
 
-                ResizeControls(txtSeparator.Width - newTxtSeparatorWidth);
+                ResizeControls(txtSeparator.Width - oldTxtSeparatorWidth);
             }
         }
 

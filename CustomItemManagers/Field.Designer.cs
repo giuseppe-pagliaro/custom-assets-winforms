@@ -34,7 +34,6 @@
             // 
             // txtSeparator
             // 
-            txtSeparator.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtSeparator.AutoSize = true;
             txtSeparator.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txtSeparator.Location = new Point(86, 12);
@@ -45,7 +44,6 @@
             // 
             // txtName
             // 
-            txtName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtName.AutoSize = true;
             txtName.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             txtName.Location = new Point(12, 12);
