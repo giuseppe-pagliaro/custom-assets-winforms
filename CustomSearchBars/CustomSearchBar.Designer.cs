@@ -52,6 +52,7 @@
             textBoxQuery.BackColor = SystemColors.ControlDark;
             textBoxQuery.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxQuery.Location = new Point(12, 12);
+            textBoxQuery.Multiline = true;
             textBoxQuery.Name = "textBoxQuery";
             textBoxQuery.PlaceholderText = "Type Query Here";
             textBoxQuery.Size = new Size(451, 30);

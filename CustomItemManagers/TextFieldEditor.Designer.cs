@@ -38,8 +38,9 @@
             txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
+            txtBoxValue.Multiline = true;
             txtBoxValue.Name = "txtBoxValue";
-            txtBoxValue.Size = new Size(219, 31);
+            txtBoxValue.Size = new Size(219, 27);
             txtBoxValue.TabIndex = 4;
             txtBoxValue.KeyPress += txtBoxValue_KeyPress;
             // 

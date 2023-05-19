@@ -121,9 +121,10 @@
             txtBoxCurrentPage.Anchor = AnchorStyles.Right;
             txtBoxCurrentPage.BackColor = SystemColors.ControlDark;
             txtBoxCurrentPage.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBoxCurrentPage.Location = new Point(117, 10);
+            txtBoxCurrentPage.Location = new Point(117, 11);
+            txtBoxCurrentPage.Multiline = true;
             txtBoxCurrentPage.Name = "txtBoxCurrentPage";
-            txtBoxCurrentPage.Size = new Size(80, 30);
+            txtBoxCurrentPage.Size = new Size(80, 29);
             txtBoxCurrentPage.TabIndex = 4;
             txtBoxCurrentPage.Text = "1";
             txtBoxCurrentPage.TextAlign = HorizontalAlignment.Center;

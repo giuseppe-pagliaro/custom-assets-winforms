@@ -47,9 +47,10 @@
             // buttonEdit
             // 
             buttonEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonEdit.AutoSize = true;
             buttonEdit.Location = new Point(474, 32);
             buttonEdit.Name = "buttonEdit";
-            buttonEdit.Size = new Size(67, 29);
+            buttonEdit.Size = new Size(67, 30);
             buttonEdit.TabIndex = 1;
             buttonEdit.Text = "Edit";
             buttonEdit.UseVisualStyleBackColor = true;

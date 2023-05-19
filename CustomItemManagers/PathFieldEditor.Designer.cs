@@ -40,6 +40,7 @@
             txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
+            txtBoxValue.Multiline = true;
             txtBoxValue.Name = "txtBoxValue";
             txtBoxValue.ReadOnly = true;
             txtBoxValue.Size = new Size(292, 31);
