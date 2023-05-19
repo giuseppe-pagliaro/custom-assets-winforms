@@ -40,7 +40,7 @@
             buttonSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSearch.Location = new Point(469, 12);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(94, 31);
+            buttonSearch.Size = new Size(94, 30);
             buttonSearch.TabIndex = 0;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;

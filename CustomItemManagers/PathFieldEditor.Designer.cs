@@ -52,7 +52,7 @@
             buttonBrowse.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonBrowse.Location = new Point(407, 12);
             buttonBrowse.Name = "buttonBrowse";
-            buttonBrowse.Size = new Size(86, 32);
+            buttonBrowse.Size = new Size(86, 31);
             buttonBrowse.TabIndex = 5;
             buttonBrowse.Text = "Browse";
             buttonBrowse.UseVisualStyleBackColor = true;
