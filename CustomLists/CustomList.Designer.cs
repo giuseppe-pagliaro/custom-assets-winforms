@@ -60,6 +60,7 @@
             // itemsPanel
             // 
             itemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            itemsPanel.AutoSize = true;
             itemsPanel.BackColor = SystemColors.ControlDark;
             itemsPanel.Controls.Add(clickProtector);
             itemsPanel.Controls.Add(txtPlaceHolder);
@@ -83,6 +84,7 @@
             // controlPanel
             // 
             controlPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            controlPanel.AutoSize = true;
             controlPanel.BackColor = Color.Transparent;
             controlPanel.Controls.Add(noFocusObj);
             controlPanel.Controls.Add(panelButtons);
@@ -103,6 +105,7 @@
             // 
             // panelButtons
             // 
+            panelButtons.AutoSize = true;
             panelButtons.BackColor = Color.Transparent;
             panelButtons.Controls.Add(txtBoxCurrentPage);
             panelButtons.Controls.Add(buttonEnd);
@@ -214,6 +217,7 @@
             panelButtons.ResumeLayout(false);
             panelButtons.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
