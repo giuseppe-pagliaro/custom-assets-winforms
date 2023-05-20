@@ -22,6 +22,7 @@ namespace Example
             fieldDecimalNumber.Style = Style;
             fieldNumber.Style = Style;
             fieldDate.Style = Style;
+            fieldPhone.Style = Style;
             Style.Apply(buttonUpdate, Style);
         }
 

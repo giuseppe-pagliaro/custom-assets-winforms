@@ -34,20 +34,10 @@ namespace CustomItemManagers
             get { return checkBoxActive.Enabled; }
             set
             {
-                if (checkBoxActive.Enabled == value)
+                if (checkBoxActive.Enabled != value)
                 {
-                    return;
-                }
-
-                if (value)
-                {
-                    checkBoxActive.Enabled = true;
-                    checkBoxActive.Visible = true;
-                }
-                else
-                {
-                    checkBoxActive.Enabled = false;
-                    checkBoxActive.Visible = false;
+                    checkBoxActive.Enabled = value;
+                    checkBoxActive.Visible = value;
                 }
             }
         }

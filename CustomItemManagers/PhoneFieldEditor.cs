@@ -54,7 +54,7 @@ namespace CustomItemManagers
         protected override void ResizeControls(int WidthDiff)
         {
             comboIntPrefix.Anchor = AnchorStyles.None;
-            comboIntPrefix.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
+            comboIntPrefix.Location = new Point(comboIntPrefix.Location.X + WidthDiff, comboIntPrefix.Location.Y);
             comboIntPrefix.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
             txtBoxValue.Anchor = AnchorStyles.None;
@@ -93,7 +93,23 @@ namespace CustomItemManagers
 
         private void txtBoxValue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // TODO
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+            else if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else if (txtBoxValue.Text.Length >= 11)
+            {
+                e.Handled = true;
+            }
+            else if (txtBoxValue.Text.Length == 3)
+            {
+                txtBoxValue.Text += " ";
+                txtBoxValue.Select(txtBoxValue.Text.Length, 0);
+            }
         }
 
         private void PhoneFieldEditor_Resize(object sender, EventArgs e)

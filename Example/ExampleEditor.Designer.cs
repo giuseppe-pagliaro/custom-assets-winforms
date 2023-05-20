@@ -43,7 +43,7 @@
             fieldDecimalNumber = new CustomItemManagers.TextFieldEditor();
             fieldNumber = new CustomItemManagers.TextFieldEditor();
             fieldDate = new CustomItemManagers.TextFieldEditor();
-            phoneFieldEditor1 = new CustomItemManagers.PhoneFieldEditor();
+            fieldPhone = new CustomItemManagers.PhoneFieldEditor();
             SuspendLayout();
             // 
             // txtID
@@ -60,7 +60,7 @@
             fieldPath.FileDialogMessage = "Select Folder";
             fieldPath.Location = new Point(18, 96);
             fieldPath.Mandatory = true;
-            fieldPath.Margin = new Padding(9, 9, 9, 9);
+            fieldPath.Margin = new Padding(9);
             fieldPath.Name = "fieldPath";
             fieldPath.OpenDialogType = CustomItemManagers.OpenDialogType.Folder;
             fieldPath.PlaceholderText = "";
@@ -79,7 +79,7 @@
             fieldNormal.FilterType = CustomItemManagers.FilterType.None;
             fieldNormal.Location = new Point(18, 186);
             fieldNormal.Mandatory = false;
-            fieldNormal.Margin = new Padding(9, 9, 9, 9);
+            fieldNormal.Margin = new Padding(9);
             fieldNormal.Name = "fieldNormal";
             fieldNormal.PlaceholderText = "";
             fieldNormal.Separator = ":";
@@ -114,7 +114,7 @@
             // 
             buttonUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonUpdate.Location = new Point(18, 639);
-            buttonUpdate.Margin = new Padding(4, 4, 4, 4);
+            buttonUpdate.Margin = new Padding(4);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(962, 76);
             buttonUpdate.TabIndex = 5;
@@ -131,7 +131,7 @@
             fieldDecimalNumber.FilterType = CustomItemManagers.FilterType.DecimalNumbersOnly;
             fieldDecimalNumber.Location = new Point(18, 276);
             fieldDecimalNumber.Mandatory = false;
-            fieldDecimalNumber.Margin = new Padding(9, 9, 9, 9);
+            fieldDecimalNumber.Margin = new Padding(9);
             fieldDecimalNumber.Name = "fieldDecimalNumber";
             fieldDecimalNumber.PlaceholderText = "";
             fieldDecimalNumber.Separator = ":";
@@ -149,7 +149,7 @@
             fieldNumber.FilterType = CustomItemManagers.FilterType.NumbersOnly;
             fieldNumber.Location = new Point(18, 366);
             fieldNumber.Mandatory = false;
-            fieldNumber.Margin = new Padding(9, 9, 9, 9);
+            fieldNumber.Margin = new Padding(9);
             fieldNumber.Name = "fieldNumber";
             fieldNumber.PlaceholderText = "";
             fieldNumber.Separator = ":";
@@ -167,7 +167,7 @@
             fieldDate.FilterType = CustomItemManagers.FilterType.Date;
             fieldDate.Location = new Point(18, 456);
             fieldDate.Mandatory = false;
-            fieldDate.Margin = new Padding(9, 9, 9, 9);
+            fieldDate.Margin = new Padding(9);
             fieldDate.Name = "fieldDate";
             fieldDate.PlaceholderText = "";
             fieldDate.Separator = ":";
@@ -176,29 +176,29 @@
             fieldDate.TabIndex = 8;
             fieldDate.Togglable = true;
             // 
-            // phoneFieldEditor1
+            // fieldPhone
             // 
-            phoneFieldEditor1.Active = false;
-            phoneFieldEditor1.BackColor = SystemColors.ControlDark;
-            phoneFieldEditor1.DefaultIntPrefix = "";
-            phoneFieldEditor1.FieldName = "Phone";
-            phoneFieldEditor1.Location = new Point(18, 550);
-            phoneFieldEditor1.Mandatory = false;
-            phoneFieldEditor1.Margin = new Padding(4, 4, 4, 4);
-            phoneFieldEditor1.Name = "phoneFieldEditor1";
-            phoneFieldEditor1.PlaceholderText = "";
-            phoneFieldEditor1.Separator = ":";
-            phoneFieldEditor1.Size = new Size(962, 81);
-            phoneFieldEditor1.Style = style6;
-            phoneFieldEditor1.TabIndex = 9;
-            phoneFieldEditor1.Togglable = true;
+            fieldPhone.Active = true;
+            fieldPhone.BackColor = SystemColors.ControlDark;
+            fieldPhone.DefaultIntPrefix = "";
+            fieldPhone.FieldName = "Phone";
+            fieldPhone.Location = new Point(18, 550);
+            fieldPhone.Mandatory = false;
+            fieldPhone.Margin = new Padding(4, 4, 4, 4);
+            fieldPhone.Name = "fieldPhone";
+            fieldPhone.PlaceholderText = "";
+            fieldPhone.Separator = ":";
+            fieldPhone.Size = new Size(962, 81);
+            fieldPhone.Style = style6;
+            fieldPhone.TabIndex = 9;
+            fieldPhone.Togglable = true;
             // 
             // ExampleEditor
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(998, 728);
-            Controls.Add(phoneFieldEditor1);
+            Controls.Add(fieldPhone);
             Controls.Add(fieldDate);
             Controls.Add(fieldNumber);
             Controls.Add(fieldDecimalNumber);
@@ -209,7 +209,7 @@
             Controls.Add(fieldPath);
             itemDatas1.Id = 0;
             ItemDatas = itemDatas1;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "ExampleEditor";
             Text = "Item Datas #0";
             Controls.SetChildIndex(txtID, 0);
@@ -221,7 +221,7 @@
             Controls.SetChildIndex(fieldDecimalNumber, 0);
             Controls.SetChildIndex(fieldNumber, 0);
             Controls.SetChildIndex(fieldDate, 0);
-            Controls.SetChildIndex(phoneFieldEditor1, 0);
+            Controls.SetChildIndex(fieldPhone, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -236,6 +236,6 @@
         private CustomItemManagers.TextFieldEditor fieldDecimalNumber;
         private CustomItemManagers.TextFieldEditor fieldNumber;
         private CustomItemManagers.TextFieldEditor fieldDate;
-        private CustomItemManagers.PhoneFieldEditor phoneFieldEditor1;
+        private CustomItemManagers.PhoneFieldEditor fieldPhone;
     }
 }
