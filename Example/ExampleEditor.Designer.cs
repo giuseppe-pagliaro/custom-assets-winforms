@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Commons.Style style1 = new Commons.Style();
+            Commons.Style style2 = new Commons.Style();
+            Commons.Style style3 = new Commons.Style();
+            Commons.Style style4 = new Commons.Style();
+            Commons.Style style5 = new Commons.Style();
             Commons.Style style6 = new Commons.Style();
-            Commons.Style style7 = new Commons.Style();
-            Commons.Style style8 = new Commons.Style();
-            Commons.Style style9 = new Commons.Style();
-            Commons.Style style10 = new Commons.Style();
-            CustomLists.ItemDatas itemDatas2 = new CustomLists.ItemDatas();
+            CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
             fieldPath = new CustomItemManagers.PathFieldEditor();
             fieldNormal = new CustomItemManagers.TextFieldEditor();
             noFocusObj = new Label();
@@ -42,7 +43,13 @@
             fieldDecimalNumber = new CustomItemManagers.TextFieldEditor();
             fieldNumber = new CustomItemManagers.TextFieldEditor();
             fieldDate = new CustomItemManagers.TextFieldEditor();
+            phoneFieldEditor1 = new CustomItemManagers.PhoneFieldEditor();
             SuspendLayout();
+            // 
+            // txtID
+            // 
+            txtID.Location = new Point(60, 60);
+            txtID.Margin = new Padding(4, 0, 4, 0);
             // 
             // fieldPath
             // 
@@ -51,13 +58,15 @@
             fieldPath.BrowseButtonText = "Browse";
             fieldPath.FieldName = "Path";
             fieldPath.FileDialogMessage = "Select Folder";
-            fieldPath.Location = new Point(12, 64);
+            fieldPath.Location = new Point(18, 96);
             fieldPath.Mandatory = true;
+            fieldPath.Margin = new Padding(9, 9, 9, 9);
             fieldPath.Name = "fieldPath";
             fieldPath.OpenDialogType = CustomItemManagers.OpenDialogType.Folder;
+            fieldPath.PlaceholderText = "";
             fieldPath.Separator = ":";
-            fieldPath.Size = new Size(641, 54);
-            fieldPath.Style = style6;
+            fieldPath.Size = new Size(962, 81);
+            fieldPath.Style = style1;
             fieldPath.TabIndex = 1;
             fieldPath.Togglable = true;
             // 
@@ -68,12 +77,14 @@
             fieldNormal.CharLimit = 50;
             fieldNormal.FieldName = "Normal Text";
             fieldNormal.FilterType = CustomItemManagers.FilterType.None;
-            fieldNormal.Location = new Point(12, 124);
+            fieldNormal.Location = new Point(18, 186);
             fieldNormal.Mandatory = false;
+            fieldNormal.Margin = new Padding(9, 9, 9, 9);
             fieldNormal.Name = "fieldNormal";
+            fieldNormal.PlaceholderText = "";
             fieldNormal.Separator = ":";
-            fieldNormal.Size = new Size(641, 54);
-            fieldNormal.Style = style7;
+            fieldNormal.Size = new Size(962, 81);
+            fieldNormal.Style = style2;
             fieldNormal.TabIndex = 2;
             fieldNormal.Togglable = true;
             // 
@@ -82,27 +93,30 @@
             noFocusObj.AutoSize = true;
             noFocusObj.BackColor = Color.Transparent;
             noFocusObj.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            noFocusObj.Location = new Point(646, 54);
+            noFocusObj.Location = new Point(969, 81);
+            noFocusObj.Margin = new Padding(4, 0, 4, 0);
             noFocusObj.Name = "noFocusObj";
-            noFocusObj.Size = new Size(0, 17);
+            noFocusObj.Size = new Size(0, 25);
             noFocusObj.TabIndex = 3;
             // 
             // txtTitle
             // 
             txtTitle.AutoSize = true;
             txtTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtTitle.Location = new Point(12, 18);
+            txtTitle.Location = new Point(18, 27);
+            txtTitle.Margin = new Padding(4, 0, 4, 0);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(455, 31);
+            txtTitle.Size = new Size(662, 45);
             txtTitle.TabIndex = 4;
             txtTitle.Text = "Just a display (does not update the item).";
             // 
             // buttonUpdate
             // 
             buttonUpdate.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonUpdate.Location = new Point(12, 364);
+            buttonUpdate.Location = new Point(18, 639);
+            buttonUpdate.Margin = new Padding(4, 4, 4, 4);
             buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(641, 51);
+            buttonUpdate.Size = new Size(962, 76);
             buttonUpdate.TabIndex = 5;
             buttonUpdate.Text = "Update";
             buttonUpdate.UseVisualStyleBackColor = true;
@@ -115,12 +129,14 @@
             fieldDecimalNumber.CharLimit = 50;
             fieldDecimalNumber.FieldName = "Numbers With Decimal";
             fieldDecimalNumber.FilterType = CustomItemManagers.FilterType.DecimalNumbersOnly;
-            fieldDecimalNumber.Location = new Point(12, 184);
+            fieldDecimalNumber.Location = new Point(18, 276);
             fieldDecimalNumber.Mandatory = false;
+            fieldDecimalNumber.Margin = new Padding(9, 9, 9, 9);
             fieldDecimalNumber.Name = "fieldDecimalNumber";
+            fieldDecimalNumber.PlaceholderText = "";
             fieldDecimalNumber.Separator = ":";
-            fieldDecimalNumber.Size = new Size(641, 54);
-            fieldDecimalNumber.Style = style8;
+            fieldDecimalNumber.Size = new Size(962, 81);
+            fieldDecimalNumber.Style = style3;
             fieldDecimalNumber.TabIndex = 6;
             fieldDecimalNumber.Togglable = true;
             // 
@@ -131,12 +147,14 @@
             fieldNumber.CharLimit = 50;
             fieldNumber.FieldName = "Numbers";
             fieldNumber.FilterType = CustomItemManagers.FilterType.NumbersOnly;
-            fieldNumber.Location = new Point(12, 244);
+            fieldNumber.Location = new Point(18, 366);
             fieldNumber.Mandatory = false;
+            fieldNumber.Margin = new Padding(9, 9, 9, 9);
             fieldNumber.Name = "fieldNumber";
+            fieldNumber.PlaceholderText = "";
             fieldNumber.Separator = ":";
-            fieldNumber.Size = new Size(641, 54);
-            fieldNumber.Style = style9;
+            fieldNumber.Size = new Size(962, 81);
+            fieldNumber.Style = style4;
             fieldNumber.TabIndex = 7;
             fieldNumber.Togglable = true;
             // 
@@ -147,20 +165,40 @@
             fieldDate.CharLimit = 50;
             fieldDate.FieldName = "Date";
             fieldDate.FilterType = CustomItemManagers.FilterType.Date;
-            fieldDate.Location = new Point(12, 304);
+            fieldDate.Location = new Point(18, 456);
             fieldDate.Mandatory = false;
+            fieldDate.Margin = new Padding(9, 9, 9, 9);
             fieldDate.Name = "fieldDate";
+            fieldDate.PlaceholderText = "";
             fieldDate.Separator = ":";
-            fieldDate.Size = new Size(641, 54);
-            fieldDate.Style = style10;
+            fieldDate.Size = new Size(962, 81);
+            fieldDate.Style = style5;
             fieldDate.TabIndex = 8;
             fieldDate.Togglable = true;
             // 
+            // phoneFieldEditor1
+            // 
+            phoneFieldEditor1.Active = false;
+            phoneFieldEditor1.BackColor = SystemColors.ControlDark;
+            phoneFieldEditor1.DefaultIntPrefix = "";
+            phoneFieldEditor1.FieldName = "Phone";
+            phoneFieldEditor1.Location = new Point(18, 550);
+            phoneFieldEditor1.Mandatory = false;
+            phoneFieldEditor1.Margin = new Padding(4, 4, 4, 4);
+            phoneFieldEditor1.Name = "phoneFieldEditor1";
+            phoneFieldEditor1.PlaceholderText = "";
+            phoneFieldEditor1.Separator = ":";
+            phoneFieldEditor1.Size = new Size(962, 81);
+            phoneFieldEditor1.Style = style6;
+            phoneFieldEditor1.TabIndex = 9;
+            phoneFieldEditor1.Togglable = true;
+            // 
             // ExampleEditor
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(665, 427);
+            ClientSize = new Size(998, 728);
+            Controls.Add(phoneFieldEditor1);
             Controls.Add(fieldDate);
             Controls.Add(fieldNumber);
             Controls.Add(fieldDecimalNumber);
@@ -169,8 +207,9 @@
             Controls.Add(noFocusObj);
             Controls.Add(fieldNormal);
             Controls.Add(fieldPath);
-            itemDatas2.Id = 0;
-            ItemDatas = itemDatas2;
+            itemDatas1.Id = 0;
+            ItemDatas = itemDatas1;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "ExampleEditor";
             Text = "Item Datas #0";
             Controls.SetChildIndex(txtID, 0);
@@ -182,6 +221,7 @@
             Controls.SetChildIndex(fieldDecimalNumber, 0);
             Controls.SetChildIndex(fieldNumber, 0);
             Controls.SetChildIndex(fieldDate, 0);
+            Controls.SetChildIndex(phoneFieldEditor1, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -196,5 +236,6 @@
         private CustomItemManagers.TextFieldEditor fieldDecimalNumber;
         private CustomItemManagers.TextFieldEditor fieldNumber;
         private CustomItemManagers.TextFieldEditor fieldDate;
+        private CustomItemManagers.PhoneFieldEditor phoneFieldEditor1;
     }
 }

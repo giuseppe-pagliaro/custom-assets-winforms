@@ -72,7 +72,7 @@ namespace CustomItemManagers
             txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
             txtBoxValue.Width -= WidthDiff;
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left;
         }
 
         protected override void ApplyStyle()

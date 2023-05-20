@@ -213,6 +213,13 @@
             textBox.BackColor = style.SecondaryBackColor;
         }
 
+        public static void Apply(ComboBox comboBox, Style style)
+        {
+            comboBox.ForeColor = style.FontColor;
+            comboBox.Font = new Font(style.FontType, comboBox.Font.SizeInPoints);
+            comboBox.BackColor = style.SecondaryBackColor;
+        }
+
         public static void Apply(Button button, Style style)
         {
             button.ForeColor = style.InteractableFontColor;
