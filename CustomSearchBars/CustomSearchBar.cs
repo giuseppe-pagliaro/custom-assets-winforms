@@ -97,7 +97,7 @@ namespace CustomSearchBars
             int x = this.Width - buttonSearch.Width - textBoxQuery.Location.X;
             buttonSearch.Location = new Point(x, buttonSearch.Location.Y);
 
-            int offset = (int)Math.Round(textBoxQuery.Location.X * 2.5);
+            int offset = (int)Math.Round(textBoxQuery.Location.X * 2.5, 0);
             textBoxQuery.Width = this.Width - offset - buttonSearch.Width;
         }
 

@@ -36,7 +36,6 @@
             // 
             // txtBoxValue
             // 
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
@@ -48,7 +47,7 @@
             // 
             // buttonBrowse
             // 
-            buttonBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonBrowse.Anchor = AnchorStyles.Top;
             buttonBrowse.Enabled = false;
             buttonBrowse.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonBrowse.Location = new Point(407, 12);
@@ -61,7 +60,7 @@
             // 
             // checkBoxActive
             // 
-            checkBoxActive.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            checkBoxActive.Anchor = AnchorStyles.Top;
             checkBoxActive.AutoSize = true;
             checkBoxActive.BackColor = Color.Transparent;
             checkBoxActive.Location = new Point(385, 12);
@@ -91,6 +90,7 @@
             Controls.Add(txtBoxValue);
             Name = "PathFieldEditor";
             Size = new Size(505, 52);
+            Resize += PathFieldEditor_Resize;
             Controls.SetChildIndex(txtName, 0);
             Controls.SetChildIndex(txtSeparator, 0);
             Controls.SetChildIndex(txtBoxValue, 0);

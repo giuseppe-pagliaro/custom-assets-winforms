@@ -164,6 +164,19 @@ namespace CustomItemManagers
             }
         }
 
+        private void PathFieldEditor_Resize(object sender, EventArgs e)
+        {
+            int x = this.Width - txtName.Location.X - buttonBrowse.Width;
+            buttonBrowse.Location = new Point(x, buttonBrowse.Location.Y);
+
+            int offset = (int)Math.Round(txtName.Location.X * 1.5, 0);
+            txtBoxValue.Width = this.Width - offset - buttonBrowse.Width - txtBoxValue.Location.X;
+
+            offset = (int)Math.Round(txtName.Location.X * 1.5, 0) - 2;
+            x = this.Width - offset - buttonBrowse.Width - checkBoxActive.Width;
+            checkBoxActive.Location = new Point(x, checkBoxActive.Location.Y);
+        }
+
         #endregion
     }
 

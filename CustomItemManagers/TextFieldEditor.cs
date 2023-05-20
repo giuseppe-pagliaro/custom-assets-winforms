@@ -200,6 +200,14 @@ namespace CustomItemManagers
             }
         }
 
+        private void TextFieldEditor_Resize(object sender, EventArgs e)
+        {
+            txtBoxValue.Width = this.Width - txtName.Location.X;
+
+            int x = this.Width - txtName.Location.X - checkBoxActive.Width + 1;
+            checkBoxActive.Location = new Point(x, checkBoxActive.Location.Y);
+        }
+
         #endregion
     }
 
