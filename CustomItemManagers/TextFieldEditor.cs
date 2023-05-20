@@ -55,6 +55,12 @@ namespace CustomItemManagers
             set { charLimit = value; }
         }
 
+        public String PlaceholderText
+        {
+            get { return txtBoxValue.PlaceholderText; }
+            set { txtBoxValue.PlaceholderText = value; }
+        }
+
         public FilterType FilterType { get; set; }
 
         public bool Mandatory { get; set; }

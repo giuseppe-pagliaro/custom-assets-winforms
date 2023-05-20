@@ -63,6 +63,12 @@ namespace CustomItemManagers
             get { return txtBoxValue.Text; }
         }
 
+        public String PlaceholderText
+        {
+            get { return txtBoxValue.PlaceholderText; }
+            set { txtBoxValue.PlaceholderText = value; }
+        }
+
         public bool Mandatory { get; set; }
 
         #endregion
