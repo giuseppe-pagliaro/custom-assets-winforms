@@ -59,7 +59,6 @@
             // 
             // itemsPanel
             // 
-            itemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             itemsPanel.BackColor = SystemColors.ControlDark;
             itemsPanel.Controls.Add(clickProtector);
             itemsPanel.Controls.Add(txtPlaceHolder);
@@ -82,7 +81,7 @@
             // 
             // controlPanel
             // 
-            controlPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            controlPanel.Anchor = AnchorStyles.Left;
             controlPanel.BackColor = Color.Transparent;
             controlPanel.Controls.Add(noFocusObj);
             controlPanel.Controls.Add(panelButtons);
@@ -208,6 +207,7 @@
             Size = new Size(548, 488);
             Load += CustomList_Load;
             Click += CustomList_Click;
+            Resize += CustomList_Resize;
             itemsPanel.ResumeLayout(false);
             controlPanel.ResumeLayout(false);
             controlPanel.PerformLayout();

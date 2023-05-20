@@ -572,12 +572,20 @@ namespace CustomLists
             noFocusObj.Focus();
         }
 
-        #endregion
-    }
+        private void CustomList_Resize(object sender, EventArgs e)
+        {
+            double spacing = this.Width * 0.2 / 100;
+            itemsPanel.Width = this.Width - (int)Math.Round(spacing, 0);
+            controlPanel.Width = this.Width - (int)Math.Round(spacing, 0);
 
-    public class IncompatibleClassException : Exception
-    {
-        public IncompatibleClassException()
-            : base("The class you provided isn't or doesn't extend \"CustomItemManagers.FieldsForm\".") { }
+            spacing = this.Height * 1.2295 / 100;
+            itemsPanel.Height = this.Height - controlPanel.Height - (int)Math.Round(spacing, 0);
+
+            spacing = this.Height * 0.2 / 100;
+            int y = this.Height - controlPanel.Height - (int)Math.Round(spacing, 0);
+            controlPanel.Location = new Point(controlPanel.Location.X, y);
+        }
+
+        #endregion
     }
 }
