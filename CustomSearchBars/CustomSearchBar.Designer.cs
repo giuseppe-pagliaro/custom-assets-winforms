@@ -35,7 +35,7 @@
             // 
             // buttonSearch
             // 
-            buttonSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSearch.Anchor = AnchorStyles.Top;
             buttonSearch.BackColor = SystemColors.ControlDark;
             buttonSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSearch.Location = new Point(469, 12);
@@ -48,7 +48,6 @@
             // 
             // textBoxQuery
             // 
-            textBoxQuery.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxQuery.BackColor = SystemColors.ControlDark;
             textBoxQuery.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxQuery.Location = new Point(12, 12);
@@ -78,6 +77,7 @@
             Controls.Add(buttonSearch);
             Name = "CustomSearchBar";
             Size = new Size(575, 54);
+            Resize += CustomSearchBar_Resize;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -574,15 +574,13 @@ namespace CustomLists
 
         private void CustomList_Resize(object sender, EventArgs e)
         {
-            double spacing = this.Width * 0.2 / 100;
-            itemsPanel.Width = this.Width - (int)Math.Round(spacing, 0);
-            controlPanel.Width = this.Width - (int)Math.Round(spacing, 0);
+            itemsPanel.Width = this.Width - 2;
+            controlPanel.Width = this.Width - 2;
 
-            spacing = this.Height * 1.2295 / 100;
+            double spacing = this.Height * 1.2295 / 100;
             itemsPanel.Height = this.Height - controlPanel.Height - (int)Math.Round(spacing, 0);
 
-            spacing = this.Height * 0.2 / 100;
-            int y = this.Height - controlPanel.Height - (int)Math.Round(spacing, 0);
+            int y = this.Height - controlPanel.Height - 2;
             controlPanel.Location = new Point(controlPanel.Location.X, y);
         }
 

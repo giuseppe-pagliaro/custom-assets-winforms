@@ -92,6 +92,15 @@ namespace CustomSearchBars
             }
         }
 
+        private void CustomSearchBar_Resize(object sender, EventArgs e)
+        {
+            int x = this.Width - buttonSearch.Width - textBoxQuery.Location.X;
+            buttonSearch.Location = new Point(x, buttonSearch.Location.Y);
+
+            int offset = (int)Math.Round(textBoxQuery.Location.X * 2.5);
+            textBoxQuery.Width = this.Width - offset - buttonSearch.Width;
+        }
+
         #endregion
 
         protected virtual void OnSearchMade(SearchMadeEventArgs e)
@@ -100,15 +109,5 @@ namespace CustomSearchBars
         }
 
         public event EventHandler<SearchMadeEventArgs>? SearchMade;
-    }
-
-    public class SearchMadeEventArgs : EventArgs
-    {
-        public SearchMadeEventArgs() : base()
-        {
-            Result = "";
-        }
-
-        public String Result { get; set; }
     }
 }
