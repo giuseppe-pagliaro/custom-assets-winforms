@@ -35,6 +35,7 @@ namespace CustomLists
         private Type? editorType;
 
         private Style style;
+        private Color? backgroundColor;
 
         #region Properties
 
@@ -155,7 +156,7 @@ namespace CustomLists
                     currentPage = value;
                 }
 
-                txtBoxCurrentPage.Text = value.ToString();
+                txtBoxCurrentPage.Text = currentPage.ToString();
                 UpdateRenderedItems();
             }
         }
@@ -230,6 +231,11 @@ namespace CustomLists
                 Style.Apply(this, style, BgType.Primary);
                 Style.Apply(itemsPanel, style, BgType.Secondary);
 
+                if (BackgroundColor is not null)
+                {
+                    BackColor = BackgroundColor.Value;
+                }
+
                 Style.Apply(txtPlaceHolder, style, FontStyle.Bold);
                 Style.Apply(txtPageCount, style, FontStyle.Regular);
 
@@ -246,6 +252,20 @@ namespace CustomLists
                     {
                         renderedItem.Style = style;
                     }
+                }
+            }
+        }
+
+        public Color? BackgroundColor
+        {
+            get { return backgroundColor; }
+            set
+            {
+                backgroundColor = value;
+
+                if (BackgroundColor is not null)
+                {
+                    BackColor = BackgroundColor.Value;
                 }
             }
         }
@@ -550,34 +570,40 @@ namespace CustomLists
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            CurrentPage--;
             noFocusObj.Focus();
+            CurrentPage--;
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            CurrentPage++;
             noFocusObj.Focus();
+            CurrentPage++;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            CurrentPage = FIRST_PAGE;
             noFocusObj.Focus();
+            CurrentPage = FIRST_PAGE;
         }
 
         private void buttonEnd_Click(object sender, EventArgs e)
         {
-            CurrentPage = totPages;
             noFocusObj.Focus();
+            CurrentPage = totPages;
+        }
+
+        private void CustomList_Resize(object sender, EventArgs e)
+        {
+            itemsPanel.Width = this.Width - 2;
+            controlPanel.Width = this.Width - 2;
+
+            double spacing = this.Height * 1.2295 / 100;
+            itemsPanel.Height = this.Height - controlPanel.Height - (int)Math.Round(spacing, 0);
+
+            int y = this.Height - controlPanel.Height - 2;
+            controlPanel.Location = new Point(controlPanel.Location.X, y);
         }
 
         #endregion
-    }
-
-    public class IncompatibleClassException : Exception
-    {
-        public IncompatibleClassException()
-            : base("The class you provided isn't or doesn't extend \"CustomItemManagers.FieldsForm\".") { }
     }
 }

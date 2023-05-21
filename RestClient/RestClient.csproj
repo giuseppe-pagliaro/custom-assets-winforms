@@ -10,7 +10,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>custom-assets-rest-client</PackageId>
     <Title>Custom Assets Rest Client</Title>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Authors>Giuseppe Pagliaro</Authors>
     <Description>Implements a rest client for the Custom Assets framework.</Description>
     <Copyright>GPL-3.0</Copyright>

@@ -20,20 +20,10 @@ namespace CustomItemManagers
             get { return checkBoxActive.Enabled; }
             set
             {
-                if (checkBoxActive.Enabled == value)
+                if (checkBoxActive.Enabled != value)
                 {
-                    return;
-                }
-
-                if (value)
-                {
-                    checkBoxActive.Enabled = true;
-                    checkBoxActive.Visible = true;
-                }
-                else
-                {
-                    checkBoxActive.Enabled = false;
-                    checkBoxActive.Visible = false;
+                    checkBoxActive.Enabled = value;
+                    checkBoxActive.Visible = value;
                 }
             }
         }
@@ -55,6 +45,12 @@ namespace CustomItemManagers
             set { charLimit = value; }
         }
 
+        public String PlaceholderText
+        {
+            get { return txtBoxValue.PlaceholderText; }
+            set { txtBoxValue.PlaceholderText = value; }
+        }
+
         public FilterType FilterType { get; set; }
 
         public bool Mandatory { get; set; }
@@ -66,7 +62,7 @@ namespace CustomItemManagers
             txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
             txtBoxValue.Width -= WidthDiff;
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left;
         }
 
         protected override void ApplyStyle()
@@ -192,6 +188,14 @@ namespace CustomItemManagers
 
                     break;
             }
+        }
+
+        private void TextFieldEditor_Resize(object sender, EventArgs e)
+        {
+            txtBoxValue.Width = this.Width - txtName.Location.X - txtBoxValue.Location.X;
+
+            int x = this.Width - txtName.Location.X - checkBoxActive.Width + 2;
+            checkBoxActive.Location = new Point(x, checkBoxActive.Location.Y);
         }
 
         #endregion

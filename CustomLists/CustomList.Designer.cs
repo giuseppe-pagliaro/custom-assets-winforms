@@ -59,7 +59,6 @@
             // 
             // itemsPanel
             // 
-            itemsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             itemsPanel.BackColor = SystemColors.ControlDark;
             itemsPanel.Controls.Add(clickProtector);
             itemsPanel.Controls.Add(txtPlaceHolder);
@@ -82,7 +81,7 @@
             // 
             // controlPanel
             // 
-            controlPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            controlPanel.Anchor = AnchorStyles.Left;
             controlPanel.BackColor = Color.Transparent;
             controlPanel.Controls.Add(noFocusObj);
             controlPanel.Controls.Add(panelButtons);
@@ -121,9 +120,10 @@
             txtBoxCurrentPage.Anchor = AnchorStyles.Right;
             txtBoxCurrentPage.BackColor = SystemColors.ControlDark;
             txtBoxCurrentPage.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            txtBoxCurrentPage.Location = new Point(117, 10);
+            txtBoxCurrentPage.Location = new Point(117, 11);
+            txtBoxCurrentPage.Multiline = true;
             txtBoxCurrentPage.Name = "txtBoxCurrentPage";
-            txtBoxCurrentPage.Size = new Size(80, 30);
+            txtBoxCurrentPage.Size = new Size(80, 29);
             txtBoxCurrentPage.TabIndex = 4;
             txtBoxCurrentPage.Text = "1";
             txtBoxCurrentPage.TextAlign = HorizontalAlignment.Center;
@@ -207,6 +207,7 @@
             Size = new Size(548, 488);
             Load += CustomList_Load;
             Click += CustomList_Click;
+            Resize += CustomList_Resize;
             itemsPanel.ResumeLayout(false);
             controlPanel.ResumeLayout(false);
             controlPanel.PerformLayout();

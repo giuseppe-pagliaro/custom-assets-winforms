@@ -34,10 +34,10 @@
             // 
             // txtBoxValue
             // 
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtBoxValue.Enabled = false;
             txtBoxValue.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
             txtBoxValue.Location = new Point(109, 12);
+            txtBoxValue.Multiline = true;
             txtBoxValue.Name = "txtBoxValue";
             txtBoxValue.Size = new Size(219, 31);
             txtBoxValue.TabIndex = 4;
@@ -45,7 +45,7 @@
             // 
             // checkBoxActive
             // 
-            checkBoxActive.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            checkBoxActive.Anchor = AnchorStyles.Top;
             checkBoxActive.AutoSize = true;
             checkBoxActive.BackColor = Color.Transparent;
             checkBoxActive.Location = new Point(312, 12);
@@ -63,6 +63,7 @@
             Controls.Add(txtBoxValue);
             Name = "TextFieldEditor";
             Size = new Size(341, 52);
+            Resize += TextFieldEditor_Resize;
             Controls.SetChildIndex(txtName, 0);
             Controls.SetChildIndex(txtSeparator, 0);
             Controls.SetChildIndex(txtBoxValue, 0);

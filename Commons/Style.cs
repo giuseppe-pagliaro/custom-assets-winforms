@@ -138,6 +138,46 @@
             }
         }
 
+        public static void Apply(TabPage tabPage, Style style, BgType bgType, FontStyle titleFontStyle)
+        {
+            if (bgType == BgType.Primary)
+            {
+                tabPage.BackColor = style.PrimaryBackColor;
+            }
+            else if (bgType == BgType.Secondary)
+            {
+                tabPage.BackColor = style.SecondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                tabPage.BackColor = Color.Transparent;
+            }
+
+            tabPage.ForeColor = style.FontColor;
+            tabPage.Font = new Font(style.FontType, tabPage.Font.SizeInPoints);
+
+            if (tabPage.Font.Style != titleFontStyle)
+            {
+                tabPage.Font = new Font(tabPage.Font, titleFontStyle);
+            }
+        }
+
+        public static void Apply(TabControl tabControl, Style style, BgType bgType)
+        {
+            if (bgType == BgType.Primary)
+            {
+                tabControl.BackColor = style.PrimaryBackColor;
+            }
+            else if (bgType == BgType.Secondary)
+            {
+                tabControl.BackColor = style.SecondaryBackColor;
+            }
+            else if (bgType == BgType.Transparent)
+            {
+                tabControl.BackColor = Color.Transparent;
+            }
+        }
+
         public static void Apply(Label label, Style style, FontStyle fontStyle)
         {
             label.ForeColor = style.FontColor;
@@ -171,6 +211,13 @@
             textBox.ForeColor = style.FontColor;
             textBox.Font = new Font(style.FontType, textBox.Font.SizeInPoints);
             textBox.BackColor = style.SecondaryBackColor;
+        }
+
+        public static void Apply(ComboBox comboBox, Style style)
+        {
+            comboBox.ForeColor = style.FontColor;
+            comboBox.Font = new Font(style.FontType, comboBox.Font.SizeInPoints);
+            comboBox.BackColor = style.SecondaryBackColor;
         }
 
         public static void Apply(Button button, Style style)

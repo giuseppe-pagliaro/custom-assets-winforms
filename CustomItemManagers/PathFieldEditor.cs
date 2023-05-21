@@ -34,20 +34,10 @@ namespace CustomItemManagers
             get { return checkBoxActive.Enabled; }
             set
             {
-                if (checkBoxActive.Enabled == value)
+                if (checkBoxActive.Enabled != value)
                 {
-                    return;
-                }
-
-                if (value)
-                {
-                    checkBoxActive.Enabled = true;
-                    checkBoxActive.Visible = true;
-                }
-                else
-                {
-                    checkBoxActive.Enabled = false;
-                    checkBoxActive.Visible = false;
+                    checkBoxActive.Enabled = value;
+                    checkBoxActive.Visible = value;
                 }
             }
         }
@@ -61,6 +51,12 @@ namespace CustomItemManagers
         public String Value
         {
             get { return txtBoxValue.Text; }
+        }
+
+        public String PlaceholderText
+        {
+            get { return txtBoxValue.PlaceholderText; }
+            set { txtBoxValue.PlaceholderText = value; }
         }
 
         public bool Mandatory { get; set; }
@@ -84,7 +80,7 @@ namespace CustomItemManagers
             txtBoxValue.Anchor = AnchorStyles.None;
             txtBoxValue.Location = new Point(txtBoxValue.Location.X + WidthDiff, txtBoxValue.Location.Y);
             txtBoxValue.Width -= WidthDiff;
-            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtBoxValue.Anchor = AnchorStyles.Top | AnchorStyles.Left;
         }
 
         protected override void ApplyStyle()
@@ -92,6 +88,7 @@ namespace CustomItemManagers
             base.ApplyStyle();
 
             Style.Apply(txtBoxValue, Style);
+            Style.Apply(checkBoxActive, Style, BgType.Transparent);
             Style.Apply(buttonBrowse, Style);
 
             if (!checkBoxActive.Checked)
@@ -156,6 +153,19 @@ namespace CustomItemManagers
                 openFileDialog.ShowDialog();
                 txtBoxValue.Text = openFileDialog.FileName;
             }
+        }
+
+        private void PathFieldEditor_Resize(object sender, EventArgs e)
+        {
+            int x = this.Width - txtName.Location.X - buttonBrowse.Width;
+            buttonBrowse.Location = new Point(x, buttonBrowse.Location.Y);
+
+            int offset = (int)Math.Round(txtName.Location.X * 1.5, 0);
+            txtBoxValue.Width = this.Width - offset - buttonBrowse.Width - txtBoxValue.Location.X;
+
+            offset = (int)Math.Round(txtName.Location.X * 1.5, 0) - 2;
+            x = this.Width - offset - buttonBrowse.Width - checkBoxActive.Width;
+            checkBoxActive.Location = new Point(x, checkBoxActive.Location.Y);
         }
 
         #endregion
