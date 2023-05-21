@@ -131,6 +131,7 @@ namespace CustomItemManagers
         private void PhoneFieldEditor_Resize(object sender, EventArgs e)
         {
             txtBoxValue.Width = this.Width - txtName.Location.X - txtBoxValue.Location.X;
+            txtBoxValue.Height = comboIntPrefix.Height;
 
             int x = this.Width - txtName.Location.X - checkBoxActive.Width + 2;
             checkBoxActive.Location = new Point(x, checkBoxActive.Location.Y);
