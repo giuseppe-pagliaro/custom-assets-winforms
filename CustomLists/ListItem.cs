@@ -19,8 +19,6 @@ namespace CustomLists
 
         private Type? viewerType;
         private Type? editorType;
-        private FieldsForm? viewer;
-        private FieldsForm? editor;
 
         private Style style;
 
@@ -98,15 +96,7 @@ namespace CustomLists
                 style = value;
                 ApplyStyle();
 
-                if (viewer is not null)
-                {
-                    viewer.Style = style;
-                }
-
-                if (editor is not null)
-                {
-                    editor.Style = style;
-                }
+                // TODO change the style of the FieldsForm
             }
         }
 
@@ -131,38 +121,15 @@ namespace CustomLists
             Style.Apply(buttonEdit, style);
         }
 
-        protected static FieldsForm CreateInstance(Type type)
-        {
-            object? obj = Activator.CreateInstance(type);
-
-            if (obj is null)
-            {
-                return new FieldsForm();
-            }
-
-            return (FieldsForm)obj;
-        }
-
         #region Event Consumers
 
         protected void ListItem_Click(object? sender, EventArgs e)
         {
-            if (viewerType is null)
-            {
-                return;
-            }
+            noFocusObj.Focus();
 
-            if (viewer is null)
+            if (viewerType is not null)
             {
-                viewer = CreateInstance(viewerType);
-                viewer.FormClosed += viewer_FormClosed;
-                viewer.Style = style;
-                viewer.ItemDatas = ItemDatas;
-                viewer.Show();
-            }
-            else
-            {
-                viewer.BringToFront();
+                FieldsFormManager.Instance.RequestEntity(ItemDatas, viewerType, style);
             }
         }
 
@@ -170,33 +137,10 @@ namespace CustomLists
         {
             noFocusObj.Focus();
 
-            if (editorType is null)
+            if (editorType is not null)
             {
-                return;
+                FieldsFormManager.Instance.RequestEntity(ItemDatas, editorType, style);
             }
-
-            if (editor is null)
-            {
-                editor = CreateInstance(editorType);
-                editor.FormClosed += editor_FormClosed;
-                editor.Style = style;
-                editor.ItemDatas = ItemDatas;
-                editor.Show();
-            }
-            else
-            {
-                editor.BringToFront();
-            }
-        }
-
-        protected void viewer_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            viewer = null;
-        }
-
-        protected void editor_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            editor = null;
         }
 
         #endregion

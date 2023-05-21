@@ -63,5 +63,37 @@ namespace CustomItemManagers
         {
             Style.Apply(this, style, BgType.Primary);
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null)
+            {
+                return false;
+            }
+
+            if (this == obj)
+            {
+                return true;
+            }
+
+            if (obj.GetType().Equals(GetType()))
+            {
+                return false;
+            }
+
+            FieldsForm other = (FieldsForm)obj;
+
+            return other.ItemDatas.Equals(ItemDatas);
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31, result = 1;
+
+            result = prime * result + GetType().GetHashCode();
+            result = prime * result + ItemDatas.GetHashCode();
+
+            return result;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Commons;
+using CustomLists;
 using CustomSearchBars;
 
 namespace Example
@@ -41,6 +42,8 @@ namespace Example
             customSearchBar.Style = style;
             Style.Apply(textBoxResult, style);
             customList.Style = style;
+
+            FieldsFormManager.Instance.ApplyStyle(style);
         }
 
         #region Event Consumers
