@@ -37,18 +37,19 @@
             txtID.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
             txtID.Location = new Point(40, 40);
             txtID.Name = "txtID";
-            txtID.Size = new Size(0, 38);
+            txtID.Size = new Size(0, 51);
             txtID.TabIndex = 0;
             // 
-            // ItemViewer
+            // FieldsForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(282, 37);
             Controls.Add(txtID);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "ItemViewer";
+            MaximizeBox = false;
+            Name = "FieldsForm";
             Text = "Object #99999";
             ResumeLayout(false);
             PerformLayout();

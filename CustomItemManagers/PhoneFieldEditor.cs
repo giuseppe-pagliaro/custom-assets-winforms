@@ -7,7 +7,11 @@ namespace CustomItemManagers
         public PhoneFieldEditor()
         {
             InitializeComponent();
+
+            defaultIntPrefixIndex = 0;
         }
+
+        private ushort defaultIntPrefixIndex;
 
         #region Properties
 
@@ -41,10 +45,22 @@ namespace CustomItemManagers
             set { txtBoxValue.PlaceholderText = value; }
         }
 
-        public String DefaultIntPrefix
+        public ushort DefaultIntPrefixIndex
         {
-            get { return ""; /* TODO */ }
-            set { /* TODO */ }
+            get { return defaultIntPrefixIndex; }
+            set
+            {
+                if (value >= comboIntPrefix.Items.Count)
+                {
+                    defaultIntPrefixIndex = 0;
+                    comboIntPrefix.SelectedIndex = defaultIntPrefixIndex;
+                }
+                else
+                {
+                    defaultIntPrefixIndex = value;
+                    comboIntPrefix.SelectedIndex = defaultIntPrefixIndex;
+                }
+            }
         }
 
         public bool Mandatory { get; set; }

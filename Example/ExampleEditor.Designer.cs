@@ -180,7 +180,7 @@
             // 
             fieldPhone.Active = true;
             fieldPhone.BackColor = SystemColors.ControlDark;
-            fieldPhone.DefaultIntPrefix = "";
+            fieldPhone.DefaultIntPrefixIndex = (ushort)104;
             fieldPhone.FieldName = "Phone";
             fieldPhone.Location = new Point(18, 550);
             fieldPhone.Mandatory = false;
