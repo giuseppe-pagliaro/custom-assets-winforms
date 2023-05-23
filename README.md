@@ -104,6 +104,7 @@ Simply create a new form which extends `CustomItemManagers::FieldsForm` and then
 2. `CustomItemManagers::CopyableTextField`
 3. `CustomItemManagers::TextFieldEditor`
 4. `CustomItemManagers::PathFieldEditor`
+5. `CustomItemManagers::PhoneFieldEditor`
 
 The **TextFieldEditor** has a property called `CustomItemManagers::TextFieldEditor.FilterType { get; set; }`. By changing it, you can control whether to accept any character (`CustomItemManagers::FilterType.None`), to only accept numbers (`CustomItemManagers::FilterType.NumbersOnly` or `CustomItemManagers::FilterType.DecimalNumbersOnly`) or a date (`CustomItemManagers::FilterType.Date`). There is also a property for the **character limit** (which has no effect if the date filter is set).
 
