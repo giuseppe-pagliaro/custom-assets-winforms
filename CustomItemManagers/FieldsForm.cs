@@ -76,14 +76,14 @@ namespace CustomItemManagers
                 return true;
             }
 
-            if (obj.GetType().Equals(GetType()))
+            if (!obj.GetType().IsSubclassOf(typeof(FieldsForm)))
             {
                 return false;
             }
 
             FieldsForm other = (FieldsForm)obj;
 
-            return other.ItemDatas.Equals(ItemDatas);
+            return other.ItemDatas.Equals(ItemDatas) && other.GetType() == GetType();
         }
 
         public override int GetHashCode()

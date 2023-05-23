@@ -95,8 +95,6 @@ namespace CustomLists
             {
                 style = value;
                 ApplyStyle();
-
-                // TODO change the style of the FieldsForm
             }
         }
 

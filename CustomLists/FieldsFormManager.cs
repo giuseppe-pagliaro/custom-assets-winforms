@@ -28,7 +28,7 @@ namespace CustomLists
             FieldsForm fieldsForm = (FieldsForm)obj;
             fieldsForm.ItemDatas = itemDatas;
 
-            FieldsForm? existentFieldsForm = entities.Find(lambda => Equals(fieldsForm));
+            FieldsForm? existentFieldsForm = entities.Find(exFieldsForm => exFieldsForm.Equals(fieldsForm));
 
             if (existentFieldsForm is not null)
             {
