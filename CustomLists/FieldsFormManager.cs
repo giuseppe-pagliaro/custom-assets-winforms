@@ -16,7 +16,7 @@ namespace CustomLists
 
         private List<FieldsForm> entities;
 
-        internal void RequestEntity(ItemDatas itemDatas, Type type, Style style)
+        public void RequestEntity(ItemDatas itemDatas, Type type, Style style)
         {
             object? obj = Activator.CreateInstance(type);
 
