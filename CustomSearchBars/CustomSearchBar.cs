@@ -1,5 +1,7 @@
 ﻿using Commons;
+using CustomLists;
 using RestClient;
+using System.Net;
 
 namespace CustomSearchBars
 {
@@ -10,12 +12,14 @@ namespace CustomSearchBars
             InitializeComponent();
 
             style = new();
-            request = new();
             result = "";
+            objectType = typeof(ItemDatas);
         }
 
         private Style style;
-        private Request request;
+        //private Object? endpoint;
+        private dynamic endpoint;
+        private Type objectType;
         private String result;
 
         #region Properties
@@ -45,16 +49,32 @@ namespace CustomSearchBars
             }
         }
 
-        public Request Request
+        public void SetEndpoint<T>(CustomEndpoint<T> endpoint) where T : ItemDatas
         {
-            get { return request; }
-            set { request = value; }
+            this.endpoint = endpoint;
+            objectType = typeof(T);
+        }
+
+        public Object? GetEndpoint()
+        {
+            return endpoint;
         }
 
         #endregion
 
         private void MakeSearch()
         {
+            if (endpoint is null)
+            {
+                return;
+            }
+
+            Type endpointType = typeof(CustomEndpoint<>).MakeGenericType(objectType);
+            if (castEndpoint == null)
+            {
+                return;
+            }
+            castEndpoint.As<CustomEndpoint<>>
             result = RestClient.HttpClient.MakeRequest(request,
                 new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
         }
