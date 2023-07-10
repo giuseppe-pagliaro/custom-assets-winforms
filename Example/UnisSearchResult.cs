@@ -1,4 +1,5 @@
 ﻿using CustomLists;
+using Newtonsoft.Json;
 
 namespace Example
 {
@@ -6,22 +7,31 @@ namespace Example
     {
         public UnisSearchResult() : base()
         {
-            Web_Pages = Array.Empty<String>();
+            WebPages = Array.Empty<String>();
             Domains = Array.Empty<String>();
             Country = String.Empty;
             Name = String.Empty;
-            Alpha_Two_Code = String.Empty;
+            AlphaTwoCode = String.Empty;
         }
 
-        public String[] Web_Pages { get; set; }
+        [JsonProperty(PropertyName = "web_pages")]
+        public String[] WebPages { get; set; }
+
+        [JsonProperty(PropertyName = "domains")]
         public String[] Domains { get; set; }
+
+        [JsonProperty(PropertyName = "country")]
         public String Country { get; set; }
+
+        [JsonProperty(PropertyName = "name")]
         public String Name { get; set; }
-        public String Alpha_Two_Code { get; set; }
+
+        [JsonProperty(PropertyName = "alpha_two_code")]
+        public String AlphaTwoCode { get; set; }
 
         public override String ToString()
         {
-            return $"\"{Name}\" in {Country} ({Alpha_Two_Code}). Pages: {string.Join(",", Web_Pages)}. Domains: {string.Join(",", Domains)}.";
+            return $"\"{Name}\" in {Country} ({AlphaTwoCode}). Pages: {string.Join(",", WebPages)}. Domains: {string.Join(",", Domains)}.";
         }
     }
 }

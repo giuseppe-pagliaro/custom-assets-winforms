@@ -65,7 +65,7 @@ namespace RestClient
                 return jsonTestResult[0];
             }
 
-            String jsonNewObj = JsonConvert.SerializeObject(newObj);
+            String jsonNewObj = JsonConvert.SerializeObject(newObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PostRequestContractResolver() });
             StringContent payload = new(jsonNewObj, System.Text.Encoding.UTF8, "application/json");
             var result = client.PostAsync(url, payload).Result;
             lastStatusCode = result.StatusCode;
@@ -79,7 +79,7 @@ namespace RestClient
             return desResult;
         }
 
-        public T Put(T newObj)
+        public T Put(T modObj)
         {
             if (mode == EndpointMode.Test)
             {
@@ -87,7 +87,18 @@ namespace RestClient
                 return jsonTestResult[0];
             }
 
-            return Activator.CreateInstance<T>(); // TODO
+            String jsonModObj = JsonConvert.SerializeObject(modObj);
+            StringContent payload = new(jsonModObj, System.Text.Encoding.UTF8, "application/json");
+            var result = client.PutAsync(url, payload).Result;
+            lastStatusCode = result.StatusCode;
+            result.EnsureSuccessStatusCode();
+            T? desResult = JsonConvert.DeserializeObject<T>(result.Content.ReadAsStringAsync().Result);
+
+            if (desResult is null)
+            {
+                return Activator.CreateInstance<T>();
+            }
+            return desResult;
         }
 
         public T Patch()
