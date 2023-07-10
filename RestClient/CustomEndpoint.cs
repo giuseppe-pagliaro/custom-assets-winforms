@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using CustomLists;
+using Newtonsoft.Json;
 using System.Net;
-using CustomLists;
 
 namespace RestClient
 {
@@ -13,8 +13,7 @@ namespace RestClient
             mode = EndpointMode.Live;
         }
 
-        private static readonly System.Net.Http.HttpClient client = new(
-            new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(1)});
+        private static readonly HttpClient client = new(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(1) });
 
         private String url;
         private T[] jsonTestResult;
@@ -41,7 +40,7 @@ namespace RestClient
             }
 
             String formattedArgs = "?" + args[0].GetFormatted();
-            for (int i = 1; i < formattedArgs.Length; i++)
+            for (int i = 1; i < args.Length; i++)
             {
                 formattedArgs += "&" + args[i].GetFormatted();
             }
@@ -111,7 +110,7 @@ namespace RestClient
             else
             {
                 lastStatusCode = client.DeleteAsync(url + "?id=" + id).Result.StatusCode;
-            }   
+            }
         }
     }
 

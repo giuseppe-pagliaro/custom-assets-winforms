@@ -1,7 +1,5 @@
 ﻿using Commons;
-using CustomLists;
 using RestClient;
-using System.Net;
 
 namespace CustomSearchBars
 {
@@ -12,15 +10,10 @@ namespace CustomSearchBars
             InitializeComponent();
 
             style = new();
-            result = "";
-            objectType = typeof(ItemDatas);
         }
 
         private Style style;
-        //private Object? endpoint;
-        private dynamic endpoint;
-        private Type objectType;
-        private String result;
+        private Func<String, Object[]>? searchMethod;
 
         #region Properties
 
@@ -49,39 +42,27 @@ namespace CustomSearchBars
             }
         }
 
-        public void SetEndpoint<T>(CustomEndpoint<T> endpoint) where T : ItemDatas
+        public Func<String, Object[]> SearchMethod
         {
-            this.endpoint = endpoint;
-            objectType = typeof(T);
-        }
+            get
+            {
+                if (searchMethod is null) return (query) => { return Array.Empty<Object>(); };
 
-        public Object? GetEndpoint()
-        {
-            return endpoint;
+                return new(searchMethod);
+            }
+
+            set { searchMethod = value; }
         }
 
         #endregion
 
-        private void MakeSearch()
-        {
-            if (endpoint is null)
-            {
-                return;
-            }
-
-            Type endpointType = typeof(CustomEndpoint<>).MakeGenericType(objectType);
-            if (castEndpoint == null)
-            {
-                return;
-            }
-            castEndpoint.As<CustomEndpoint<>>
-            result = RestClient.HttpClient.MakeRequest(request,
-                new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
-        }
-
         private void ThrowSearchMadeEvent()
         {
-            using (WaitForm waitForm = new(MakeSearch))
+            if (searchMethod is null) return;
+
+            Object[] result = Array.Empty<Object>();
+
+            using (WaitForm waitForm = new(() => { result = searchMethod(textBoxQuery.Text); }))
             {
                 waitForm.Style = style;
                 waitForm.ShowDialog();

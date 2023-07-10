@@ -6,24 +6,22 @@ namespace Example
     {
         public UnisSearchResult() : base()
         {
-            WebPages = Array.Empty<String>();
+            Web_Pages = Array.Empty<String>();
             Domains = Array.Empty<String>();
             Country = String.Empty;
             Name = String.Empty;
-            StateOrProvince = String.Empty;
-            AlphaTwoCode = String.Empty;
+            Alpha_Two_Code = String.Empty;
         }
 
-        public String[] WebPages { get; set; }
+        public String[] Web_Pages { get; set; }
         public String[] Domains { get; set; }
         public String Country { get; set; }
         public String Name { get; set; }
-        public String StateOrProvince { get; set; }
-        public String AlphaTwoCode { get; set; }
+        public String Alpha_Two_Code { get; set; }
 
         public override String ToString()
         {
-            return $"\"{Name}\" in {Country} ({AlphaTwoCode}), {StateOrProvince}. Pages: {WebPages}, Domains: {Domains}.";
+            return $"\"{Name}\" in {Country} ({Alpha_Two_Code}). Pages: {string.Join(",", Web_Pages)}. Domains: {string.Join(",", Domains)}.";
         }
     }
 }
