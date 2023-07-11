@@ -46,7 +46,7 @@ namespace CustomSearchBars
         {
             get
             {
-                if (searchMethod is null) return (query) => { return Array.Empty<Object>(); };
+                if (searchMethod is null) return query => { return Array.Empty<Object>(); };
 
                 return new(searchMethod);
             }

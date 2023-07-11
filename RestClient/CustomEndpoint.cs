@@ -1,6 +1,7 @@
 ﻿using CustomLists;
 using Newtonsoft.Json;
 using System.Net;
+using System.Reflection;
 
 namespace RestClient
 {
@@ -11,6 +12,7 @@ namespace RestClient
             this.url = url;
             this.jsonTestResult = jsonTestResult;
             mode = EndpointMode.Live;
+            lastStatusCode = HttpStatusCode.OK;
         }
 
         private static readonly HttpClient client = new(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(1) });
@@ -45,7 +47,7 @@ namespace RestClient
                 formattedArgs += "&" + args[i].GetFormatted();
             }
 
-            var result = client.GetAsync(url + formattedArgs).Result;
+            HttpResponseMessage result = client.GetAsync(url + formattedArgs).Result;
             lastStatusCode = result.StatusCode;
             result.EnsureSuccessStatusCode();
             T[]? desResult = JsonConvert.DeserializeObject<T[]>(result.Content.ReadAsStringAsync().Result);
@@ -67,7 +69,7 @@ namespace RestClient
 
             String jsonNewObj = JsonConvert.SerializeObject(newObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PostRequestContractResolver() });
             StringContent payload = new(jsonNewObj, System.Text.Encoding.UTF8, "application/json");
-            var result = client.PostAsync(url, payload).Result;
+            HttpResponseMessage result = client.PostAsync(url, payload).Result;
             lastStatusCode = result.StatusCode;
             result.EnsureSuccessStatusCode();
             T? desResult = JsonConvert.DeserializeObject<T>(result.Content.ReadAsStringAsync().Result);
@@ -89,7 +91,7 @@ namespace RestClient
 
             String jsonModObj = JsonConvert.SerializeObject(modObj);
             StringContent payload = new(jsonModObj, System.Text.Encoding.UTF8, "application/json");
-            var result = client.PutAsync(url, payload).Result;
+            HttpResponseMessage result = client.PutAsync(url, payload).Result;
             lastStatusCode = result.StatusCode;
             result.EnsureSuccessStatusCode();
             T? desResult = JsonConvert.DeserializeObject<T>(result.Content.ReadAsStringAsync().Result);
@@ -101,7 +103,7 @@ namespace RestClient
             return desResult;
         }
 
-        public T Patch()
+        public T Patch(T oldObj, T modObj, IdPassingMode idPassingMode)
         {
             if (mode == EndpointMode.Test)
             {
@@ -109,10 +111,64 @@ namespace RestClient
                 return jsonTestResult[0];
             }
 
-            return Activator.CreateInstance<T>(); // TODO
+            bool allDifferent = true;
+            PropertyInfo[] properties = oldObj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => p.Name != "Id").ToArray();
+            bool[] includeProperties = new bool[properties.Length];
+            int i = 0;
+            foreach (PropertyInfo property in properties)
+            {
+                object? oldPropValue = property.GetValue(oldObj);
+                if (oldPropValue is not null)
+                {
+                    includeProperties[i] = !oldPropValue.Equals(property.GetValue(modObj));
+                    if (!includeProperties[i])
+                    {
+                        allDifferent = false;
+                    }
+                }
+                else
+                {
+                    if (property.GetValue(modObj) is null)
+                    {
+                        includeProperties[i] = false;
+                        allDifferent = false;
+                    }
+                    else
+                    {
+                        includeProperties[i] = true;
+                    }
+                }
+
+                i++;
+            }
+
+            if (allDifferent) return Put(modObj);
+
+            String jsonModObj = JsonConvert.SerializeObject(modObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PatchRequestContractResolver(includeProperties) });
+            StringContent payload = new(jsonModObj, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage result;
+            if (idPassingMode == IdPassingMode.Parameter)
+            {
+                result = client.PatchAsync(url + "?id=" + oldObj.Id, payload).Result;
+            }
+            else
+            {
+                result = client.PatchAsync(url + "/" + oldObj.Id, payload).Result;
+            }
+
+            lastStatusCode = result.StatusCode;
+            result.EnsureSuccessStatusCode();
+            T? desResult = JsonConvert.DeserializeObject<T>(result.Content.ReadAsStringAsync().Result);
+
+            if (desResult is null)
+            {
+                return Activator.CreateInstance<T>();
+            }
+            return desResult;
         }
 
-        public void Delete(int id)
+        public void Delete(int id, IdPassingMode idPassingMode)
         {
             if (mode == EndpointMode.Test)
             {
@@ -120,7 +176,14 @@ namespace RestClient
             }
             else
             {
-                lastStatusCode = client.DeleteAsync(url + "?id=" + id).Result.StatusCode;
+                if (idPassingMode == IdPassingMode.Parameter)
+                {
+                    lastStatusCode = client.DeleteAsync(url + "?id=" + id).Result.StatusCode;
+                }
+                else
+                {
+                    lastStatusCode = client.DeleteAsync(url + "/" + id).Result.StatusCode;
+                }
             }
         }
     }
@@ -129,5 +192,11 @@ namespace RestClient
     {
         Live,
         Test
+    }
+
+    public enum IdPassingMode
+    {
+        Parameter,
+        Path
     }
 }

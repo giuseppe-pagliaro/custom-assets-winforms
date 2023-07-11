@@ -8,7 +8,7 @@ namespace RestClient
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             IList<JsonProperty> properties = base.CreateProperties(type, memberSerialization);
-            return properties.Where(p => p.PropertyName != "Id" || p.PropertyName != "id").ToList();
+            return properties.Where(p => p.PropertyName != "Id").ToList();
         }
     }
 }
