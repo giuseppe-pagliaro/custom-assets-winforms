@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
+            CustomAssetsCommons.ItemDatas itemDatas1 = new();
             txtValue = new Label();
             SuspendLayout();
             // 

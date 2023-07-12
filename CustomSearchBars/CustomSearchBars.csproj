@@ -10,15 +10,24 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>custom-assets-searchbars</PackageId>
     <Title>Custom Assets Searchbars</Title>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>Giuseppe Pagliaro</Authors>
     <Description>Adds a searchbar that uses the http client implemented in the Custom Assets framework.</Description>
     <Copyright>GPL-3.0</Copyright>
     <RepositoryUrl>https://github.com/giuseppe-pagliaro/custom-assets-for-winforms</RepositoryUrl>
     <PackageTags>custom assets; client; tools; controls; database; lists; custom; toolbar; rest client; searchbar</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomAssetsCommons\CustomAssetsCommons.csproj" />
     <ProjectReference Include="..\RestClient\RestClient.csproj" />
   </ItemGroup>
 

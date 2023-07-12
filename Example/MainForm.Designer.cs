@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using CustomAssetsCommons;
+
+namespace Example
 {
     partial class MainForm
     {
@@ -28,8 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Commons.Style style5 = new Commons.Style();
-            Commons.Style style6 = new Commons.Style();
+            Style style5 = new();
+            Style style6 = new();
             customList = new CustomLists.CustomList();
             customSearchBar = new CustomSearchBars.CustomSearchBar();
             groupBoxStyles = new GroupBox();

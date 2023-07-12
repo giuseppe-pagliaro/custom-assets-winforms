@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Commons.Style style1 = new Commons.Style();
-            CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
+            CustomAssetsCommons.Style style1 = new();
+            CustomAssetsCommons.ItemDatas itemDatas1 = new();
             fieldValue = new CustomItemManagers.CopyableTextField();
             SuspendLayout();
             // 

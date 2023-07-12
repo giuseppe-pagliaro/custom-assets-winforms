@@ -1,4 +1,4 @@
-﻿namespace Commons
+﻿namespace CustomAssetsCommons
 {
     public class Style
     {

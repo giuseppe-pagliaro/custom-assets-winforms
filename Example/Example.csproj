@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CustomAssetsCommons\CustomAssetsCommons.csproj" />
     <ProjectReference Include="..\CustomItemManagers\CustomItemManagers.csproj" />
     <ProjectReference Include="..\CustomLists\CustomLists.csproj" />
     <ProjectReference Include="..\CustomSearchBars\CustomSearchBars.csproj" />

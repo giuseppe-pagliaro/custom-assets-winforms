@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using CustomAssetsCommons;
+
+namespace Example
 {
     partial class ExampleEditor
     {
@@ -28,13 +30,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Commons.Style style1 = new Commons.Style();
-            Commons.Style style2 = new Commons.Style();
-            Commons.Style style3 = new Commons.Style();
-            Commons.Style style4 = new Commons.Style();
-            Commons.Style style5 = new Commons.Style();
-            Commons.Style style6 = new Commons.Style();
-            CustomLists.ItemDatas itemDatas1 = new CustomLists.ItemDatas();
+            Style style1 = new();
+            Style style2 = new();
+            Style style3 = new();
+            Style style4 = new();
+            Style style5 = new();
+            Style style6 = new();
+            ItemDatas itemDatas1 = new();
             fieldPath = new CustomItemManagers.PathFieldEditor();
             fieldNormal = new CustomItemManagers.TextFieldEditor();
             noFocusObj = new Label();
