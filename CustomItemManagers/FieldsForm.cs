@@ -1,5 +1,4 @@
-﻿using Commons;
-using CustomLists;
+﻿using CustomAssetsCommons;
 
 namespace CustomItemManagers
 {

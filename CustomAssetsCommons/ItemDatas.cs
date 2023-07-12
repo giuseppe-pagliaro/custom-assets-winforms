@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace CustomLists
+namespace CustomAssetsCommons
 {
     public class ItemDatas : ICloneable
     {

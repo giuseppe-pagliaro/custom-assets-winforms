@@ -1,4 +1,4 @@
-﻿using Commons;
+﻿using CustomAssetsCommons;
 using CustomLists;
 using CustomSearchBars;
 
@@ -10,7 +10,7 @@ namespace Example
         {
             InitializeComponent();
 
-            customSearchBar.Request = Requests.SEARCH_UNIS_BY_COUNTRY;
+            customSearchBar.SearchMethod = Endpoints.SearchUnis;
             customSearchBar.SearchMade += customSearchBar_SearchMade;
             customSearchBar.QueryPlaceholderText = "Type Your Country Here";
             customList.Viewer = typeof(ExampleViewer);
@@ -79,7 +79,21 @@ namespace Example
 
         private void customSearchBar_SearchMade(object? sender, SearchMadeEventArgs e)
         {
-            textBoxResult.Text = e.Result;
+            UnisSearchResult[] searchResults = (UnisSearchResult[])e.Result;
+
+            foreach (UnisSearchResult searchResult in searchResults)
+            {
+                if (searchResult != null)
+                {
+                    textBoxResult.Text += searchResult.ToString();
+                }
+                else
+                {
+                    textBoxResult.Text += "[Null Result]";
+                }
+
+                textBoxResult.Text += "  ";
+            }
         }
 
         #endregion

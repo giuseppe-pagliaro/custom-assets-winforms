@@ -1,4 +1,4 @@
-﻿using Commons;
+﻿using CustomAssetsCommons;
 using CustomItemManagers;
 
 namespace Example

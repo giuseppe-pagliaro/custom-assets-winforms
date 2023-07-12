@@ -1,4 +1,4 @@
-﻿using Commons;
+﻿using CustomAssetsCommons;
 using RestClient;
 
 namespace CustomSearchBars
@@ -10,13 +10,10 @@ namespace CustomSearchBars
             InitializeComponent();
 
             style = new();
-            request = new();
-            result = "";
         }
 
         private Style style;
-        private Request request;
-        private String result;
+        private Func<String, Object[]>? searchMethod;
 
         #region Properties
 
@@ -45,23 +42,27 @@ namespace CustomSearchBars
             }
         }
 
-        public Request Request
+        public Func<String, Object[]> SearchMethod
         {
-            get { return request; }
-            set { request = value; }
+            get
+            {
+                if (searchMethod is null) return query => { return Array.Empty<Object>(); };
+
+                return new(searchMethod);
+            }
+
+            set { searchMethod = value; }
         }
 
         #endregion
 
-        private void MakeSearch()
-        {
-            result = RestClient.HttpClient.MakeRequest(request,
-                new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
-        }
-
         private void ThrowSearchMadeEvent()
         {
-            using (WaitForm waitForm = new(MakeSearch))
+            if (searchMethod is null) return;
+
+            Object[] result = Array.Empty<Object>();
+
+            using (WaitForm waitForm = new(() => { result = searchMethod(textBoxQuery.Text); }))
             {
                 waitForm.Style = style;
                 waitForm.ShowDialog();

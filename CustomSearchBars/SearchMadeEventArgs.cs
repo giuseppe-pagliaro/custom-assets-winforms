@@ -4,9 +4,9 @@
     {
         public SearchMadeEventArgs() : base()
         {
-            Result = "";
+            Result = Array.Empty<Object>();
         }
 
-        public String Result { get; set; }
+        public Object[] Result { get; set; }
     }
 }

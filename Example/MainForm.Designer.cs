@@ -1,4 +1,6 @@
-﻿namespace Example
+﻿using CustomAssetsCommons;
+
+namespace Example
 {
     partial class MainForm
     {
@@ -28,9 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Commons.Style style5 = new Commons.Style();
-            RestClient.Request request3 = new RestClient.Request();
-            Commons.Style style6 = new Commons.Style();
+            Style style5 = new();
+            Style style6 = new();
             customList = new CustomLists.CustomList();
             customSearchBar = new CustomSearchBars.CustomSearchBar();
             groupBoxStyles = new GroupBox();
@@ -63,7 +64,6 @@
             customSearchBar.BackColor = SystemColors.Control;
             customSearchBar.Location = new Point(288, 42);
             customSearchBar.Name = "customSearchBar";
-            customSearchBar.Request = request3;
             customSearchBar.Size = new Size(500, 43);
             customSearchBar.Style = style6;
             customSearchBar.TabIndex = 1;
