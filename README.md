@@ -62,37 +62,52 @@ This way, changing the appearance of a control is as easy as typing somethis lik
 (Or `control.Style = Styles.LIGHT_MODE` if you're a maniac!)
 
 ## Rest Client
-This framework also provides a nicer way to make **http** or **https** requests. First of all, you'll need to create an instance of the `RestClient::Request` class.
+This framework also provides a nicer way to make **http** or **https** requests. First of all, you'll need to create an instance of the `RestClient::CustomEndpoint` class.
 
 ```csharp
-public static class Requests
+public static class Endpoints
     {
-        static Requests()
+        static Endpoints()
         {
-            String UNIS_BY_COUNTRY_BASE_URL = "http://universities.hipolabs.com";
+            UnisSearchResult[] SearchUnisTestResult = { new(), new() };
 
-            SEARCH_UNIS_BY_COUNTRY = new (UNIS_BY_COUNTRY_BASE_URL, "/search", new Arg[] { new("country") }, "{\"mode\": \"Test\"}");
+            SearchUnisTestResult[0].Id = 1;
+            SearchUnisTestResult[0].WebPages = new[] { "http://www.angelicum.org/" };
+            SearchUnisTestResult[0].Domains = new[] { "angelicum.org" };
+            SearchUnisTestResult[0].Country = "Italy";
+            SearchUnisTestResult[0].Name = "Pontificia Università S. Tommaso";
+            SearchUnisTestResult[0].AlphaTwoCode = "IT";
+
+            SearchUnisTestResult[1].Id = 1;
+            SearchUnisTestResult[1].WebPages = new[] { "http://www.antonianum.ofm.org/" };
+            SearchUnisTestResult[1].Domains = new[] { "antonianum.ofm.org" };
+            SearchUnisTestResult[1].Country = "Italy";
+            SearchUnisTestResult[1].Name = "Pontificio Ateneo Antonianum";
+            SearchUnisTestResult[1].AlphaTwoCode = "IT";
+
+            SEARCH_UNIS_BY_COUNTRY = new("http://universities.hipolabs.com/search", SearchUnisTestResult);
         }
 
-        public static readonly Request SEARCH_UNIS_BY_COUNTRY;
+        // Endpoints
+        public static readonly CustomEndpoint<UnisSearchResult> SEARCH_UNIS_BY_COUNTRY;
+
+        // Premade Requests
+        public static UnisSearchResult[] SearchUnis(String query)
+        {
+            return SEARCH_UNIS_BY_COUNTRY.Get(new Arg[] { new("country", query) });
+        }
     }
 ```
 
-`RestClient::Arg` is a class that allows you to define the arguments accepted by the request. If you use the constructor with **one parameter**, it means you want to create an arg with the name provided, of which the value will be specified when you actually make the request. If you use the one with **two parameters**, you are actually creating a `new Arg(String name, String value)` that is constant.
+Under **Premade Requests**, you can see an example of a GET request. `RestClient::Arg` is a class that allows you to define the arguments accepted by the request.
 
-Now, whenever you need it, simply call the MakeRequest method and access it's result by reading the Result property of the task that is returned.
-
-```csharp
-String res = RestClient.HttpClient.MakeRequest(request, new String[] { textBoxQuery.Text.Replace(" ", "+") }).Result;
-```
-
-You can also change the `RestClient::HttpClient.ClientMode` static property to toggle between **Live** and **Test** mode. When the second one is selected, instead of actually making the request, every call to the method will return the `RestClient::Request.TestResult` you've provided for that request (the last parameter in the constructor).
+You can also change the `RestClient::CustomEndpoint.Mode` static property to toggle between **Live** and **Test** mode. When the second one is selected, instead of actually making the request, every call to the method will return the **Test Result** you've provided for that request.
 
 ## SearchBar
-This control uses the **Http Requests Framework** discussed earlier to implement an extremely easy to use **search bar**. All you need to do is drag and drop it in any form, customize any of it's properties and supply it with a compatible `RestClient::Request` instance. That is, a request with **one arg** containing the search query.
+This control uses the **Http Requests Framework** discussed earlier to implement an extremely easy to use **Search Bar**. All you need to do is drag and drop it into any form, customize any of it's properties and supply it with a compatible function in `CustomSearchBars::CustomSearchBar.SearchMethod`. This is why we've created the funcion **SearchUnis** in `Example::Endpoints`, that uses the **SEARCH_UNIS_BY_COUNTRY** endpoint to make the GET request we need.
 
 ```csharp
-customSearchBar.Request = Requests.SEARCH_UNIS_BY_COUNTRY;
+customSearchBar.SearchMethod = Endpoints.SearchUnis;
 ```
 
 ## Item Managers
