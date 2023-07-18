@@ -4,28 +4,12 @@ namespace HermoItemManagers.Fields
 {
     public partial class Field : UserControl
     {
-        public Field()
+        public Field(String name = "Field", Style? style = null)
         {
             InitializeComponent();
 
-            style = new();
-            Name = "Field";
-        }
-
-        public Field(string name)
-        {
-            InitializeComponent();
-
-            style = new();
             Name = name;
-        }
-
-        public Field(string name, Style style)
-        {
-            InitializeComponent();
-
-            this.style = style;
-            Name = name;
+            this.style = style ?? Style.DEFAULT_STYLE;
         }
 
         private Style style;

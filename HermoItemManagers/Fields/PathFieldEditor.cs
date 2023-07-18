@@ -4,10 +4,11 @@ namespace HermoItemManagers.Fields
 {
     public partial class PathFieldEditor : Field
     {
-        public PathFieldEditor()
+        public PathFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
+            PlaceholderText = placeholderText;
             FileDialogMessage = "Select Folder";
             OpenDialogType = OpenDialogType.Folder;
             OpenDialogFilters = Array.Empty<OpenDialogFilter>();

@@ -4,21 +4,7 @@ namespace HermoItemManagers.Fields
 {
     public partial class TextField : Field
     {
-        public TextField() : base()
-        {
-            InitializeComponent();
-
-            Value = "(empty)";
-        }
-
-        public TextField(String name, String value) : base(name)
-        {
-            InitializeComponent();
-
-            Value = value;
-        }
-
-        public TextField(String name, String value, Style style) : base(name, style)
+        public TextField(String name = "Field", String value = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 

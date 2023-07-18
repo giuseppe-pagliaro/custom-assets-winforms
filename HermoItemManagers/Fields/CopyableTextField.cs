@@ -4,30 +4,7 @@ namespace HermoItemManagers.Fields
 {
     public partial class CopyableTextField : Field
     {
-        public CopyableTextField() : base()
-        {
-            InitializeComponent();
-
-            this.value = String.Empty;
-            Value = "(empty)";
-            CopyMessage = "Click to copy.";
-            CopiedMessage = "Copied.";
-            toolTipValue.SetToolTip(txtValue, CopyMessage);
-        }
-
-        public CopyableTextField(String name, String value) : base(name)
-        {
-            InitializeComponent();
-
-            clicked = false;
-            this.value = String.Empty;
-            this.Value = value;
-            CopyMessage = "Click to copy.";
-            CopiedMessage = "Copied.";
-            toolTipValue.SetToolTip(txtValue, CopyMessage);
-        }
-
-        public CopyableTextField(String name, String value, Style style) : base(name, style)
+        public CopyableTextField(String name = "Field", String value = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 

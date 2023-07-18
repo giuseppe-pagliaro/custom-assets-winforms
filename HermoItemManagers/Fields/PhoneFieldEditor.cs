@@ -4,10 +4,11 @@ namespace HermoItemManagers.Fields
 {
     public partial class PhoneFieldEditor : Field
     {
-        public PhoneFieldEditor()
+        public PhoneFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
+            PlaceholderText = placeholderText;
             defaultIntPrefixIndex = 0;
         }
 

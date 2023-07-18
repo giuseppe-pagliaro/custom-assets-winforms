@@ -2,7 +2,7 @@
 {
     public class Style
     {
-        public Style()
+        private Style()
         {
             primaryBackColor = SystemColors.Control;
             secondaryBackColor = SystemColors.ControlDark;
@@ -32,6 +32,11 @@
             this.buttonFlatStyle = buttonFlatStyle;
         }
 
+        static Style()
+        {
+            DEFAULT_STYLE = new();
+        }
+
         private Color primaryBackColor;
         private Color secondaryBackColor;
 
@@ -45,6 +50,8 @@
         private Color interactableFontColor;
         private Color linkColor;
         private FlatStyle buttonFlatStyle;
+
+        public static readonly Style DEFAULT_STYLE;
 
         #region Properties
 

@@ -4,36 +4,25 @@ namespace HermoRestClient
 {
     public partial class WaitForm : Form
     {
-        public WaitForm()
+        public WaitForm(Action? worker = null, Style? style = null, String loadingMessage = "Loading")
         {
             InitializeComponent();
 
-            loadingMessage = "Loading";
+            this.worker = worker;
+            this.style = style ?? Style.DEFAULT_STYLE;
+            ApplyStyle();
+
+            this.loadingMessage = loadingMessage;
             animationRunning = true;
-            worker = null;
-            style = new();
 
             CenterToParent();
         }
 
-        public WaitForm(Action worker) : this()
-        {
-            this.worker = worker;
-        }
-
-        private String loadingMessage;
-        private bool animationRunning;
-        private Action? worker;
-
+        private readonly Action? worker;
         private Style style;
 
-        #region Properties
-
-        public String LoadingMessage
-        {
-            get { return loadingMessage; }
-            set { loadingMessage = value; }
-        }
+        private readonly String loadingMessage;
+        private bool animationRunning;
 
         public Style Style
         {
@@ -41,15 +30,17 @@ namespace HermoRestClient
             set
             {
                 style = value;
-
-                Style.Apply(this, style, BgType.Primary);
-                Style.Apply(txtLoading, style, FontStyle.Bold);
+                ApplyStyle();
             }
         }
 
-        #endregion
+        protected virtual void ApplyStyle()
+        {
+            Style.Apply(this, style, BgType.Primary);
+            Style.Apply(txtLoading, style, FontStyle.Bold);
+        }
 
-        private void UpdateLoadingMessageSafely(String text)
+        protected virtual void UpdateLoadingMessageSafely(String text)
         {
             if (animationRunning == false)
             {

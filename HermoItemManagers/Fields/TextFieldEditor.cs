@@ -4,8 +4,9 @@ namespace HermoItemManagers.Fields
 {
     public partial class TextFieldEditor : Field
     {
-        public TextFieldEditor()
+        public TextFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
         {
+            PlaceholderText = placeholderText;
             charLimit = 50;
 
             InitializeComponent();

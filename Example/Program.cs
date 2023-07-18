@@ -15,8 +15,7 @@ namespace Example
             ApplicationConfiguration.Initialize();
             //Application.Run(new MainForm());
 
-            // Application.Run(ItemFormsFactory.GetFormViewer<DataExample>(new DataExample(), new NextControlLine[] { NextControlLine.NextLine }));
-            Application.Run(new ItemViewer<DataExample>(new() { Id = 0, Value = "Prova"}));
+            Application.Run(new ItemViewer(new DataExample() { Id = 0, Value = "Ciao"}));
         }
     }
 }
