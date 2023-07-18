@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Version>2.0.0</Version>
     <PackageId>hermo-commons</PackageId>
-    <Title>HermoCommons</Title>
+    <Title>Hermo Commons</Title>
     <Authors>Giuseppe Pagliaro</Authors>
     <Copyright>GPL-3.0</Copyright>
     <Description>Contains the objects used by every "HermoRestAssets" project.</Description>

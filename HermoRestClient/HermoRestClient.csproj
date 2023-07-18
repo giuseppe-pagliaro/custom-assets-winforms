@@ -7,11 +7,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>HermoRestClient</Title>
+    <Title>Hermo Rest Client</Title>
     <PackageId>hermo-rest-client</PackageId>
     <Version>2.0.0</Version>
     <Authors>Giuseppe Pagliaro</Authors>
-    <Description>Implements a REST client for the "Hermo REST Assets" framework.</Description>
+    <Description>Implements a REST client for the "Hermo REST Assets" library.</Description>
     <Copyright>GPL-3.0</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/giuseppe-pagliaro/hermo-rest-assets</RepositoryUrl>
