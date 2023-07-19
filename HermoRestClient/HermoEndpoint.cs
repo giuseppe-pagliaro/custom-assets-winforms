@@ -186,6 +186,41 @@ namespace HermoRestClient
                 }
             }
         }
+
+        public Func<T[]> GetNewItemsMethod(int itemsCount, String itemsCountParamName = "count")
+        {
+            return () => Get(new Arg[] { new(itemsCountParamName, itemsCount.ToString()) });
+        }
+
+        public Func<int, T[]> GetByIdMethod(String idParamName = "id")
+        {
+            return id => Get(new Arg[] { new(idParamName, id.ToString()) });
+        }
+
+        public Func<String, T[]> GetSearchMethod(String queryParamName = "query")
+        {
+            return query => Get(new Arg[] { new(queryParamName, query) });
+        }
+
+        public Func<T, T> GetPostMethod()
+        {
+            return newObj => Post(newObj);
+        }
+
+        public Func<T, T> GetPutMethod()
+        {
+            return modObj => Put(modObj);
+        }
+
+        public Func<T, T, T> GetPatchMethod(IdPassingMode idPassingMode)
+        {
+            return (oldObj, modObj) => Patch(oldObj, modObj, idPassingMode);
+        }
+
+        public Action<int> GetDeleteMethod(IdPassingMode idPassingMode)
+        {
+            return id => Delete(id, idPassingMode);
+        }
     }
 
     public enum EndpointMode

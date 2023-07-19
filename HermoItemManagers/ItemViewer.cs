@@ -6,7 +6,7 @@ namespace HermoItemManagers
 {
     public partial class ItemViewer : Form
     {
-        public ItemViewer(Style? style = null, String propIsNullMsg = "(Null Value)", String deleteBtnMsg = "Delete")
+        public ItemViewer(ItemDatas? item = null, Style? style = null, Action<int>? deleteMethod = null, String propIsNullMsg = "(Null Value)", String deleteBtnMsg = "Delete")
         {
             InitializeComponent();
 
@@ -14,26 +14,22 @@ namespace HermoItemManagers
             initialDelBtnLocation = buttonDelete.Location;
 
             Text = "No Item Provided";
-            item = new();
+            this.item = item ?? new();
             fields = new();
             this.style = style ?? Style.DEFAULT_STYLE;
-            ApplyStyle();
+            this.deleteMethod = deleteMethod;
 
             this.propIsNullMsg = propIsNullMsg;
             buttonDelete.Text = deleteBtnMsg;
 
-            noFocusObj.Focus();
-        }
-
-        public ItemViewer(ItemDatas item, Style? style = null, String propIsNullMsg = "(Null Value)", String deleteBtnMsg = "Delete") : this(style, propIsNullMsg, deleteBtnMsg)
-        {
-            this.item = item;
             Populate();
+            ApplyStyle();
         }
 
         protected ItemDatas item;
         protected List<Field> fields;
         private Style style;
+        private Action<int>? deleteMethod;
 
         protected readonly String propIsNullMsg;
         private readonly Size initialFormSize;
@@ -118,7 +114,11 @@ namespace HermoItemManagers
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            // TODO
+            if (deleteMethod is null) return;
+
+            deleteMethod(item.Id);
+
+            // TODO remove from memory. (chacher)
         }
     }
 }

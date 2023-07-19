@@ -1,6 +1,6 @@
 ﻿namespace HermoItemManagers
 {
-    partial class ItemViewer
+    partial class ItemCreatorOrEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,49 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonDelete = new Button();
+            buttonEditOrCreate = new Button();
             noFocusObj = new Label();
             SuspendLayout();
             // 
-            // buttonDelete
+            // buttonEditOrCreate
             // 
-            buttonDelete.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonDelete.Location = new Point(12, 12);
-            buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(752, 65);
-            buttonDelete.TabIndex = 1;
-            buttonDelete.Text = "Delete";
-            buttonDelete.UseVisualStyleBackColor = true;
-            buttonDelete.Click += buttonDelete_Click;
+            buttonEditOrCreate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonEditOrCreate.Location = new Point(12, 12);
+            buttonEditOrCreate.Name = "buttonEditOrCreate";
+            buttonEditOrCreate.Size = new Size(752, 65);
+            buttonEditOrCreate.TabIndex = 1;
+            buttonEditOrCreate.Text = "Edit";
+            buttonEditOrCreate.UseVisualStyleBackColor = true;
             // 
             // noFocusObj
             // 
             noFocusObj.AutoSize = true;
             noFocusObj.BackColor = Color.Transparent;
             noFocusObj.Font = new Font("Segoe UI", 8.142858F, FontStyle.Regular, GraphicsUnit.Point);
-            noFocusObj.Location = new Point(770, 50);
+            noFocusObj.Location = new Point(770, 47);
             noFocusObj.Name = "noFocusObj";
             noFocusObj.Size = new Size(0, 28);
             noFocusObj.TabIndex = 0;
             // 
-            // ItemViewer
+            // ItemCreatorOrEditor
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(776, 89);
             Controls.Add(noFocusObj);
-            Controls.Add(buttonDelete);
+            Controls.Add(buttonEditOrCreate);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
-            Name = "ItemViewer";
-            Text = "ItemViewer";
+            Name = "ItemCreatorOrEditor";
+            Text = "ItemEditor";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        protected Button buttonDelete;
-        protected Label noFocusObj;
+        protected Button buttonEditOrCreate;
+        private Label noFocusObj;
     }
 }
