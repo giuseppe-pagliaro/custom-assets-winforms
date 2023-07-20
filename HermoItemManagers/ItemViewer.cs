@@ -16,12 +16,6 @@ namespace HermoItemManagers
 
         private Action<int>? deleteMethod;
 
-        public Action<int>? DeleteMethod
-        {
-            get { return deleteMethod; }
-            set { deleteMethod = value; }
-        }
-
         protected override void Populate()
         {
             base.Populate();
@@ -38,7 +32,6 @@ namespace HermoItemManagers
                 }
 
                 fields[fields.Count - 1].Width = buttonAction.Width;
-
                 Height += buttonAction.Location.Y * (fields.Count) + fields[fields.Count - 1].Height * (fields.Count);
             }
 

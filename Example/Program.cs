@@ -15,7 +15,8 @@ namespace Example
             ApplicationConfiguration.Initialize();
             //Application.Run(new MainForm());
 
-            Application.Run(new ItemViewer(new DataExample() { Id = 0, Value = "Ciao"}));
+            //Application.Run(new ItemViewer(new DataExample() { Id = 0, Value = "Ciao"}));
+            Application.Run(new ItemEditor(new DataExample() { Id = 0, Value = "Ciao" }));
         }
     }
 }

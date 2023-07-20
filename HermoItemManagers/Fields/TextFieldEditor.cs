@@ -6,10 +6,10 @@ namespace HermoItemManagers.Fields
     {
         public TextFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
         {
+            InitializeComponent();
+
             PlaceholderText = placeholderText;
             charLimit = 50;
-
-            InitializeComponent();
         }
 
         private int charLimit;
