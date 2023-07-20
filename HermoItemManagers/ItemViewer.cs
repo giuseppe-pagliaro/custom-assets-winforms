@@ -4,76 +4,27 @@ using System.Reflection;
 
 namespace HermoItemManagers
 {
-    public partial class ItemViewer : Form
+    public partial class ItemViewer : FieldsForm
     {
-        public ItemViewer(ItemDatas? item = null, Style? style = null, Action<int>? deleteMethod = null, String propIsNullMsg = "(Null Value)", String deleteBtnMsg = "Delete")
+        public ItemViewer(ItemDatas? item = null, Action<int>? deleteMethod = null, Style? style = null, String propIsNullMsg = "(Null Value)", String actionBtnMsg = "Delete")
+            : base(item, style, propIsNullMsg, actionBtnMsg)
         {
             InitializeComponent();
 
-            initialFormSize = Size;
-            initialDelBtnLocation = buttonDelete.Location;
-
-            Text = "No Item Provided";
-            this.item = item ?? new();
-            fields = new();
-            this.style = style ?? Style.DEFAULT_STYLE;
             this.deleteMethod = deleteMethod;
-
-            this.propIsNullMsg = propIsNullMsg;
-            buttonDelete.Text = deleteBtnMsg;
-
-            Populate();
-            ApplyStyle();
         }
 
-        protected ItemDatas item;
-        protected List<Field> fields;
-        private Style style;
         private Action<int>? deleteMethod;
 
-        protected readonly String propIsNullMsg;
-        private readonly Size initialFormSize;
-        private readonly Point initialDelBtnLocation;
-
-        public ItemDatas Item
+        public Action<int>? DeleteMethod
         {
-            get
-            {
-                return item.Clone();
-            }
-
-            set
-            {
-                item = value;
-                ClearForm();
-                Populate();
-            }
+            get { return deleteMethod; }
+            set { deleteMethod = value; }
         }
 
-        public Style Style
+        protected override void Populate()
         {
-            get { return this.style; }
-
-            set
-            {
-                this.style = value;
-                ApplyStyle();
-            }
-        }
-
-        private void ClearForm()
-        {
-            fields.Clear();
-            Controls.Clear();
-
-            buttonDelete.Location = initialDelBtnLocation;
-            Controls.Add(buttonDelete);
-            Size = initialFormSize;
-        }
-
-        protected virtual void Populate()
-        {
-            Text = $"{item.ClassNameToString()} #{item.Id}";
+            base.Populate();
 
             foreach (PropertyInfo property in item.GetType().GetProperties().Where(p => p.Name != "Id").ToArray())
             {
@@ -86,38 +37,27 @@ namespace HermoItemManagers
                     fields.Add(new TextField(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg));
                 }
 
-                fields[fields.Count - 1].Width = buttonDelete.Width;
+                fields[fields.Count - 1].Width = buttonAction.Width;
 
-                Height += buttonDelete.Location.Y * (fields.Count) + fields[fields.Count - 1].Height * (fields.Count);
+                Height += buttonAction.Location.Y * (fields.Count) + fields[fields.Count - 1].Height * (fields.Count);
             }
 
             for (int i = 0; i < fields.Count; i++)
             {
-                fields[i].Location = new(buttonDelete.Location.X, buttonDelete.Location.Y * (i + 1) + fields[i].Height * i);
+                fields[i].Location = new(buttonAction.Location.X, buttonAction.Location.Y * (i + 1) + fields[i].Height * i);
                 Controls.Add(fields[i]);
             }
 
-            buttonDelete.Location = new(buttonDelete.Location.X, fields[fields.Count - 1].Location.Y + fields[fields.Count - 1].Height + buttonDelete.Location.Y);
+            buttonAction.Location = new(buttonAction.Location.X, fields[fields.Count - 1].Location.Y + fields[fields.Count - 1].Height + buttonAction.Location.Y);
         }
 
-        protected virtual void ApplyStyle()
+        protected override void buttonAction_Click(object sender, EventArgs e)
         {
-            Style.Apply(this, Style, BgType.Primary);
+            base.buttonAction_Click(sender, e);
 
-            foreach (Field field in fields)
-            {
-                field.Style = Style;
-            }
-
-            Style.Apply(buttonDelete, Style);
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
             if (deleteMethod is null) return;
 
             deleteMethod(item.Id);
-
             // TODO remove from memory. (chacher)
         }
     }

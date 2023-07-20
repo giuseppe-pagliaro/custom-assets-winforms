@@ -1,6 +1,6 @@
 ﻿namespace HermoItemManagers
 {
-    partial class ItemViewer
+    partial class ItemEditor
     {
         /// <summary>
         /// Required designer variable.
