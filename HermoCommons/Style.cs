@@ -32,11 +32,6 @@
             this.buttonFlatStyle = buttonFlatStyle;
         }
 
-        static Style()
-        {
-            DEFAULT_STYLE = new();
-        }
-
         private Color primaryBackColor;
         private Color secondaryBackColor;
 
@@ -51,7 +46,7 @@
         private Color linkColor;
         private FlatStyle buttonFlatStyle;
 
-        public static readonly Style DEFAULT_STYLE;
+        private static readonly Lazy<Style> lazyDefaultStyle = new(() => new Style());
 
         #region Properties
 
@@ -68,6 +63,8 @@
         public Color InteractableFontColor { get { return interactableFontColor; } }
         public Color LinkColor { get { return linkColor; } }
         public FlatStyle ButtonFlatStyle { get { return buttonFlatStyle; } }
+
+        public static Style DEFAULT_STYLE { get { return lazyDefaultStyle.Value; } }
 
         #endregion
 

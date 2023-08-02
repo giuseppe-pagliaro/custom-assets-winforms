@@ -1,5 +1,5 @@
 ﻿using HermoCommons;
-using HermoItemManagers;
+using HermoItemManagers.Fields;
 using System.Text.Json.Serialization;
 
 namespace Example

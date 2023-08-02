@@ -17,8 +17,8 @@ namespace HermoRestClient
 
         private static readonly HttpClient client = new(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(1) });
 
-        private String url;
-        private T[] jsonTestResult;
+        private readonly String url;
+        private readonly T[] jsonTestResult;
         private EndpointMode mode;
         private HttpStatusCode lastStatusCode;
 
@@ -192,9 +192,9 @@ namespace HermoRestClient
             return () => Get(new Arg[] { new(itemsCountParamName, itemsCount.ToString()) });
         }
 
-        public Func<int, T[]> GetByIdMethod(String idParamName = "id")
+        public Func<int[], T[]> GetByIdMethod(String idParamName = "ids")
         {
-            return id => Get(new Arg[] { new(idParamName, id.ToString()) });
+            return ids => Get(new Arg[] { new(idParamName, String.Join(",", ids)) });
         }
 
         public Func<String, T[]> GetSearchMethod(String queryParamName = "query")

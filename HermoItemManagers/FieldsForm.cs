@@ -1,5 +1,6 @@
 ﻿using HermoCommons;
 using HermoItemManagers.Fields;
+using HermoItemManagers.Managers;
 
 namespace HermoItemManagers
 {
@@ -9,7 +10,7 @@ namespace HermoItemManagers
         {
             InitializeComponent();
 
-            item = new(); // TODO get placeholder from itemManagers
+            item = ItemDatas.DEFAULT_ITEM;
             fields = new();
             style = Style.DEFAULT_STYLE;
 
@@ -26,7 +27,7 @@ namespace HermoItemManagers
         {
             InitializeComponent();
 
-            this.item = item ?? new(); // TODO get placeholder from itemManagers
+            this.item = item ?? ItemDatas.DEFAULT_ITEM;
             fields = new();
             this.style = style ?? Style.DEFAULT_STYLE;
 
@@ -50,9 +51,9 @@ namespace HermoItemManagers
 
         public ItemDatas Item
         {
-            get { return this.item.Clone(); }
+            get { return item.Clone(); }
 
-            set
+            internal set
             {
                 item = value;
                 ClearForm();
@@ -63,11 +64,11 @@ namespace HermoItemManagers
 
         public Style Style
         {
-            get { return this.style; }
+            get { return style; }
 
             set
             {
-                this.style = value;
+                style = value;
                 ApplyStyle();
             }
         }
@@ -102,6 +103,36 @@ namespace HermoItemManagers
         protected virtual void buttonAction_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
+        }
+
+        private void ItemWasEdited(object sender, ItemEditedEventArgs e)
+        {
+            Item = e.NewItem;
+        }
+
+        private void ItemWasDeleted(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            if (obj == this) return true;
+            if (!obj.GetType().Equals(GetType())) return false;
+
+            FieldsForm fieldsForm = (FieldsForm)obj;
+
+            return fieldsForm.Item.Equals(Item);
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 7;
+            hash = 31 * hash + GetType().GetHashCode();
+            hash = 31 * hash + (item == null ? 0 : item.GetHashCode());
+
+            return hash;
         }
     }
 }

@@ -14,7 +14,9 @@ namespace HermoItemManagers
             this.editMethod = editMethod;
         }
 
-        private Func<ItemDatas, ItemDatas, ItemDatas>? editMethod;
+        //private static readonly HashSet<Type> TEXT_EDITOR_TYPES = new(new[] { typeof(string), typeof(int), typeof(bool) });
+
+        private readonly Func<ItemDatas, ItemDatas, ItemDatas>? editMethod;
 
         protected override void Populate()
         {
@@ -22,14 +24,33 @@ namespace HermoItemManagers
 
             foreach (PropertyInfo property in item.GetType().GetProperties().Where(p => p.Name != "Id").ToArray())
             {
-                switch (property.PropertyType)
+                if (property.PropertyType.Equals(typeof(HermoPhoneNumber)))
                 {
-                    // TODO other cases
-
-                    default:
-                        fields.Add(new TextFieldEditor(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg, style)
-                            { Togglable = true, FilterType = FilterType.None, Mandatory = !Attribute.IsDefined(property, typeof(IsNotMandatory)) });
-                        break;
+                    // TODO
+                }
+                else if (property.PropertyType.Equals(typeof(HermoDate)))
+                {
+                    fields.Add(new TextFieldEditor(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg, style)
+                        { Togglable = true, FilterType = FilterType.Date, Mandatory = !Attribute.IsDefined(property, typeof(IsNotMandatory)) });
+                }
+                else if (property.PropertyType.Equals(typeof(int)))
+                {
+                    fields.Add(new TextFieldEditor(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg, style)
+                        { Togglable = true, FilterType = FilterType.NumbersOnly, Mandatory = !Attribute.IsDefined(property, typeof(IsNotMandatory)) });
+                }
+                else if (property.PropertyType.Equals(typeof(float)) || property.PropertyType.Equals(typeof(double)))
+                {
+                    fields.Add(new TextFieldEditor(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg, style)
+                        { Togglable = true, FilterType = FilterType.DecimalNumbersOnly, Mandatory = !Attribute.IsDefined(property, typeof(IsNotMandatory)) });
+                }
+                else if (property.PropertyType.Equals(typeof(string)))
+                {
+                    fields.Add(new TextFieldEditor(property.Name, property.GetValue(item)?.ToString() ?? propIsNullMsg, style)
+                        { Togglable = true, FilterType = FilterType.None, Mandatory = !Attribute.IsDefined(property, typeof(IsNotMandatory)) });
+                }
+                else
+                {
+                    // TODO generate selector.
                 }
 
                 fields[fields.Count - 1].Width = buttonAction.Width;
@@ -66,6 +87,35 @@ namespace HermoItemManagers
                             property.SetValue(newInstance, txtFieldEditor.Value);
                         }
                         break;
+                }
+                if (property.PropertyType.Equals(typeof(HermoPhoneNumber)))
+                {
+                    // TODO
+                }
+                else if (property.PropertyType.Equals(typeof(HermoDate)))
+                {
+                    // TODO
+                }
+                else if (property.PropertyType.Equals(typeof(int)))
+                {
+                    // TODO
+                }
+                else if (property.PropertyType.Equals(typeof(float)) || property.PropertyType.Equals(typeof(double)))
+                {
+                    // TODO
+                }
+                else if (property.PropertyType.Equals(typeof(string)))
+                {
+                    TextFieldEditor txtFieldEditor = (TextFieldEditor)fields[i];
+
+                    if (!txtFieldEditor.Active || txtFieldEditor.Value != "")
+                    {
+                        property.SetValue(newInstance, txtFieldEditor.Value);
+                    }
+                }
+                else
+                {
+                    // TODO get value from selector.
                 }
 
                 i++;
