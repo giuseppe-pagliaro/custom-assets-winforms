@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HermoCommons", "HermoCommon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HermoRestClient", "HermoRestClient\HermoRestClient.csproj", "{FA8349FA-C821-4D96-BDB9-D2D551A72EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermoItemManagers", "HermoItemManagers\HermoItemManagers.csproj", "{26B7AE41-3187-41FC-90BB-60D293E3E102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HermoItemManagers", "HermoItemManagers\HermoItemManagers.csproj", "{26B7AE41-3187-41FC-90BB-60D293E3E102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{6389A411-6695-4862-A959-C02C620306D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{6389A411-6695-4862-A959-C02C620306D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermoSearchBars", "HermoSearchBars\HermoSearchBars.csproj", "{8FD4D7AE-9BB9-4309-B05D-4432B77055E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6389A411-6695-4862-A959-C02C620306D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6389A411-6695-4862-A959-C02C620306D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6389A411-6695-4862-A959-C02C620306D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FD4D7AE-9BB9-4309-B05D-4432B77055E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD4D7AE-9BB9-4309-B05D-4432B77055E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD4D7AE-9BB9-4309-B05D-4432B77055E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD4D7AE-9BB9-4309-B05D-4432B77055E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

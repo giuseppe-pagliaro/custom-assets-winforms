@@ -1,5 +1,6 @@
 ﻿using HermoCommons;
 using HermoItemManagers.Fields;
+using HermoItemManagers.Managers;
 using System.Reflection;
 
 namespace HermoItemManagers
@@ -122,8 +123,8 @@ namespace HermoItemManagers
             }
 
             editMethod(item, newInstance);
-
-            // TODO edit in memory. (chacher)
+            ItemsManager.Instance.Edit(newInstance);
+            Close();
         }
     }
 }

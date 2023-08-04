@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.22621.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>hermo-search-bars</PackageId>
+    <Title>Hermo Search Bars</Title>
+    <Version>2.0.0</Version>
+    <Authors>Giuseppe Pagliaro</Authors>
+    <Description>Implements a search bar for the "Hermo REST Assets" library.</Description>
+    <Copyright>GPL-3.0</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/giuseppe-pagliaro/hermo-rest-assets</RepositoryUrl>
+    <PackageTags>custom assets; client; tools; controls; database; lists; custom; toolbar; rest client; searchbar</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HermoCommons\HermoCommons.csproj" />
+    <ProjectReference Include="..\HermoRestClient\HermoRestClient.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -2,24 +2,33 @@
 
 namespace HermoItemManagers.Managers
 {
-    public class ItemsManager
+    internal sealed class ItemsManager
     {
         private class Entity
         {
-            public Entity()
+            public Entity(ItemDatas? item = null)
             {
-                Item = ItemDatas.DEFAULT_ITEM;
-                RefCount = 1;
-            }
-
-            public Entity(ItemDatas item)
-            {
-                Item = item;
+                Item = item ?? ItemDatas.DEFAULT_ITEM;
                 RefCount = 1;
             }
 
             public ItemDatas Item;
             public int RefCount;
+
+            public event EventHandler<ItemEditedEventArgs>? ItemEdited;
+            public event EventHandler<EventArgs>? ItemDeleted;
+
+            public void OnItemEdited(ItemEditedEventArgs e)
+            {
+                EventHandler<ItemEditedEventArgs>? handler = ItemEdited;
+                handler?.Invoke(this, e);
+            }
+
+            public void OnItemDeleted(EventArgs e)
+            {
+                EventHandler<EventArgs>? handler = ItemDeleted;
+                handler?.Invoke(this, e);
+            }
         }
 
         private ItemsManager()
@@ -32,16 +41,24 @@ namespace HermoItemManagers.Managers
 
         public static ItemsManager Instance { get { return lazy.Value; } }
 
-        public T[] AddReference<T>(T[] items) where T : ItemDatas
+        internal void AddFieldsFormToEvents(int itemHash, FieldsForm fieldsForm)
         {
-            T[] ret = new T[items.Length];
+            if (!entities.ContainsKey(itemHash)) return;
+
+            entities[itemHash].ItemEdited += fieldsForm.ItemWasEdited;
+            entities[itemHash].ItemDeleted += fieldsForm.ItemWasDeleted;
+        }
+
+        public ItemDatas[] AddReference(ItemDatas[] items)
+        {
+            ItemDatas[] ret = new ItemDatas[items.Length];
             for (int i = 0; i < items.Length; i++)
             {
                 int itemHash = items[i].GetHashCode();
 
                 if (entities.ContainsKey(itemHash))
                 {
-                    ret[i] = (T)entities[itemHash].Item;
+                    ret[i] = entities[itemHash].Item;
                     entities[itemHash].RefCount++;
                 }
                 else
@@ -54,17 +71,16 @@ namespace HermoItemManagers.Managers
             return ret;
         }
 
-        public void Edit<T>(T newItem) where T : ItemDatas
+        public void Edit(ItemDatas newItem)
         {
             int itemHash = newItem.GetHashCode();
             if (!entities.ContainsKey(itemHash)) return;
 
             entities[itemHash].Item = newItem;
-
-            // Throw an event to edit in every place.
+            entities[itemHash].OnItemEdited(new(newItem));
         }
 
-        public void RemoveReference<T>(T[] items) where T : ItemDatas
+        public void RemoveReference(ItemDatas[] items)
         {
             for (int i = 0; i < items.Length; i++)
             {
@@ -82,15 +98,17 @@ namespace HermoItemManagers.Managers
             }
         }
 
-        public void Delete<T>(T item) where T : ItemDatas
+        public void Delete(ItemDatas item)
         {
-            entities.Remove(item.GetHashCode());
+            int itemHash = item.GetHashCode();
+            if (!entities.ContainsKey(itemHash)) return;
 
-            // Throw an event to remove from every place.
+            entities[itemHash].OnItemDeleted(new());
+            entities.Remove(itemHash);
         }
     }
 
-    public class ItemEditedEventArgs : EventArgs
+    internal class ItemEditedEventArgs : EventArgs
     {
         public ItemEditedEventArgs(ItemDatas newItem) : base()
         {

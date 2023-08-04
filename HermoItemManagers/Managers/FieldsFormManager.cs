@@ -10,51 +10,51 @@ namespace HermoItemManagers.Managers
         }
 
         private static readonly Lazy<FieldsFormManager> lazy = new(() => new FieldsFormManager());
-        private readonly List<FieldsForm> entities;
+        private readonly Dictionary<int, FieldsForm> entities;
 
         public static FieldsFormManager Instance { get { return lazy.Value; } }
 
-        public void RequestEntity(ItemDatas itemDatas, Type type, Style style)
+        public void RequestEntity<T>(ItemDatas itemDatas, Style style) where T : FieldsForm
         {
-            object? obj = Activator.CreateInstance(type);
+            object? obj = Activator.CreateInstance(typeof(T));
 
-            if (obj is null)
-            {
-                return;
-            }
+            if (obj is null) return;
 
             FieldsForm fieldsForm = (FieldsForm)obj;
-            fieldsForm.Item = itemDatas;
+            fieldsForm.Item = ItemsManager.Instance.AddReference(new ItemDatas[] { itemDatas })[0];
+            int fieldsFormHash = fieldsForm.GetHashCode();
 
-            FieldsForm? existentFieldsForm = entities.Find(exFieldsForm => exFieldsForm.Equals(fieldsForm));
-
-            if (existentFieldsForm is not null)
+            if (entities.ContainsKey(fieldsFormHash))
             {
-                existentFieldsForm.BringToFront();
+                entities[fieldsFormHash].BringToFront();
+                ItemsManager.Instance.RemoveReference(new ItemDatas[] { fieldsForm.Item });
                 fieldsForm.Dispose();
-                return;
             }
-
-            fieldsForm.Style = style;
-            fieldsForm.FormClosing += FieldsForm_FormClosing;
-            fieldsForm.Show();
-            entities.Add(fieldsForm);
+            else
+            {
+                fieldsForm.Style = style;
+                fieldsForm.FormClosing += FieldsForm_FormClosing;
+                ItemsManager.Instance.AddFieldsFormToEvents(itemDatas.GetHashCode(), fieldsForm);
+                fieldsForm.Show();
+                entities.Add(fieldsFormHash, fieldsForm);
+            }
         }
 
         public void ApplyStyle(Style style)
         {
-            foreach (FieldsForm fieldsForm in entities)
+            foreach (KeyValuePair<int, FieldsForm> keyValuePair in entities)
             {
-                fieldsForm.Style = style;
+                keyValuePair.Value.Style = style;
             }
         }
 
         private void FieldsForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            if (sender is not null)
-            {
-                entities.Remove((FieldsForm)sender);
-            }
+            if (sender is null) return;
+
+            FieldsForm fieldsForm = (FieldsForm)sender;
+            ItemsManager.Instance.RemoveReference(new ItemDatas[] { fieldsForm.Item });
+            entities.Remove(fieldsForm.GetHashCode());
         }
     }
 }

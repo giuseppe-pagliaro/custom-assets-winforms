@@ -1,5 +1,6 @@
 ﻿using HermoCommons;
 using HermoItemManagers.Fields;
+using HermoItemManagers.Managers;
 using System.Reflection;
 
 namespace HermoItemManagers
@@ -51,7 +52,7 @@ namespace HermoItemManagers
             if (deleteMethod is null) return;
 
             deleteMethod(item.Id);
-            // TODO remove from memory. (chacher)
+            ItemsManager.Instance.Delete(item);
         }
     }
 }

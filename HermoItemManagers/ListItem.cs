@@ -14,7 +14,7 @@ namespace HermoItemManagers
             buttonEdit.Visible = false;
         }
 
-        private ItemDatas? itemDatas;
+        private ItemDatas? item;
         private readonly int originalHeight;
 
         private Type? viewerType;
@@ -28,16 +28,16 @@ namespace HermoItemManagers
         {
             get
             {
-                if (itemDatas is null)
+                if (item is null)
                 {
                     return ItemDatas.DEFAULT_ITEM;
                 }
 
-                return itemDatas.Clone();
+                return item.Clone();
             }
             set
             {
-                itemDatas = value;
+                item = value;
                 Populate();
             }
         }
@@ -102,13 +102,13 @@ namespace HermoItemManagers
 
         protected virtual void Populate()
         {
-            if (itemDatas is null)
+            if (item is null)
             {
                 txtID.Text = "(Item ID is Null)";
             }
             else
             {
-                txtID.Text = itemDatas.ClassNameToString() + " #" + itemDatas.Id.ToString();
+                txtID.Text = item.ClassNameToString() + " #" + item.Id.ToString();
             }
         }
 
@@ -125,20 +125,18 @@ namespace HermoItemManagers
         {
             noFocusObj.Focus();
 
-            if (viewerType is not null)
-            {
-                FieldsFormManager.Instance.RequestEntity(Item, viewerType, style);
-            }
+            if (viewerType is null) return;
+
+            typeof(FieldsFormManager).GetMethod("RequestEntity")?.MakeGenericMethod(viewerType).Invoke(FieldsFormManager.Instance, new object[] { Item, style });
         }
 
         protected void buttonEdit_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
 
-            if (editorType is not null)
-            {
-                FieldsFormManager.Instance.RequestEntity(Item, editorType, style);
-            }
+            if (editorType is null) return;
+
+            typeof(FieldsFormManager).GetMethod("RequestEntity")?.MakeGenericMethod(editorType).Invoke(FieldsFormManager.Instance, new object[] { Item, style });
         }
 
         #endregion

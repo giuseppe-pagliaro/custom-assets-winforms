@@ -105,12 +105,12 @@ namespace HermoItemManagers
             noFocusObj.Focus();
         }
 
-        private void ItemWasEdited(object sender, ItemEditedEventArgs e)
+        internal void ItemWasEdited(object? sender, ItemEditedEventArgs e)
         {
             Item = e.NewItem;
         }
 
-        private void ItemWasDeleted(object sender, EventArgs e)
+        internal void ItemWasDeleted(object? sender, EventArgs e)
         {
             Close();
         }
