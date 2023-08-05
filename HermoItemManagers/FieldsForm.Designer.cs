@@ -68,8 +68,7 @@
         }
 
         #endregion
-
-        protected Button buttonAction;
         private Label noFocusObj;
+        private Button buttonAction;
     }
 }

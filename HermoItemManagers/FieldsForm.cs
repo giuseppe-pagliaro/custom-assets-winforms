@@ -1,51 +1,25 @@
 ﻿using HermoCommons;
-using HermoItemManagers.Fields;
 using HermoItemManagers.Managers;
 
 namespace HermoItemManagers
 {
-    public partial class FieldsForm : Form
+    public sealed partial class FieldsForm : Form
     {
-        protected FieldsForm()
+        internal FieldsForm()
         {
-            InitializeComponent();
-
             item = ItemDatas.DEFAULT_ITEM;
-            fields = new();
             style = Style.DEFAULT_STYLE;
-
-            buttonAction.Text = "Action";
-            propIsNullMsg = "(Null Value)";
-
             initialFormSize = Size;
             initialActionBtnLocation = buttonAction.Location;
-
-            ApplyStyle();
         }
 
-        public FieldsForm(ItemDatas? item = null, Style? style = null, String propIsNullMsg = "(Null Value)", String actionBtnMsg = "Action")
-        {
-            InitializeComponent();
+        private ItemDatas item;
+        internal Style style;
 
-            this.item = item ?? ItemDatas.DEFAULT_ITEM;
-            fields = new();
-            this.style = style ?? Style.DEFAULT_STYLE;
+        internal Action<FieldsForm>? Populate;
+        internal Action<FieldsForm>? ApplyStyle;
+        internal Action<FieldsForm>? BtnClickedAction;
 
-            buttonAction.Text = actionBtnMsg;
-            this.propIsNullMsg = propIsNullMsg;
-
-            initialFormSize = Size;
-            initialActionBtnLocation = buttonAction.Location;
-
-            if (item is not null) Populate();
-            ApplyStyle();
-        }
-
-        protected ItemDatas item;
-        protected List<Field> fields;
-        protected Style style;
-
-        protected readonly String propIsNullMsg;
         private readonly Size initialFormSize;
         private readonly Point initialActionBtnLocation;
 
@@ -55,10 +29,15 @@ namespace HermoItemManagers
 
             internal set
             {
+                if (Populate is null || ApplyStyle is null) return;
+
                 item = value;
-                ClearForm();
-                Populate();
-                ApplyStyle();
+
+                SuspendLayout();
+                Clear();
+                Populate(this);
+                ApplyStyle(this);
+                ResumeLayout(true);
             }
         }
 
@@ -68,41 +47,60 @@ namespace HermoItemManagers
 
             set
             {
+                if (ApplyStyle is null) return;
+
                 style = value;
-                ApplyStyle();
+                SuspendLayout();
+                ApplyStyle(this);
+                ResumeLayout(true);
             }
         }
 
-        private void ClearForm()
+        public Point ActionBtnLocation
         {
-            fields.Clear();
+            get { return buttonAction.Location; }
+            set { buttonAction.Location = value; }
+        }
+
+        public int ActionBtnWidth
+        {
+            get { return buttonAction.Width; }
+            set { buttonAction.Width = value; }
+        }
+
+        public int ActionBtnHeight
+        {
+            get { return buttonAction.Height; }
+            set { buttonAction.Height = value; }
+        }
+
+        public String ActionBtnText
+        {
+            get { return buttonAction.Text; }
+            set { buttonAction.Text = value; }
+        }
+
+        public void ApplyActionBtnStyle()
+        {
+            Style.Apply(buttonAction, style);
+        }
+
+        private void Clear()
+        {
             Controls.Clear();
 
             buttonAction.Location = initialActionBtnLocation;
             Controls.Add(buttonAction);
             Size = initialFormSize;
+            buttonAction.Text = "Action";
         }
 
-        protected virtual void Populate()
-        {
-            Text = $"{item.ClassNameToString()} #{item.Id}";
-        }
-
-        protected virtual void ApplyStyle()
-        {
-            Style.Apply(this, style, BgType.Primary);
-
-            foreach (Field field in fields)
-            {
-                field.Style = style;
-            }
-
-            Style.Apply(buttonAction, style);
-        }
-
-        protected virtual void buttonAction_Click(object sender, EventArgs e)
+        private void buttonAction_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
+
+            if (BtnClickedAction is null) return;
+            BtnClickedAction(this);
         }
 
         internal void ItemWasEdited(object? sender, ItemEditedEventArgs e)
@@ -119,18 +117,29 @@ namespace HermoItemManagers
         {
             if (obj == null) return false;
             if (obj == this) return true;
-            if (!obj.GetType().Equals(GetType())) return false;
+            if (!GetType().Equals(obj.GetType())) return false;
 
             FieldsForm fieldsForm = (FieldsForm)obj;
 
-            return fieldsForm.Item.Equals(Item);
+            if ((Populate?.GetType().Equals(fieldsForm.Populate?.GetType()) ?? false) &&
+                (ApplyStyle?.GetType().Equals(fieldsForm.ApplyStyle?.GetType()) ?? false) &&
+                (BtnClickedAction?.GetType().Equals(fieldsForm.BtnClickedAction?.GetType()) ?? false))
+            {
+                return fieldsForm.Item.Equals(Item);
+            }
+            else
+            {
+                return ApplyStyle is null && BtnClickedAction is null;
+            }
         }
 
         public override int GetHashCode()
         {
             int hash = 7;
-            hash = 31 * hash + GetType().GetHashCode();
-            hash = 31 * hash + (item == null ? 0 : item.GetHashCode());
+            hash = 31 * hash + (Populate is null ? 0 : Populate.GetType().GetHashCode());
+            hash = 31 * hash + (ApplyStyle is null ? 0 : ApplyStyle.GetType().GetHashCode());
+            hash = 31 * hash + (BtnClickedAction is null ? 0 : BtnClickedAction.GetType().GetHashCode());
+            hash = 31 * hash + (item is null ? 0 : item.GetHashCode());
 
             return hash;
         }

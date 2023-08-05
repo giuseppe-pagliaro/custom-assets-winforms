@@ -1,6 +1,6 @@
 ﻿namespace HermoItemManagers
 {
-    partial class ItemEditor
+    /*partial class ItemEditor
     {
         /// <summary>
         /// Required designer variable.
@@ -31,5 +31,5 @@
         }
 
         #endregion
-    }
+    }*/
 }

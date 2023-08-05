@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using HermoCommons;
+using HermoItemManagers;
+using HermoItemManagers.Managers;
 
 namespace Example
 {
@@ -15,6 +9,11 @@ namespace Example
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            FieldsFormManager.Instance.RequestEntity<ItemViewerBuilder>(new DataExample() { Id = 0, Value = "Ciao" }, Style.DEFAULT_STYLE);
         }
     }
 }

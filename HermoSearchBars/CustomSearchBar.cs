@@ -70,7 +70,7 @@ namespace HermoSearchBars
 
             Object[] result = Array.Empty<Object>();
 
-            using (WaitForm waitForm = new(() => { result = searchMethod(textBoxQuery.Text); }, style, searchingMsg))
+            using (WaitForm waitForm = new(() => result = searchMethod(textBoxQuery.Text), style, searchingMsg))
             {
                 waitForm.ShowDialog();
             }

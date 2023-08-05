@@ -14,14 +14,18 @@ namespace HermoItemManagers.Managers
 
         public static FieldsFormManager Instance { get { return lazy.Value; } }
 
-        public void RequestEntity<T>(ItemDatas itemDatas, Style style) where T : FieldsForm
+        public void RequestEntity<TBuilder>(ItemDatas itemDatas, Style style) where TBuilder : FieldsFormBuilder<TBuilder>
         {
-            object? obj = Activator.CreateInstance(typeof(T));
+            TBuilder Instance = (TBuilder)(typeof(TBuilder).GetProperty("Instance")?.GetValue(null) ?? throw new InstanceNotFoundException()); // TODO fix!
 
-            if (obj is null) return;
-
-            FieldsForm fieldsForm = (FieldsForm)obj;
-            fieldsForm.Item = ItemsManager.Instance.AddReference(new ItemDatas[] { itemDatas })[0];
+            FieldsForm fieldsForm = new()
+            {
+                Populate = Instance.Populate,
+                ApplyStyle = Instance.ApplyStyle,
+                BtnClickedAction = Instance.BtnClickedAction,
+                style = style,
+                Item = itemDatas
+            };
             int fieldsFormHash = fieldsForm.GetHashCode();
 
             if (entities.ContainsKey(fieldsFormHash))
@@ -32,7 +36,6 @@ namespace HermoItemManagers.Managers
             }
             else
             {
-                fieldsForm.Style = style;
                 fieldsForm.FormClosing += FieldsForm_FormClosing;
                 ItemsManager.Instance.AddFieldsFormToEvents(itemDatas.GetHashCode(), fieldsForm);
                 fieldsForm.Show();
@@ -56,5 +59,10 @@ namespace HermoItemManagers.Managers
             ItemsManager.Instance.RemoveReference(new ItemDatas[] { fieldsForm.Item });
             entities.Remove(fieldsForm.GetHashCode());
         }
+    }
+
+    public class InstanceNotFoundException : Exception
+    {
+        public InstanceNotFoundException() : base("Couldn't find the Instance property in your factory.") { }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HermoItemManagers.Managers
 {
-    internal sealed class ItemsManager
+    public sealed class ItemsManager
     {
         private class Entity
         {

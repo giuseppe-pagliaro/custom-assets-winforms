@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace HermoItemManagers
 {
-    public partial class ItemEditor : FieldsForm
+    /*public partial class ItemEditor : FieldsForm
     {
         public ItemEditor(ItemDatas? currItem = null, Func<ItemDatas, ItemDatas, ItemDatas>? editMethod = null, Style? style = null, String propIsNullMsg = "(Null Value)", String actionBtnMsg = "Edit")
             : base(currItem, style, propIsNullMsg, actionBtnMsg)
@@ -126,5 +126,5 @@ namespace HermoItemManagers
             ItemsManager.Instance.Edit(newInstance);
             Close();
         }
-    }
+    }*/
 }
