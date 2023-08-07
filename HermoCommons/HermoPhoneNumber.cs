@@ -9,10 +9,10 @@ namespace HermoCommons
             number = "3333333333";
         }
         private static byte NUMBER_LENGHT = 10;
-        private String number;
+        private string number;
 
         [JsonPropertyName("number")]
-        public String Number
+        public string Number
         {
             get
             {
@@ -25,7 +25,7 @@ namespace HermoCommons
 
                 try
                 {
-                    Int64.Parse(value);
+                    long.Parse(value);
                 }
                 catch (FormatException)
                 {

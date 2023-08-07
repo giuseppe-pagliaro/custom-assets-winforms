@@ -4,7 +4,7 @@ namespace HermoItemManagers.Fields
 {
     public partial class PathFieldEditor : Field
     {
-        public PathFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
+        public PathFieldEditor(string name = "Field", string placeholderText = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
@@ -18,13 +18,13 @@ namespace HermoItemManagers.Fields
 
         #region Properties
 
-        public String BrowseButtonText
+        public string BrowseButtonText
         {
             get { return buttonBrowse.Text; }
             set { buttonBrowse.Text = value; }
         }
 
-        public String FileDialogMessage { get; set; }
+        public string FileDialogMessage { get; set; }
 
         public OpenDialogType OpenDialogType { get; set; }
 
@@ -49,12 +49,12 @@ namespace HermoItemManagers.Fields
             set { checkBoxActive.Checked = value; }
         }
 
-        public String Value
+        public string Value
         {
             get { return txtBoxValue.Text; }
         }
 
-        public String PlaceholderText
+        public string PlaceholderText
         {
             get { return txtBoxValue.PlaceholderText; }
             set { txtBoxValue.PlaceholderText = value; }
@@ -64,9 +64,9 @@ namespace HermoItemManagers.Fields
 
         #endregion
 
-        private String FormatDialogFilters()
+        private string FormatDialogFilters()
         {
-            String formattedDialogFilters = ALL_FILES_FILTER.ToString();
+            string formattedDialogFilters = ALL_FILES_FILTER.ToString();
             for (int i = 1; i < OpenDialogFilters.Length - 1; i++)
             {
                 formattedDialogFilters += "|" + OpenDialogFilters[i] + "|";

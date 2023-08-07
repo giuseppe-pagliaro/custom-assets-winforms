@@ -1,27 +1,34 @@
 ﻿using HermoCommons;
+using HermoItemManagers.Fields;
 using HermoItemManagers.Managers;
+using System.Collections.ObjectModel;
 
 namespace HermoItemManagers
 {
     public sealed partial class FieldsForm : Form
     {
-        internal FieldsForm()
+        internal FieldsForm(Style? style = null)
         {
-            item = ItemDatas.DEFAULT_ITEM;
-            style = Style.DEFAULT_STYLE;
+            InitializeComponent();
+
+            this.item = ItemDatas.DEFAULT_ITEM;
+            this.style = style ?? Style.DEFAULT_STYLE;
+            fields = new();
+
             initialFormSize = Size;
             initialActionBtnLocation = buttonAction.Location;
         }
 
         private ItemDatas item;
-        internal Style style;
+        private Style style;
+        private readonly List<Field> fields;
 
         internal Action<FieldsForm>? Populate;
         internal Action<FieldsForm>? ApplyStyle;
         internal Action<FieldsForm>? BtnClickedAction;
 
-        private readonly Size initialFormSize;
-        private readonly Point initialActionBtnLocation;
+        private Size initialFormSize;
+        private Point initialActionBtnLocation;
 
         public ItemDatas Item
         {
@@ -56,6 +63,8 @@ namespace HermoItemManagers
             }
         }
 
+        #region Button Action
+
         public Point ActionBtnLocation
         {
             get { return buttonAction.Location; }
@@ -74,7 +83,7 @@ namespace HermoItemManagers
             set { buttonAction.Height = value; }
         }
 
-        public String ActionBtnText
+        public string ActionBtnText
         {
             get { return buttonAction.Text; }
             set { buttonAction.Text = value; }
@@ -85,9 +94,54 @@ namespace HermoItemManagers
             Style.Apply(buttonAction, style);
         }
 
+        #endregion
+
+        #region Fields
+
+        public ReadOnlyCollection<Field> Fields
+        {
+            get { return fields.AsReadOnly(); }
+        }
+
+        public void AddField(Field field)
+        {
+            fields.Add(field);
+        }
+
+        public void AddFields(Field[] newFields)
+        {
+            fields.AddRange(newFields);
+        }
+
+        public void RemoveField(Field field)
+        {
+            fields.Remove(field);
+        }
+
+        public void RemoveField(int fieldInd)
+        {
+            fields.RemoveAt(fieldInd);
+        }
+
+        public void ClearFields()
+        {
+            fields.Clear();
+        }
+
+        public void ApplyFieldStyle()
+        {
+            foreach (Field field in fields)
+            {
+                field.Style = style;
+            }
+        }
+
+        #endregion
+
         private void Clear()
         {
             Controls.Clear();
+            fields.Clear();
 
             buttonAction.Location = initialActionBtnLocation;
             Controls.Add(buttonAction);

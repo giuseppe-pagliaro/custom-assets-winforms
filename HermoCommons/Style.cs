@@ -16,8 +16,8 @@
             buttonFlatStyle = FlatStyle.Standard;
         }
 
-        public Style(Color primaryBackColor, Color secondaryBackColor, String fontType, Color fontColor,
-            Color primaryInteractableColor, Color secondaryInteractableColor, String interactableFontType,
+        public Style(Color primaryBackColor, Color secondaryBackColor, string fontType, Color fontColor,
+            Color primaryInteractableColor, Color secondaryInteractableColor, string interactableFontType,
             Color interactableFontColor, Color linkColor, FlatStyle buttonFlatStyle)
         {
             this.primaryBackColor = primaryBackColor;
@@ -35,13 +35,13 @@
         private Color primaryBackColor;
         private Color secondaryBackColor;
 
-        private String fontType;
+        private string fontType;
         private Color fontColor;
 
         private Color primaryInteractableColor;
         private Color secondaryInteractableColor;
 
-        private String interactableFontType;
+        private string interactableFontType;
         private Color interactableFontColor;
         private Color linkColor;
         private FlatStyle buttonFlatStyle;
@@ -53,13 +53,13 @@
         public Color PrimaryBackColor { get { return primaryBackColor; } }
         public Color SecondaryBackColor { get { return secondaryBackColor; } }
 
-        public String FontType { get { return fontType; } }
+        public string FontType { get { return fontType; } }
         public Color FontColor { get { return fontColor; } }
 
         public Color PrimaryInteractableColor { get { return primaryInteractableColor; } }
         public Color SecondaryInteractableColor { get { return secondaryInteractableColor; } }
 
-        public String InteractableFontType { get { return interactableFontType; } }
+        public string InteractableFontType { get { return interactableFontType; } }
         public Color InteractableFontColor { get { return interactableFontColor; } }
         public Color LinkColor { get { return linkColor; } }
         public FlatStyle ButtonFlatStyle { get { return buttonFlatStyle; } }

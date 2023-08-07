@@ -4,12 +4,12 @@ namespace HermoItemManagers.Fields
 {
     public partial class CopyableTextField : Field
     {
-        public CopyableTextField(String name = "Field", String value = "", Style? style = null) : base(name, style)
+        public CopyableTextField(string name = "Field", string value = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
             clicked = false;
-            this.value = String.Empty;
+            this.value = string.Empty;
             this.Value = value;
             CopyMessage = "Click to copy.";
             CopiedMessage = "Copied.";
@@ -17,15 +17,15 @@ namespace HermoItemManagers.Fields
         }
 
         private bool clicked;
-        private String value;
+        private string value;
 
         #region Properties
 
-        public String CopyMessage { get; set; }
+        public string CopyMessage { get; set; }
 
-        public String CopiedMessage { get; set; }
+        public string CopiedMessage { get; set; }
 
-        public String Value
+        public string Value
         {
             get { return value; }
             set

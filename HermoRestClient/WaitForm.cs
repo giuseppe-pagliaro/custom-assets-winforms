@@ -4,7 +4,7 @@ namespace HermoRestClient
 {
     public partial class WaitForm : Form
     {
-        public WaitForm(Action? worker = null, Style? style = null, String loadingMessage = "Loading")
+        public WaitForm(Action? worker = null, Style? style = null, string loadingMessage = "Loading")
         {
             InitializeComponent();
 
@@ -21,7 +21,7 @@ namespace HermoRestClient
         private readonly Action? worker;
         private Style style;
 
-        private readonly String loadingMessage;
+        private readonly string loadingMessage;
         private bool animationRunning;
 
         public Style Style
@@ -40,7 +40,7 @@ namespace HermoRestClient
             Style.Apply(txtLoading, style, FontStyle.Bold);
         }
 
-        protected virtual void UpdateLoadingMessageSafely(String text)
+        protected virtual void UpdateLoadingMessageSafely(string text)
         {
             if (animationRunning == false)
             {
@@ -90,7 +90,7 @@ namespace HermoRestClient
                         break;
                 }
 
-                String loadingMessage = this.loadingMessage;
+                string loadingMessage = this.loadingMessage;
 
                 for (int i = 0; i < numPoints; i++)
                 {

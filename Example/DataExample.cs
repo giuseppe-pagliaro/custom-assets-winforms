@@ -8,11 +8,11 @@ namespace Example
     {
         public DataExample() : base()
         {
-            Value = String.Empty;
+            Value = string.Empty;
         }
 
         [IsCopyable]
         [JsonPropertyName("value")]
-        public String Value { get; set; }
+        public string Value { get; set; }
     }
 }

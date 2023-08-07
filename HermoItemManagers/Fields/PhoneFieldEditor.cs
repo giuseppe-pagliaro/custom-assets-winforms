@@ -4,7 +4,7 @@ namespace HermoItemManagers.Fields
 {
     public partial class PhoneFieldEditor : Field
     {
-        public PhoneFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
+        public PhoneFieldEditor(string name = "Field", string placeholderText = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
@@ -35,12 +35,12 @@ namespace HermoItemManagers.Fields
             set { checkBoxActive.Checked = value; }
         }
 
-        public String Value
+        public string Value
         {
             get { return comboIntPrefix.SelectedText + " " + txtBoxValue.Text; }
         }
 
-        public String PlaceholderText
+        public string PlaceholderText
         {
             get { return txtBoxValue.PlaceholderText; }
             set { txtBoxValue.PlaceholderText = value; }

@@ -4,7 +4,7 @@ using HermoItemManagers.Managers;
 using HermoRestClient;
 using System.Reflection;
 
-namespace HermoItemManagers
+namespace HermoItemManagers.Builders
 {
     public class ItemViewerBuilder : FieldsFormBuilder<ItemViewerBuilder>
     {
@@ -16,24 +16,26 @@ namespace HermoItemManagers
             deleteWarningMsgTxt = "Are you sure you want to delete this element? The process is irreversible.";
         }
 
-        private String deleteWarningTitleTxt;
-        private String deletingMsg;
-        private String deleteWarningMsgTxt;
+        private string deleteWarningTitleTxt;
+        private string deletingMsg;
+        private string deleteWarningMsgTxt;
         private Action<int>? deleteMethod;
 
-        public String DeleteWarningTitleTxt
+        #region Properties
+
+        public string DeleteWarningTitleTxt
         {
             get { return deleteWarningTitleTxt; }
             set { deleteWarningTitleTxt = value; }
         }
 
-        public String DeletingMsg
+        public string DeletingMsg
         {
             get { return deletingMsg; }
             set { deletingMsg = value; }
         }
 
-        public String DeleteWarningMsgTxt
+        public string DeleteWarningMsgTxt
         {
             get { return deleteWarningMsgTxt; }
             set { deleteWarningMsgTxt = value; }
@@ -45,10 +47,11 @@ namespace HermoItemManagers
             set { deleteMethod = value; }
         }
 
+        #endregion
+
         public override void Populate(FieldsForm fieldsForm)
         {
             ItemDatas item = fieldsForm.Item;
-            List<Field> fields = new();
 
             fieldsForm.Text = $"{item.ClassNameToString()} #{item.Id}";
 
@@ -56,37 +59,32 @@ namespace HermoItemManagers
             {
                 if (Attribute.IsDefined(property, typeof(IsCopyable)))
                 {
-                    fields.Add(new CopyableTextField(property.Name, property.GetValue(item)?.ToString() ?? PropIsNullMsg));
+                    fieldsForm.AddField(new CopyableTextField(property.Name, property.GetValue(item)?.ToString() ?? PropIsNullMsg));
                 }
                 else
                 {
-                    fields.Add(new TextField(property.Name, property.GetValue(item)?.ToString() ?? PropIsNullMsg));
+                    fieldsForm.AddField(new TextField(property.Name, property.GetValue(item)?.ToString() ?? PropIsNullMsg));
                 }
-                fields[fields.Count - 1].Width = fieldsForm.ActionBtnWidth;
-                fieldsForm.Height += fieldsForm.ActionBtnLocation.Y * fields.Count + fields[fields.Count - 1].Height * fields.Count;
+                fieldsForm.Fields[fieldsForm.Fields.Count - 1].Width = fieldsForm.ActionBtnWidth;
+                fieldsForm.Height += fieldsForm.ActionBtnLocation.Y * fieldsForm.Fields.Count + fieldsForm.Fields[fieldsForm.Fields.Count - 1].Height * fieldsForm.Fields.Count;
             }
 
-            for (int i = 0; i < fields.Count; i++)
+            for (int i = 0; i < fieldsForm.Fields.Count; i++)
             {
-                fields[i].Location = new(fieldsForm.ActionBtnLocation.X, fieldsForm.ActionBtnLocation.Y * (i + 1) + fields[i].Height * i);
-                fieldsForm.Controls.Add(fields[i]);
+                fieldsForm.Fields[i].Location = new(fieldsForm.ActionBtnLocation.X, fieldsForm.ActionBtnLocation.Y * (i + 1) + fieldsForm.Fields[i].Height * i);
+                fieldsForm.Controls.Add(fieldsForm.Fields[i]);
             }
-            fieldsForm.ActionBtnLocation = new(fieldsForm.ActionBtnLocation.X, fields[fields.Count - 1].Location.Y + fields[fields.Count - 1].Height + fieldsForm.ActionBtnLocation.Y);
-            // Update button text?
+            fieldsForm.ActionBtnLocation = new(fieldsForm.ActionBtnLocation.X,
+                fieldsForm.Fields[fieldsForm.Fields.Count - 1].Location.Y + fieldsForm.Fields[fieldsForm.Fields.Count - 1].Height + fieldsForm.ActionBtnLocation.Y);
+
+            fieldsForm.ActionBtnText = ActionBtnText;
         }
 
         public override void ApplyStyle(FieldsForm fieldsForm)
         {
             Style.Apply(fieldsForm, fieldsForm.Style, BgType.Primary);
 
-            foreach (Control control in fieldsForm.Controls)
-            {
-                if (control.GetType().IsSubclassOf(typeof(Field)))
-                {
-                    ((Field)control).Style = fieldsForm.Style;
-                }
-            }
-
+            fieldsForm.ApplyFieldStyle();
             fieldsForm.ApplyActionBtnStyle();
         }
 

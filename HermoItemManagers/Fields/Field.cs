@@ -11,7 +11,7 @@ namespace HermoItemManagers.Fields
             Name = "Field";
             style = Style.DEFAULT_STYLE;
         }
-        public Field(String name = "Field", Style? style = null)
+        public Field(string name = "Field", Style? style = null)
         {
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace HermoItemManagers.Fields
             }
         }
 
-        public String FieldName
+        public string FieldName
         {
             get { return txtName.Text; }
             set
@@ -48,7 +48,7 @@ namespace HermoItemManagers.Fields
             }
         }
 
-        public String Separator
+        public string Separator
         {
             get { return txtSeparator.Text; }
             set

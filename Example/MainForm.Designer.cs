@@ -38,6 +38,7 @@
             Name = "MainForm";
             Text = "MainForm";
             Load += MainForm_Load;
+            Shown += MainForm_Shown;
             ResumeLayout(false);
         }
 

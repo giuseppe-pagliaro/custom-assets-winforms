@@ -14,8 +14,8 @@
             this.extension = extension;
         }
 
-        private String name;
-        private String extension;
+        private string name;
+        private string extension;
 
         public override string ToString()
         {

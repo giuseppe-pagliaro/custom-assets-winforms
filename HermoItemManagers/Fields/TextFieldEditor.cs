@@ -4,7 +4,7 @@ namespace HermoItemManagers.Fields
 {
     public partial class TextFieldEditor : Field
     {
-        public TextFieldEditor(String name = "Field", String placeholderText = "", Style? style = null) : base(name, style)
+        public TextFieldEditor(string name = "Field", string placeholderText = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
@@ -35,7 +35,7 @@ namespace HermoItemManagers.Fields
             set { checkBoxActive.Checked = value; }
         }
 
-        public String Value
+        public string Value
         {
             get { return txtBoxValue.Text; }
         }
@@ -46,7 +46,7 @@ namespace HermoItemManagers.Fields
             set { charLimit = value; }
         }
 
-        public String PlaceholderText
+        public string PlaceholderText
         {
             get { return txtBoxValue.PlaceholderText; }
             set { txtBoxValue.PlaceholderText = value; }
@@ -173,7 +173,7 @@ namespace HermoItemManagers.Fields
                         case 4:
                             if (e.KeyChar == '/')
                             {
-                                String subStr = txtBoxValue.Text.Substring(0, 3);
+                                string subStr = txtBoxValue.Text.Substring(0, 3);
                                 txtBoxValue.Text = subStr + "0" + txtBoxValue.Text[3];
                                 txtBoxValue.Select(txtBoxValue.Text.Length, 0);
                             }

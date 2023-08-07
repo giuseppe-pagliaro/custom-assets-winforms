@@ -1,38 +1,36 @@
 ﻿using System.Reflection;
 
-namespace HermoItemManagers
+namespace HermoItemManagers.Builders
 {
     public abstract class FieldsFormBuilder<T> where T : FieldsFormBuilder<T>
     {
-        private static T InstantiateFactory()
+        private static T InstantiateBuilder()
         {
             object? obj = Activator.CreateInstance(typeof(T), true);
 
-            if (obj is null) throw new FactoryNotInstantiatedException();
-
-            return (T)obj;
+            return obj is null ? throw new FactoryNotInstantiatedException() : (T)obj;
         }
 
-        private static readonly Lazy<T> lazy = new(() => InstantiateFactory());
+        private static readonly Lazy<T> lazy = new(() => InstantiateBuilder());
 
-        private String propIsNullMsg = "(Null Property)";
-        private String actionBtnText = "Action";
+        private string propIsNullMsg = "(Null Property)";
+        private string actionBtnText = "Action";
 
         public static T Instance { get { return lazy.Value; } }
 
-        public String PropIsNullMsg
+        public string PropIsNullMsg
         {
             get { return propIsNullMsg; }
             set { propIsNullMsg = value; }
         }
 
-        public String ActionBtnText
+        public string ActionBtnText
         {
             get { return actionBtnText; }
             set { actionBtnText = value; }
         }
 
-        public void SetProps(params Object[] newProps)
+        public void SetProps(params object[] newProps)
         {
             PropertyInfo[] properties = typeof(FieldsFormBuilder<T>).GetProperties();
 

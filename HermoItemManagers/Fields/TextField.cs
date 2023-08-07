@@ -4,14 +4,14 @@ namespace HermoItemManagers.Fields
 {
     public partial class TextField : Field
     {
-        public TextField(String name = "Field", String value = "", Style? style = null) : base(name, style)
+        public TextField(string name = "Field", string value = "", Style? style = null) : base(name, style)
         {
             InitializeComponent();
 
             Value = value;
         }
 
-        public String Value
+        public string Value
         {
             get { return txtValue.Text; }
             set { txtValue.Text = value; }

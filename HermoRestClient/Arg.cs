@@ -2,16 +2,16 @@
 {
     public class Arg
     {
-        public Arg(String name, String value)
+        public Arg(string name, string value)
         {
             this.name = name;
             this.value = value;
         }
 
-        private String name;
-        private String value;
+        private string name;
+        private string value;
 
-        internal String GetFormatted()
+        internal string GetFormatted()
         {
             if (name == "")
             {

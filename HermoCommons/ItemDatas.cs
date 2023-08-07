@@ -29,9 +29,9 @@ namespace HermoCommons
         public ItemDatas Clone() { return (ItemDatas)this.MemberwiseClone(); }
         object ICloneable.Clone() { return Clone(); }
 
-        public String ClassNameToString()
+        public string ClassNameToString()
         {
-            String rawName = this.GetType().Name;
+            string rawName = this.GetType().Name;
             return Regex.Replace(rawName, @"(\p{Lu})", " $1").TrimStart();
         }
 

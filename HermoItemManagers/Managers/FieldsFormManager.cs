@@ -1,4 +1,5 @@
 ﻿using HermoCommons;
+using HermoItemManagers.Builders;
 
 namespace HermoItemManagers.Managers
 {
@@ -16,22 +17,21 @@ namespace HermoItemManagers.Managers
 
         public void RequestEntity<TBuilder>(ItemDatas itemDatas, Style style) where TBuilder : FieldsFormBuilder<TBuilder>
         {
-            TBuilder Instance = (TBuilder)(typeof(TBuilder).GetProperty("Instance")?.GetValue(null) ?? throw new InstanceNotFoundException()); // TODO fix!
+            TBuilder Instance = (TBuilder)(typeof(FieldsFormBuilder<TBuilder>).GetProperty("Instance")?.GetValue(null) ?? throw new InstanceNotFoundException());
 
-            FieldsForm fieldsForm = new()
+            FieldsForm fieldsForm = new(style)
             {
                 Populate = Instance.Populate,
                 ApplyStyle = Instance.ApplyStyle,
                 BtnClickedAction = Instance.BtnClickedAction,
-                style = style,
-                Item = itemDatas
+                Item = ItemsManager.Instance.AddReference(new ItemDatas[] { itemDatas })[0]
             };
             int fieldsFormHash = fieldsForm.GetHashCode();
 
             if (entities.ContainsKey(fieldsFormHash))
             {
                 entities[fieldsFormHash].BringToFront();
-                ItemsManager.Instance.RemoveReference(new ItemDatas[] { fieldsForm.Item });
+                ItemsManager.Instance.RemoveReference(new ItemDatas[] { itemDatas });
                 fieldsForm.Dispose();
             }
             else
@@ -63,6 +63,6 @@ namespace HermoItemManagers.Managers
 
     public class InstanceNotFoundException : Exception
     {
-        public InstanceNotFoundException() : base("Couldn't find the Instance property in your factory.") { }
+        public InstanceNotFoundException() : base("Couldn't find the Instance property in your builder.") { }
     }
 }

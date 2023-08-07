@@ -7,7 +7,7 @@ namespace HermoRestClient
 {
     public class HermoEndpoint<T> where T : ItemDatas
     {
-        public HermoEndpoint(String url, T[] jsonTestResult)
+        public HermoEndpoint(string url, T[] jsonTestResult)
         {
             this.url = url;
             this.jsonTestResult = jsonTestResult;
@@ -17,7 +17,7 @@ namespace HermoRestClient
 
         private static readonly HttpClient client = new(new SocketsHttpHandler { PooledConnectionLifetime = TimeSpan.FromMinutes(1) });
 
-        private readonly String url;
+        private readonly string url;
         private readonly T[] jsonTestResult;
         private EndpointMode mode;
         private HttpStatusCode lastStatusCode;
@@ -41,7 +41,7 @@ namespace HermoRestClient
                 return jsonTestResult;
             }
 
-            String formattedArgs = "?" + args[0].GetFormatted();
+            string formattedArgs = "?" + args[0].GetFormatted();
             for (int i = 1; i < args.Length; i++)
             {
                 formattedArgs += "&" + args[i].GetFormatted();
@@ -67,7 +67,7 @@ namespace HermoRestClient
                 return jsonTestResult[0];
             }
 
-            String jsonNewObj = JsonConvert.SerializeObject(newObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PostRequestContractResolver() });
+            string jsonNewObj = JsonConvert.SerializeObject(newObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PostRequestContractResolver() });
             StringContent payload = new(jsonNewObj, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage result = client.PostAsync(url, payload).Result;
             lastStatusCode = result.StatusCode;
@@ -89,7 +89,7 @@ namespace HermoRestClient
                 return jsonTestResult[0];
             }
 
-            String jsonModObj = JsonConvert.SerializeObject(modObj);
+            string jsonModObj = JsonConvert.SerializeObject(modObj);
             StringContent payload = new(jsonModObj, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage result = client.PutAsync(url, payload).Result;
             lastStatusCode = result.StatusCode;
@@ -144,7 +144,7 @@ namespace HermoRestClient
 
             if (allDifferent) return Put(modObj);
 
-            String jsonModObj = JsonConvert.SerializeObject(modObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PatchRequestContractResolver(includeProperties) });
+            string jsonModObj = JsonConvert.SerializeObject(modObj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new PatchRequestContractResolver(includeProperties) });
             StringContent payload = new(jsonModObj, System.Text.Encoding.UTF8, "application/json");
 
             HttpResponseMessage result;
@@ -187,17 +187,17 @@ namespace HermoRestClient
             }
         }
 
-        public Func<T[]> GetNewItemsMethod(int itemsCount, String itemsCountParamName = "count")
+        public Func<T[]> GetNewItemsMethod(int itemsCount, string itemsCountParamName = "count")
         {
             return () => Get(new Arg[] { new(itemsCountParamName, itemsCount.ToString()) });
         }
 
-        public Func<int[], T[]> GetByIdMethod(String idParamName = "ids")
+        public Func<int[], T[]> GetByIdMethod(string idParamName = "ids")
         {
-            return ids => Get(new Arg[] { new(idParamName, String.Join(",", ids)) });
+            return ids => Get(new Arg[] { new(idParamName, string.Join(",", ids)) });
         }
 
-        public Func<String, T[]> GetSearchMethod(String queryParamName = "query")
+        public Func<string, T[]> GetSearchMethod(string queryParamName = "query")
         {
             return query => Get(new Arg[] { new(queryParamName, query) });
         }

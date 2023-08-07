@@ -35,4 +35,8 @@
     <ProjectReference Include="..\HermoRestClient\HermoRestClient.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Builders\" />
+  </ItemGroup>
+
 </Project>
