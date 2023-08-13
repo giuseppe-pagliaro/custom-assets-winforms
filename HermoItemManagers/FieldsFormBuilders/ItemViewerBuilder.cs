@@ -4,7 +4,7 @@ using HermoItemManagers.Managers;
 using HermoRestClient;
 using System.Reflection;
 
-namespace HermoItemManagers.Builders
+namespace HermoItemManagers.FieldsFormBuilders
 {
     public class ItemViewerBuilder : FieldsFormBuilder<ItemViewerBuilder>
     {

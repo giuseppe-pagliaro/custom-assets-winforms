@@ -3,14 +3,14 @@ using HermoItemManagers.Managers;
 
 namespace HermoItemManagers
 {
-    public partial class ListItem : UserControl
+    public sealed partial class ListItem : UserControl
     {
-        public ListItem()
+        internal ListItem(Style? style = null)
         {
             InitializeComponent();
 
             originalHeight = Height;
-            style = Style.DEFAULT_STYLE;
+            this.style = style ?? Style.DEFAULT_STYLE;
             buttonEdit.Visible = false;
         }
 
@@ -21,6 +21,10 @@ namespace HermoItemManagers
         private Type? editorType;
 
         private Style style;
+
+        internal Action<ListItem>? Populate;
+        internal Action<ListItem>? ApplyStyle;
+        internal Action<ListItem>? BtnClickedAction;
 
         #region Properties
 
@@ -35,10 +39,13 @@ namespace HermoItemManagers
 
                 return item.Clone();
             }
-            set
+
+            internal set
             {
+                if (Populate is null) return;
+
                 item = value;
-                Populate();
+                Populate(this);
             }
         }
 
@@ -91,16 +98,20 @@ namespace HermoItemManagers
         public Style Style
         {
             get { return style; }
+
             set
             {
+                if (ApplyStyle is null) return;
+
                 style = value;
-                ApplyStyle();
+                ApplyStyle(this);
             }
         }
 
         #endregion
 
-        protected virtual void Populate()
+        /*
+        private void Populate()
         {
             if (item is null)
             {
@@ -112,16 +123,16 @@ namespace HermoItemManagers
             }
         }
 
-        protected virtual void ApplyStyle()
+        private void ApplyStyle()
         {
             Style.Apply(this, style, BgType.Secondary);
             Style.Apply(txtID, style, FontStyle.Bold);
             Style.Apply(buttonEdit, style);
-        }
+        }*/
 
         #region Event Consumers
 
-        protected void ListItem_Click(object? sender, EventArgs e)
+        private void ListItem_Click(object? sender, EventArgs e)
         {
             noFocusObj.Focus();
 
@@ -130,7 +141,7 @@ namespace HermoItemManagers
             typeof(FieldsFormManager).GetMethod("RequestEntity")?.MakeGenericMethod(viewerType).Invoke(FieldsFormManager.Instance, new object[] { Item, style });
         }
 
-        protected void buttonEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
 

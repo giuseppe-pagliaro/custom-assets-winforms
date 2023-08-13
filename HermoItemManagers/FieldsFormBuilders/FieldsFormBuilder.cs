@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace HermoItemManagers.Builders
+namespace HermoItemManagers.FieldsFormBuilders
 {
     public abstract class FieldsFormBuilder<T> where T : FieldsFormBuilder<T>
     {
@@ -8,7 +8,7 @@ namespace HermoItemManagers.Builders
         {
             object? obj = Activator.CreateInstance(typeof(T), true);
 
-            return obj is null ? throw new FactoryNotInstantiatedException() : (T)obj;
+            return obj is null ? throw new BuilderNotInstantiatedException() : (T)obj;
         }
 
         private static readonly Lazy<T> lazy = new(() => InstantiateBuilder());
@@ -50,15 +50,5 @@ namespace HermoItemManagers.Builders
         public abstract void ApplyStyle(FieldsForm fieldsForm);
 
         public abstract void BtnClickedAction(FieldsForm fieldsForm);
-    }
-
-    public class FactoryNotInstantiatedException : Exception
-    {
-        public FactoryNotInstantiatedException() : base("Couldn't create your factory, make sure it implements a default constructor.") { }
-    }
-
-    public class IncompatiblePropertiesException : Exception
-    {
-        public IncompatiblePropertiesException() : base("The properties you provided in SetProps don't correspond to the props of the factory.") { }
     }
 }
