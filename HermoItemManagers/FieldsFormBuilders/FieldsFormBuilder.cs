@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace HermoItemManagers.FieldsFormBuilders
+﻿namespace HermoItemManagers.FieldsFormBuilders
 {
     public abstract class FieldsFormBuilder<T> where T : FieldsFormBuilder<T>
     {
@@ -8,10 +6,12 @@ namespace HermoItemManagers.FieldsFormBuilders
         {
             object? obj = Activator.CreateInstance(typeof(T), true);
 
-            return obj is null ? throw new BuilderNotInstantiatedException() : (T)obj;
+            return obj is null ? throw new MissingMethodException() : (T)obj;
         }
 
         private static readonly Lazy<T> lazy = new(() => InstantiateBuilder());
+
+        //private static readonly Lazy<T> lazy = new(() => Activator.CreateInstance<T>());
 
         private string propIsNullMsg = "(Null Property)";
         private string actionBtnText = "Action";
@@ -28,21 +28,6 @@ namespace HermoItemManagers.FieldsFormBuilders
         {
             get { return actionBtnText; }
             set { actionBtnText = value; }
-        }
-
-        public void SetProps(params object[] newProps)
-        {
-            PropertyInfo[] properties = typeof(FieldsFormBuilder<T>).GetProperties();
-
-            if (properties.Length != newProps.Length) throw new IncompatiblePropertiesException();
-
-            int i = 0;
-            foreach (PropertyInfo property in properties)
-            {
-                if (!property.PropertyType.Equals(newProps[i].GetType()) && !newProps[i].GetType().IsSubclassOf(property.PropertyType)) throw new IncompatiblePropertiesException();
-                property.SetValue(Instance, newProps[i]);
-                i++;
-            }
         }
 
         public abstract void Populate(FieldsForm fieldsForm);

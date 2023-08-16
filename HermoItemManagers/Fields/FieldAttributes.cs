@@ -5,7 +5,4 @@
 
     [AttributeUsage(AttributeTargets.Property)]
     public class IsNotMandatory : Attribute {}
-
-    [AttributeUsage(AttributeTargets.Property)]
-    public class ShowsUpInListItem : Attribute {}
 }

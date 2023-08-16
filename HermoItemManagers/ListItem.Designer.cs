@@ -28,29 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            txtID = new Label();
             buttonEdit = new Button();
             noFocusObj = new Label();
             SuspendLayout();
-            // 
-            // txtID
-            // 
-            txtID.AutoSize = true;
-            txtID.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            txtID.Location = new Point(31, 30);
-            txtID.Name = "txtID";
-            txtID.Size = new Size(169, 31);
-            txtID.TabIndex = 0;
-            txtID.Text = "Object #99999";
-            txtID.Click += ListItem_Click;
             // 
             // buttonEdit
             // 
             buttonEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonEdit.AutoSize = true;
-            buttonEdit.Location = new Point(474, 32);
+            buttonEdit.Location = new Point(498, 35);
             buttonEdit.Name = "buttonEdit";
-            buttonEdit.Size = new Size(67, 30);
+            buttonEdit.Size = new Size(67, 40);
             buttonEdit.TabIndex = 1;
             buttonEdit.Text = "Edit";
             buttonEdit.UseVisualStyleBackColor = true;
@@ -60,9 +48,9 @@
             // 
             noFocusObj.AutoSize = true;
             noFocusObj.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            noFocusObj.Location = new Point(343, 36);
+            noFocusObj.Location = new Point(551, 127);
             noFocusObj.Name = "noFocusObj";
-            noFocusObj.Size = new Size(0, 17);
+            noFocusObj.Size = new Size(0, 25);
             noFocusObj.TabIndex = 2;
             // 
             // ListItem
@@ -71,18 +59,15 @@
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(noFocusObj);
             Controls.Add(buttonEdit);
-            Controls.Add(txtID);
             Name = "ListItem";
-            Size = new Size(573, 173);
+            Size = new Size(600, 200);
             Click += ListItem_Click;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        protected Label txtID;
         private Label noFocusObj;
-        protected Button buttonEdit;
+        private Button buttonEdit;
     }
 }

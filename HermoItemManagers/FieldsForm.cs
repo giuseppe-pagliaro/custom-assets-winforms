@@ -145,6 +145,7 @@ namespace HermoItemManagers
 
             buttonAction.Location = initialActionBtnLocation;
             Controls.Add(buttonAction);
+            Controls.Add(noFocusObj);
             Size = initialFormSize;
             buttonAction.Text = "Action";
         }

@@ -1,5 +1,4 @@
 ﻿using HermoCommons;
-using HermoItemManagers.Managers;
 
 namespace HermoItemManagers
 {
@@ -9,126 +8,108 @@ namespace HermoItemManagers
         {
             InitializeComponent();
 
-            originalHeight = Height;
             this.style = style ?? Style.DEFAULT_STYLE;
             buttonEdit.Visible = false;
+
+            originalHeight = Size.Height;
         }
 
         private ItemDatas? item;
-        private readonly int originalHeight;
-
-        private Type? viewerType;
-        private Type? editorType;
-
         private Style style;
 
         internal Action<ListItem>? Populate;
         internal Action<ListItem>? ApplyStyle;
-        internal Action<ListItem>? BtnClickedAction;
+        internal Action<ListItem>? ListItemClickedAction;
+        private Action<ListItem>? buttonEditClickedAction;
+
+        private readonly int originalHeight;
 
         #region Properties
 
         public ItemDatas Item
         {
-            get
-            {
-                if (item is null)
-                {
-                    return ItemDatas.DEFAULT_ITEM;
-                }
-
-                return item.Clone();
-            }
+            get => item?.Clone() ?? ItemDatas.DEFAULT_ITEM;
 
             internal set
             {
                 if (Populate is null) return;
 
+                SuspendLayout();
                 item = value;
+                Clear();
                 Populate(this);
-            }
-        }
-
-        internal int OriginalHeight
-        {
-            get { return originalHeight; }
-        }
-
-        internal Type Viewer
-        {
-            get
-            {
-                if (viewerType is null)
-                {
-                    return typeof(FieldsForm);
-                }
-
-                return viewerType;
-            }
-            set { viewerType = value; }
-        }
-
-        internal Type Editor
-        {
-            get
-            {
-                if (editorType is null)
-                {
-                    return typeof(FieldsForm);
-                }
-
-                return editorType;
-            }
-            set
-            {
-                editorType = value;
-
-                if (!buttonEdit.Visible && editorType is not null)
-                {
-                    buttonEdit.Visible = true;
-                }
-
-                if (buttonEdit.Visible && editorType is null)
-                {
-                    buttonEdit.Visible = false;
-                }
+                ResumeLayout(true);
             }
         }
 
         public Style Style
         {
-            get { return style; }
+            get => style;
 
             set
             {
                 if (ApplyStyle is null) return;
 
                 style = value;
+                SuspendLayout();
                 ApplyStyle(this);
+                ResumeLayout(true);
             }
+        }
+
+        public int EditButtonWidth
+        {
+            get => buttonEdit.Width;
+        }
+
+        public int EditButtonHeight
+        {
+            get => buttonEdit.Height;
+        }
+
+        public Point EditButtonLocation
+        {
+            get => buttonEdit.Location;
+        }
+
+        internal Action<ListItem>? ButtonEditClickedAction
+        {
+            get => buttonEditClickedAction;
+
+            set
+            {
+                if (value is null && buttonEdit.Visible)
+                {
+                    buttonEdit.Visible = false;
+                    buttonEditClickedAction = null;
+                }
+                else if (value is not null && !buttonEdit.Visible)
+                {
+                    buttonEdit.Visible = true;
+                    buttonEditClickedAction = value;
+                }
+                else
+                {
+                    buttonEditClickedAction = value;
+                }
+            }
+        }
+
+        internal int OriginalHeight
+        {
+            get => originalHeight;
         }
 
         #endregion
 
-        /*
-        private void Populate()
+        private void Clear()
         {
-            if (item is null)
-            {
-                txtID.Text = "(Item ID is Null)";
-            }
-            else
-            {
-                txtID.Text = item.ClassNameToString() + " #" + item.Id.ToString();
-            }
+            Controls.Clear();
+            Controls.Add(buttonEdit);
+            Controls.Add(noFocusObj);
         }
 
-        private void ApplyStyle()
-        {
-            Style.Apply(this, style, BgType.Secondary);
-            Style.Apply(txtID, style, FontStyle.Bold);
-            Style.Apply(buttonEdit, style);
-        }*/
+        public void ApplyEditButtonStyle() => Style.Apply(buttonEdit, style);
 
         #region Event Consumers
 
@@ -136,18 +117,16 @@ namespace HermoItemManagers
         {
             noFocusObj.Focus();
 
-            if (viewerType is null) return;
-
-            typeof(FieldsFormManager).GetMethod("RequestEntity")?.MakeGenericMethod(viewerType).Invoke(FieldsFormManager.Instance, new object[] { Item, style });
+            if (ListItemClickedAction is null) return;
+            ListItemClickedAction(this);
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
 
-            if (editorType is null) return;
-
-            typeof(FieldsFormManager).GetMethod("RequestEntity")?.MakeGenericMethod(editorType).Invoke(FieldsFormManager.Instance, new object[] { Item, style });
+            if (ButtonEditClickedAction is null) return;
+            ButtonEditClickedAction(this);
         }
 
         #endregion
