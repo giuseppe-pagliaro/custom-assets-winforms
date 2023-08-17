@@ -2,7 +2,14 @@
 {
     public abstract class ListItemBuilder<T> where T : ListItemBuilder<T>
     {
-        private static readonly Lazy<T> lazy = new(() => Activator.CreateInstance<T>()); // Revert to old design
+        private static T InstantiateBuilder()
+        {
+            object? obj = Activator.CreateInstance(typeof(T), true);
+
+            return obj is null ? throw new MissingMethodException() : (T)obj;
+        }
+
+        private static readonly Lazy<T> lazy = new(() => InstantiateBuilder());
 
         private string propIsNullMsg = "(Null Property)";
         private string editBtnTxt = "Edit";

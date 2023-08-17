@@ -33,10 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HermoCommons\HermoCommons.csproj" />
     <ProjectReference Include="..\HermoRestClient\HermoRestClient.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="FieldsFormBuilders\" />
+    <ProjectReference Include="..\HermoSearchBars\HermoSearchBars.csproj" />
   </ItemGroup>
 
 </Project>

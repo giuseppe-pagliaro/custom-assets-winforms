@@ -4,11 +4,11 @@ namespace HermoItemManagers
 {
     public sealed partial class ListItem : UserControl
     {
-        internal ListItem(Style? style = null)
+        internal ListItem()
         {
             InitializeComponent();
 
-            this.style = style ?? Style.DEFAULT_STYLE;
+            this.style = Style.DEFAULT_STYLE;
             buttonEdit.Visible = false;
 
             originalHeight = Size.Height;

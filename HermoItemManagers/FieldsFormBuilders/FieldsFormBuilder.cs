@@ -11,8 +11,6 @@
 
         private static readonly Lazy<T> lazy = new(() => InstantiateBuilder());
 
-        //private static readonly Lazy<T> lazy = new(() => Activator.CreateInstance<T>());
-
         private string propIsNullMsg = "(Null Property)";
         private string actionBtnText = "Action";
 
