@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace HermoItemManagers
 {
-    public partial class CustomList : UserControl
+    public partial class CustomList : UserControl, IItemDatasUser
     {
         public CustomList()
         {
@@ -85,6 +85,7 @@ namespace HermoItemManagers
             }
 
             this.items = ItemsManager.Instance.AddReference(items.ToArray()).ToList();
+            this.items.ForEach(item => ItemsManager.Instance.AddItemDatasUserToEvents(item.GetHashCode(), this));
 
             TListItemBuilder Instance = (TListItemBuilder)(typeof(ListItemBuilder<TListItemBuilder>).GetProperty("Instance")?.GetValue(null) ?? throw new InstanceNotFoundException());
             Populate = Instance.Populate;
@@ -535,14 +536,64 @@ namespace HermoItemManagers
             ResumeLayout();
         }
 
-        private void ItemWasEdited(object? sender, ItemEditedEventArgs e)
+        void IItemDatasUser.ItemWasEdited(object? sender, ItemEditedEventArgs e)
         {
-            // TODO
+            if (items is null) return;
+
+            int itemInd = items.IndexOf(e.NewItem);
+
+            if (itemInd == -1) return;
+
+            items[itemInd] = e.NewItem;
+
+            if (itemInd < startPageInd || itemInd > endPageInd || renderedItems is null) return;
+
+            // If Item is set before the Builder Methods, the item will be set without calling them (saves time).
+            ListItem listItemToEdit = new()
+            {
+                Item = e.NewItem,
+                Populate = Populate,
+                ApplyStyle = ApplyStyle,
+                ListItemClickedAction = ListItemClickedAction,
+                ButtonEditClickedAction = ButtonEditClickedAction
+            };
+            int listItemInd = renderedItems.IndexOf(listItemToEdit);
+
+            if (listItemInd == -1) return;
+            renderedItems[listItemInd].Item = e.NewItem;
+
+            SuspendLayout();
+            RefreshItemPanel();
+            ResumeLayout();
         }
 
-        private void ItemWasDeleted(object? sender, EventArgs e)
+        void IItemDatasUser.ItemWasDeleted(object? sender, ItemDeletedEventArgs e)
         {
-            // TODO
+            if (items is null) return;
+
+            int itemInd = items.IndexOf(e.ItemDeleted);
+
+            if (itemInd == -1) return;
+
+            items.RemoveAt(itemInd);
+
+            if (itemInd < startPageInd || itemInd > endPageInd || renderedItems is null) return;
+
+            // If Item is set before the Builder Methods, the item will be set without calling them (saves time).
+            ListItem listItemToDelete = new()
+            {
+                Item = e.ItemDeleted,
+                Populate = Populate,
+                ApplyStyle = ApplyStyle,
+                ListItemClickedAction = ListItemClickedAction,
+                ButtonEditClickedAction = ButtonEditClickedAction
+            };
+
+            if (!renderedItems.Remove(listItemToDelete)) return;
+
+            SuspendLayout();
+            RefreshItemPanel();
+            ResumeLayout();
         }
 
         #endregion

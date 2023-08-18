@@ -32,10 +32,11 @@ namespace HermoItemManagers
 
             internal set
             {
+                item = value;
+
                 if (Populate is null) return;
 
                 SuspendLayout();
-                item = value;
                 Clear();
                 Populate(this);
                 ResumeLayout(true);
@@ -130,5 +131,38 @@ namespace HermoItemManagers
         }
 
         #endregion
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            if (obj == this) return true;
+            if (!GetType().Equals(obj.GetType())) return false;
+
+            ListItem listItem = (ListItem)obj;
+
+            if ((Populate?.Equals(listItem.Populate) ?? false) &&
+                (ApplyStyle?.Equals(listItem.ApplyStyle) ?? false) &&
+                (ListItemClickedAction?.Equals(listItem.ListItemClickedAction) ?? false) &&
+                (buttonEditClickedAction?.Equals(listItem.buttonEditClickedAction) ?? false))
+            {
+                return listItem.Item.Equals(Item);
+            }
+            else
+            {
+                return Populate is null && ApplyStyle is null && ListItemClickedAction is null && buttonEditClickedAction is null;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 7;
+            hash = 31 * hash + (Populate is null ? 0 : Populate.GetHashCode());
+            hash = 31 * hash + (ApplyStyle is null ? 0 : ApplyStyle.GetHashCode());
+            hash = 31 * hash + (ListItemClickedAction is null ? 0 : ListItemClickedAction.GetHashCode());
+            hash = 31 * hash + (buttonEditClickedAction is null ? 0 : buttonEditClickedAction.GetHashCode());
+            hash = 31 * hash + (item is null ? 0 : item.GetHashCode());
+
+            return hash;
+        }
     }
 }

@@ -5,13 +5,13 @@ using System.Collections.ObjectModel;
 
 namespace HermoItemManagers
 {
-    public sealed partial class FieldsForm : Form
+    public sealed partial class FieldsForm : Form, IItemDatasUser
     {
         internal FieldsForm(Style? style = null)
         {
             InitializeComponent();
 
-            this.item = ItemDatas.DEFAULT_ITEM;
+            item = ItemDatas.DEFAULT_ITEM;
             this.style = style ?? Style.DEFAULT_STYLE;
             fields = new();
 
@@ -32,13 +32,13 @@ namespace HermoItemManagers
 
         public ItemDatas Item
         {
-            get { return item.Clone(); }
+            get => item.Clone();
 
             internal set
             {
-                if (Populate is null || ApplyStyle is null) return;
-
                 item = value;
+
+                if (Populate is null || ApplyStyle is null) return;
 
                 SuspendLayout();
                 Clear();
@@ -150,6 +150,8 @@ namespace HermoItemManagers
             buttonAction.Text = "Action";
         }
 
+        #region Event Consumers
+
         private void buttonAction_Click(object sender, EventArgs e)
         {
             noFocusObj.Focus();
@@ -158,15 +160,11 @@ namespace HermoItemManagers
             BtnClickedAction(this);
         }
 
-        internal void ItemWasEdited(object? sender, ItemEditedEventArgs e)
-        {
-            Item = e.NewItem;
-        }
+        void IItemDatasUser.ItemWasEdited(object? sender, ItemEditedEventArgs e) => Item = e.NewItem;
 
-        internal void ItemWasDeleted(object? sender, EventArgs e)
-        {
-            Close();
-        }
+        void IItemDatasUser.ItemWasDeleted(object? sender, ItemDeletedEventArgs e) => Close();
+
+        #endregion
 
         public override bool Equals(object? obj)
         {
@@ -176,24 +174,24 @@ namespace HermoItemManagers
 
             FieldsForm fieldsForm = (FieldsForm)obj;
 
-            if ((Populate?.GetType().Equals(fieldsForm.Populate?.GetType()) ?? false) &&
-                (ApplyStyle?.GetType().Equals(fieldsForm.ApplyStyle?.GetType()) ?? false) &&
-                (BtnClickedAction?.GetType().Equals(fieldsForm.BtnClickedAction?.GetType()) ?? false))
+            if ((Populate?.Equals(fieldsForm.Populate) ?? false) &&
+                (ApplyStyle?.Equals(fieldsForm.ApplyStyle) ?? false) &&
+                (BtnClickedAction?.Equals(fieldsForm.BtnClickedAction) ?? false))
             {
                 return fieldsForm.Item.Equals(Item);
             }
             else
             {
-                return ApplyStyle is null && BtnClickedAction is null;
+                return Populate is null && ApplyStyle is null && BtnClickedAction is null;
             }
         }
 
         public override int GetHashCode()
         {
             int hash = 7;
-            hash = 31 * hash + (Populate is null ? 0 : Populate.GetType().GetHashCode());
-            hash = 31 * hash + (ApplyStyle is null ? 0 : ApplyStyle.GetType().GetHashCode());
-            hash = 31 * hash + (BtnClickedAction is null ? 0 : BtnClickedAction.GetType().GetHashCode());
+            hash = 31 * hash + (Populate is null ? 0 : Populate.GetHashCode());
+            hash = 31 * hash + (ApplyStyle is null ? 0 : ApplyStyle.GetHashCode());
+            hash = 31 * hash + (BtnClickedAction is null ? 0 : BtnClickedAction.GetHashCode());
             hash = 31 * hash + (item is null ? 0 : item.GetHashCode());
 
             return hash;

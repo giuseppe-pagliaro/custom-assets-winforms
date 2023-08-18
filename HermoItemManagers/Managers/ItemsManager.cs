@@ -16,7 +16,7 @@ namespace HermoItemManagers.Managers
             public int RefCount;
 
             public event EventHandler<ItemEditedEventArgs>? ItemEdited;
-            public event EventHandler<EventArgs>? ItemDeleted;
+            public event EventHandler<ItemDeletedEventArgs>? ItemDeleted;
 
             public void OnItemEdited(ItemEditedEventArgs e)
             {
@@ -24,9 +24,9 @@ namespace HermoItemManagers.Managers
                 handler?.Invoke(this, e);
             }
 
-            public void OnItemDeleted(EventArgs e)
+            public void OnItemDeleted(ItemDeletedEventArgs e)
             {
-                EventHandler<EventArgs>? handler = ItemDeleted;
+                EventHandler<ItemDeletedEventArgs>? handler = ItemDeleted;
                 handler?.Invoke(this, e);
             }
         }
@@ -41,12 +41,12 @@ namespace HermoItemManagers.Managers
 
         public static ItemsManager Instance { get { return lazy.Value; } }
 
-        internal void AddFieldsFormToEvents(int itemHash, FieldsForm fieldsForm)
+        internal void AddItemDatasUserToEvents(int itemHash, IItemDatasUser itemDatasUser)
         {
             if (!entities.ContainsKey(itemHash)) return;
 
-            entities[itemHash].ItemEdited += fieldsForm.ItemWasEdited;
-            entities[itemHash].ItemDeleted += fieldsForm.ItemWasDeleted;
+            entities[itemHash].ItemEdited += itemDatasUser.ItemWasEdited;
+            entities[itemHash].ItemDeleted += itemDatasUser.ItemWasDeleted;
         }
 
         public ItemDatas[] AddReference(ItemDatas[] items)
@@ -103,7 +103,7 @@ namespace HermoItemManagers.Managers
             int itemHash = item.GetHashCode();
             if (!entities.ContainsKey(itemHash)) return;
 
-            entities[itemHash].OnItemDeleted(new());
+            entities[itemHash].OnItemDeleted(new(item));
             entities.Remove(itemHash);
         }
     }
@@ -116,5 +116,15 @@ namespace HermoItemManagers.Managers
         }
 
         public ItemDatas NewItem { get; }
+    }
+
+    internal class ItemDeletedEventArgs : EventArgs
+    {
+        public ItemDeletedEventArgs(ItemDatas itemDeleted) : base()
+        {
+            ItemDeleted = itemDeleted;
+        }
+
+        public ItemDatas ItemDeleted { get; }
     }
 }

@@ -37,7 +37,7 @@ namespace HermoItemManagers.Managers
             else
             {
                 fieldsForm.FormClosing += FieldsForm_FormClosing;
-                ItemsManager.Instance.AddFieldsFormToEvents(itemDatas.GetHashCode(), fieldsForm);
+                ItemsManager.Instance.AddItemDatasUserToEvents(itemDatas.GetHashCode(), fieldsForm);
                 fieldsForm.Show();
                 entities.Add(fieldsFormHash, fieldsForm);
             }
