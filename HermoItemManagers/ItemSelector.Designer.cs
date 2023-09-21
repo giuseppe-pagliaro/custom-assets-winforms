@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             customList = new CustomList();
+            hermoSearchBar = new HermoSearchBars.HermoSearchBar();
             SuspendLayout();
             // 
             // customList
@@ -40,18 +41,28 @@
             customList.CurrentPage = 1;
             customList.ItemsEmptyMsg = "No Items";
             customList.ItemsNullMsg = "Null Items";
-            customList.Location = new Point(0, 369);
+            customList.Location = new Point(0, 89);
             customList.Margin = new Padding(4, 4, 4, 4);
             customList.Name = "customList";
-            customList.Size = new Size(822, 518);
+            customList.Size = new Size(822, 798);
             customList.TabIndex = 0;
             customList.TotPagesMsg = " Pages";
+            // 
+            // hermoSearchBar
+            // 
+            hermoSearchBar.Dock = DockStyle.Top;
+            hermoSearchBar.Location = new Point(0, 0);
+            hermoSearchBar.Margin = new Padding(4);
+            hermoSearchBar.Name = "hermoSearchBar";
+            hermoSearchBar.Size = new Size(822, 81);
+            hermoSearchBar.TabIndex = 1;
             // 
             // ItemSelector
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(822, 887);
+            Controls.Add(hermoSearchBar);
             Controls.Add(customList);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ItemSelector";
@@ -62,5 +73,6 @@
         #endregion
 
         private CustomList customList;
+        private HermoSearchBars.HermoSearchBar hermoSearchBar;
     }
 }

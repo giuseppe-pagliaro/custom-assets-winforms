@@ -1,6 +1,6 @@
 ﻿namespace HermoSearchBars
 {
-    partial class CustomSearchBar
+    partial class HermoSearchBar
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -28,64 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            buttonSearch = new Button();
             textBoxQuery = new TextBox();
+            buttonSearch = new Button();
             noFocusObj = new Label();
             SuspendLayout();
+            // 
+            // textBoxQuery
+            // 
+            textBoxQuery.BackColor = SystemColors.ControlDark;
+            textBoxQuery.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxQuery.Location = new Point(18, 18);
+            textBoxQuery.Margin = new Padding(4);
+            textBoxQuery.Multiline = true;
+            textBoxQuery.Name = "textBoxQuery";
+            textBoxQuery.PlaceholderText = "Type Query Here";
+            textBoxQuery.Size = new Size(674, 43);
+            textBoxQuery.TabIndex = 1;
+            textBoxQuery.KeyPress += textBoxQuery_KeyPress;
             // 
             // buttonSearch
             // 
             buttonSearch.Anchor = AnchorStyles.Top;
             buttonSearch.BackColor = SystemColors.ControlDark;
             buttonSearch.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSearch.Location = new Point(469, 12);
+            buttonSearch.Location = new Point(704, 18);
+            buttonSearch.Margin = new Padding(4);
             buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(94, 30);
-            buttonSearch.TabIndex = 0;
+            buttonSearch.Size = new Size(141, 45);
+            buttonSearch.TabIndex = 2;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = false;
             buttonSearch.Click += buttonSearch_Click;
-            // 
-            // textBoxQuery
-            // 
-            textBoxQuery.BackColor = SystemColors.ControlDark;
-            textBoxQuery.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxQuery.Location = new Point(12, 12);
-            textBoxQuery.Multiline = true;
-            textBoxQuery.Name = "textBoxQuery";
-            textBoxQuery.PlaceholderText = "Type Query Here";
-            textBoxQuery.Size = new Size(451, 30);
-            textBoxQuery.TabIndex = 1;
-            textBoxQuery.KeyPress += textBoxQuery_KeyPress;
             // 
             // noFocusObj
             // 
             noFocusObj.AutoSize = true;
             noFocusObj.BackColor = Color.Transparent;
             noFocusObj.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
-            noFocusObj.Location = new Point(569, 12);
+            noFocusObj.Location = new Point(852, 23);
+            noFocusObj.Margin = new Padding(4, 0, 4, 0);
             noFocusObj.Name = "noFocusObj";
-            noFocusObj.Size = new Size(0, 17);
-            noFocusObj.TabIndex = 2;
+            noFocusObj.Size = new Size(0, 25);
+            noFocusObj.TabIndex = 0;
             // 
-            // CustomSearchBar
+            // HermoSearchBar
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(noFocusObj);
-            Controls.Add(textBoxQuery);
             Controls.Add(buttonSearch);
-            Name = "CustomSearchBar";
-            Size = new Size(575, 54);
-            Resize += CustomSearchBar_Resize;
+            Controls.Add(textBoxQuery);
+            Margin = new Padding(4);
+            Name = "HermoSearchBar";
+            Size = new Size(862, 81);
+            Resize += HermoSearchBar_Resize;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button buttonSearch;
         private TextBox textBoxQuery;
+        private Button buttonSearch;
         private Label noFocusObj;
     }
 }

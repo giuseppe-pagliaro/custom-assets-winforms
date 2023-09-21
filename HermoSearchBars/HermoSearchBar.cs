@@ -3,9 +3,9 @@ using HermoRestClient;
 
 namespace HermoSearchBars
 {
-    public partial class CustomSearchBar : UserControl
+    public partial class HermoSearchBar : UserControl
     {
-        public CustomSearchBar()
+        public HermoSearchBar()
         {
             InitializeComponent();
 
@@ -100,7 +100,7 @@ namespace HermoSearchBars
             }
         }
 
-        private void CustomSearchBar_Resize(object sender, EventArgs e)
+        private void HermoSearchBar_Resize(object sender, EventArgs e)
         {
             int x = this.Width - buttonSearch.Width - textBoxQuery.Location.X;
             buttonSearch.Location = new Point(x, buttonSearch.Location.Y);
