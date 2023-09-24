@@ -1,12 +1,14 @@
-﻿namespace HermoSearchBars
+﻿using HermoCommons;
+
+namespace HermoSearchBars
 {
     public class SearchMadeEventArgs : EventArgs
     {
         public SearchMadeEventArgs() : base()
         {
-            Result = Array.Empty<object>();
+            Result = Array.Empty<ItemDatas>();
         }
 
-        public object[] Result { get; set; }
+        public ItemDatas[] Result { get; set; }
     }
 }

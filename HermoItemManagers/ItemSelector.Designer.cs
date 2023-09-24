@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemSelector));
             customList = new CustomList();
             hermoSearchBar = new HermoSearchBars.HermoSearchBar();
             SuspendLayout();
@@ -50,12 +51,16 @@
             // 
             // hermoSearchBar
             // 
+            hermoSearchBar.ButtonText = "Search";
             hermoSearchBar.Dock = DockStyle.Top;
             hermoSearchBar.Location = new Point(0, 0);
             hermoSearchBar.Margin = new Padding(4);
             hermoSearchBar.Name = "hermoSearchBar";
+            hermoSearchBar.QueryPlaceholderText = "Type Query Here";
+            hermoSearchBar.SearchingMsg = "Searching";
             hermoSearchBar.Size = new Size(822, 81);
             hermoSearchBar.TabIndex = 1;
+            hermoSearchBar.SearchMade += hermoSearchBar_SearchMade;
             // 
             // ItemSelector
             // 

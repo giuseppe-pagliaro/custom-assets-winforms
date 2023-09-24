@@ -14,7 +14,7 @@ namespace HermoSearchBars
         }
 
         private Style style;
-        private Func<string, object[]>? searchMethod;
+        private Func<string, ItemDatas[]>? searchMethod;
         private string searchingMsg;
 
         #region Properties
@@ -50,11 +50,11 @@ namespace HermoSearchBars
             }
         }
 
-        public Func<string, object[]> SearchMethod
+        public Func<string, ItemDatas[]> SearchMethod
         {
             get
             {
-                if (searchMethod is null) return query => { return Array.Empty<object>(); };
+                if (searchMethod is null) return query => { return Array.Empty<ItemDatas>(); };
 
                 return new(searchMethod);
             }
@@ -68,7 +68,7 @@ namespace HermoSearchBars
         {
             if (searchMethod is null) return;
 
-            object[] result = Array.Empty<object>();
+            ItemDatas[] result = Array.Empty<ItemDatas>();
 
             using (WaitForm waitForm = new(() => result = searchMethod(textBoxQuery.Text), style, searchingMsg))
             {
