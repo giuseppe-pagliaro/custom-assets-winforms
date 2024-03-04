@@ -1,4 +1,7 @@
-# Hermo REST Assets
+# Custom Assets Winforms
+
+This is an old version of Hermo UI Assets and is no longer mantained.
+
 Adds a series of controls to Winforms that will help you create your **REST client**.
 Before starting, please download the **NuGet Packages** that contain the controls you want to use and their respective **dependencies**. To make sure you have everything, use the **diagram** below.
 
